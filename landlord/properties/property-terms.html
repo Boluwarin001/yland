@@ -1,0 +1,884 @@
+<!-- /properties/property-terms.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Property Terms</title>
+  <script src="../tailwind.js"></script>
+</head>
+
+<body data-active-tab="terms" class="bg-white text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+        <div id="propertyHeaderMount"></div>
+
+        <div id="page" class="opacity-0 transition-opacity">
+
+          <!-- Header -->
+          <div class="mt-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <div>
+              <h1 class="text-md font-semibold text-slate-900">Property Terms</h1>
+              <p class="text-md text-slate-500 mt-1">Manage payment arrangements, responsibilities and other terms for this property.</p>
+            </div>
+
+            <button class="h-9 px-4 rounded-lg bg-[#1D3639] text-white text-xs font-medium hover:bg-[#152b2e] transition-colors">
+              Save Changes
+            </button>
+          </div>
+
+
+          <!-- Rent & Payments -->
+          <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+            <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h2 class="text-lg font-semibold text-slate-900">Rent & Payments</h2>
+                  <p class="text-md text-slate-500 mt-1">Choose which payment methods tenants can use to pay rent.</p>
+                </div>
+
+                <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-width="1.8" d="M2.5 7.5h19m-16 4h3m-3 4h5M4.5 5h15A2.5 2.5 0 0122 7.5v9a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 16.5v-9A2.5 2.5 0 014.5 5z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 space-y-3">
+
+              <!-- Bank Transfer -->
+              <div class="rounded-2xl border border-slate-200 overflow-hidden">
+
+                <div class="flex items-center gap-4 p-4 hover:bg-[#FAF4DF]/40 transition-colors">
+
+                  <div class="w-11 h-11 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-width="1.7" d="M3 10.5L12 4l9 6.5M5 10.5V19m4-8.5V19m6-8.5V19m4-8.5V19M3 20h18M2.5 10.5h19"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <div class="text-md font-semibold text-slate-900">Bank Transfer</div>
+                    <div class="text-xs text-slate-500 mt-0.5">Tenants transfer rent directly into your bank account.</div>
+                  </div>
+
+                  <span class="hidden md:inline-flex px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">
+                    Enabled
+                  </span>
+
+                  <button type="button" data-toggle="bank"
+                    class="payment-toggle relative w-11 h-6 rounded-full bg-[#1D3639] shrink-0 transition-colors"
+                    aria-pressed="true">
+                    <span class="absolute top-1 left-6 w-4 h-4 rounded-full bg-white shadow-sm transition-all"></span>
+                  </button>
+
+                </div>
+
+                <div id="bankDetails" class="border-t border-slate-100 bg-[#FAF4DF]/30 px-5 py-5">
+
+                  <div class="flex flex-col lg:flex-row gap-5">
+
+                    <div class="flex-1">
+
+                      <div class="mb-4">
+                        <label class="block text-xs font-medium text-slate-600 mb-2">Bank Account</label>
+
+                        <select id="bankAccount"
+                          class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md text-slate-900 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                          <option value="main">Main Business Account</option>
+                          <option value="property">Property Management Account</option>
+                          <option value="personal">Personal Landlord Account</option>
+                        </select>
+                      </div>
+
+                      <div class="rounded-2xl bg-white border border-slate-200 p-5">
+
+                        <div class="flex items-center justify-between mb-5">
+                          <div>
+                            <div class="text-xs text-slate-400 uppercase tracking-wide">Account Details</div>
+                            <div class="text-md font-semibold text-slate-900 mt-1">Main Business Account</div>
+                          </div>
+
+                          <span class="px-2.5 py-1 rounded-full bg-[#C3DF93] text-[#1D3639] text-xs font-semibold">
+                            Active
+                          </span>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
+
+                          <div>
+                            <div class="text-xs text-slate-400">Bank</div>
+                            <div class="text-md font-medium text-slate-900 mt-1">Barclays Bank UK</div>
+                          </div>
+
+                          <div>
+                            <div class="text-xs text-slate-400">Business / Personal Name</div>
+                            <div class="text-md font-medium text-slate-900 mt-1">YourLandlordship Ltd</div>
+                          </div>
+
+                          <div>
+                            <div class="text-xs text-slate-400">Sort Code</div>
+                            <div class="text-md font-medium text-slate-900 mt-1 tracking-wide">20-45-67</div>
+                          </div>
+
+                          <div>
+                            <div class="text-xs text-slate-400">Account Number</div>
+                            <div class="text-md font-medium text-slate-900 mt-1 tracking-wide">•••• 4821</div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+                    <!-- Bank Card -->
+                    <div class="lg:w-[330px]">
+
+                      <div class="relative overflow-hidden rounded-2xl bg-[#1D3639] p-6 text-white min-h-[225px] flex flex-col justify-between shadow-sm">
+
+                        <div class="absolute -right-16 -top-16 w-40 h-40 rounded-full bg-[#C3DF93]/20"></div>
+                        <div class="absolute -right-10 -bottom-20 w-48 h-48 rounded-full bg-[#E3572B]/10"></div>
+
+                        <div class="relative flex items-start justify-between">
+                          <div>
+                            <div class="text-xs text-white/50 uppercase tracking-widest">Bank Account</div>
+                            <div class="text-md font-semibold mt-1">Main Business Account</div>
+                          </div>
+
+                          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
+                            <svg class="w-5 h-5 text-[#C3DF93]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-width="1.7" d="M3 10.5L12 4l9 6.5M5 10.5V19m4-8.5V19m6-8.5V19m4-8.5V19M3 20h18"/>
+                            </svg>
+                          </div>
+                        </div>
+
+                        <div class="relative">
+                          <div class="text-xs text-white/50">Account Number</div>
+                          <div class="text-xl tracking-[0.18em] font-medium mt-1">•••• 4821</div>
+                        </div>
+
+                        <div class="relative flex items-end justify-between">
+                          <div>
+                            <div class="text-[10px] text-white/40 uppercase">Account Name</div>
+                            <div class="text-xs font-medium mt-1">YourLandlordship Ltd</div>
+                          </div>
+
+                          <div class="text-right">
+                            <div class="text-[10px] text-white/40 uppercase">Sort Code</div>
+                            <div class="text-xs font-medium mt-1">20-45-67</div>
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+              <!-- Stripe -->
+              <div class="rounded-2xl border border-slate-200 overflow-hidden">
+
+                <div class="flex items-center gap-4 p-4 hover:bg-slate-50 transition-colors">
+
+                  <div class="w-11 h-11 rounded-xl bg-[#635BFF]/10 flex items-center justify-center shrink-0">
+                    <span class="text-lg font-bold text-[#635BFF]">S</span>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <div class="text-md font-semibold text-slate-900">Stripe</div>
+                    <div class="text-xs text-slate-500 mt-0.5">Accept online card payments through Stripe.</div>
+                  </div>
+
+                  <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 text-xs">
+                    Not connected
+                  </span>
+
+                  <button type="button" data-toggle="stripe"
+                    class="payment-toggle relative w-11 h-6 rounded-full bg-slate-300 shrink-0 transition-colors"
+                    aria-pressed="false">
+                    <span class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white shadow-sm transition-all"></span>
+                  </button>
+
+                </div>
+
+                <div id="stripeDetails" class="hidden border-t border-slate-100 bg-[#635BFF]/5 px-5 py-5">
+
+                  <div class="max-w-2xl">
+
+                    <label class="block text-xs font-medium text-slate-600 mb-2">Stripe API Key</label>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+
+                      <input type="password"
+                        placeholder="sk_live_..."
+                        class="flex-1 h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-[#635BFF] focus:ring-2 focus:ring-[#635BFF]/10">
+
+                      <button type="button"
+                        class="h-11 px-5 rounded-xl bg-[#1D3639] text-white text-xs font-semibold hover:bg-[#152b2e] transition-colors">
+                        Test Connection
+                      </button>
+
+                    </div>
+
+                    <p class="text-xs text-slate-400 mt-2">
+                      Your Stripe API key is used to connect this property to your Stripe account.
+                    </p>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+              <!-- GoCardless -->
+              <div class="rounded-2xl border border-slate-200 overflow-hidden">
+
+                <div class="flex items-center gap-4 p-4 hover:bg-slate-50 transition-colors">
+
+                  <div class="w-11 h-11 rounded-xl bg-[#0B7B77]/10 flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#0B7B77]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-width="1.8" d="M4 12h16M12 4v16M5.5 7.5h13M5.5 16.5h13"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <div class="text-md font-semibold text-slate-900">GoCardless</div>
+                    <div class="text-xs text-slate-500 mt-0.5">Collect rent automatically through Direct Debit.</div>
+                  </div>
+
+                  <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full bg-slate-100 text-slate-500 text-xs">
+                    Not connected
+                  </span>
+
+                  <button type="button" data-toggle="gocardless"
+                    class="payment-toggle relative w-11 h-6 rounded-full bg-slate-300 shrink-0 transition-colors"
+                    aria-pressed="false">
+                    <span class="absolute top-1 left-1 w-4 h-4 rounded-full bg-white shadow-sm transition-all"></span>
+                  </button>
+
+                </div>
+
+                <div id="gocardlessDetails" class="hidden border-t border-slate-100 bg-[#0B7B77]/5 px-5 py-5">
+
+                  <div class="max-w-2xl">
+
+                    <label class="block text-xs font-medium text-slate-600 mb-2">GoCardless API Key</label>
+
+                    <div class="flex flex-col sm:flex-row gap-3">
+
+                      <input type="password"
+                        placeholder="Your GoCardless API key"
+                        class="flex-1 h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-[#0B7B77] focus:ring-2 focus:ring-[#0B7B77]/10">
+
+                      <button type="button"
+                        class="h-11 px-5 rounded-xl bg-[#1D3639] text-white text-xs font-semibold hover:bg-[#152b2e] transition-colors">
+                        Test Connection
+                      </button>
+
+                    </div>
+
+                    <p class="text-xs text-slate-400 mt-2">
+                      Your GoCardless API key is used to connect this property to your GoCardless account.
+                    </p>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+              <!-- Universal Payment Reference -->
+              <div class="mt-5 pt-5 border-t border-slate-100">
+
+                <div class="max-w-2xl">
+
+                  <label class="block text-xs font-medium text-slate-600 mb-2">
+                    Payment Reference
+                  </label>
+
+                  <input type="text"
+                    value="PROPERTY-UNIT-RENT"
+                    placeholder="e.g. PROPERTY-UNIT-RENT"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md text-slate-900 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+
+                  <p class="text-xs text-slate-400 mt-2">
+                    This reference identifies rent payments for this property and applies regardless of the payment method used.
+                  </p>
+
+                </div>
+
+              </div>
+
+
+              <!-- Rent Schedule -->
+              <div class="pt-5 mt-2 border-t border-slate-100">
+
+                <div class="mb-4">
+                  <h3 class="text-md font-semibold text-slate-900">Rent Schedule</h3>
+                  <p class="text-xs text-slate-500 mt-1">Set the amount and frequency tenants are expected to pay.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+
+                  <div>
+                    <label class="block text-xs font-medium text-slate-500 mb-2">Rent Amount</label>
+
+                    <div class="relative">
+                      <span class="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">£</span>
+
+                      <input type="number" value="950"
+                        class="w-full h-11 rounded-xl border border-slate-200 bg-white pl-8 pr-4 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    </div>
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-medium text-slate-500 mb-2">Payment Frequency</label>
+
+                    <select class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                      <option>Monthly</option>
+                      <option>Weekly</option>
+                      <option>Quarterly</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block text-xs font-medium text-slate-500 mb-2">Rent Due Date</label>
+
+                    <select class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                      <option>1st of each month</option>
+                      <option>5th of each month</option>
+                      <option>15th of each month</option>
+                      <option>28th of each month</option>
+                    </select>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+
+
+          <!-- Property Manager -->
+          <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+            <div class="px-5 py-4 border-b border-slate-100 bg-[#C3DF93]/20">
+
+              <div class="flex items-start justify-between gap-4">
+
+                <div>
+                  <h2 class="text-md font-semibold text-slate-900">Property Manager</h2>
+                  <p class="text-xs text-slate-500 mt-1">Choose the person responsible for managing this property.</p>
+                </div>
+
+                <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-width="1.7" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2m7-10a4 4 0 100-8 4 4 0 000 8zm7-3a3 3 0 110-6m3 14v-2a4 4 0 00-3-3.87"/>
+                  </svg>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="p-5 grid grid-cols-1 lg:grid-cols-[1fr_1.3fr] gap-6 items-start">
+
+              <div>
+                <label class="text-xs font-medium text-slate-700">Property Manager</label>
+
+                <select class="mt-2 w-full h-11 px-3 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639]">
+                  <option>Sarah Thompson — Property Manager</option>
+                  <option>James Wilson — Property Manager</option>
+                  <option>No property manager</option>
+                </select>
+              </div>
+
+              <div class="rounded-2xl bg-slate-50 border border-slate-100 p-5">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div class="flex items-center gap-3">
+
+                    <div class="w-11 h-11 rounded-full bg-[#FAF4DF] flex items-center justify-center text-md font-semibold text-[#1D3639]">
+                      ST
+                    </div>
+
+                    <div>
+                      <p class="text-md font-semibold text-slate-900">Sarah Thompson</p>
+                      <p class="text-xs text-slate-500 mt-1">Property Manager · YourLandlordship</p>
+                    </div>
+
+                  </div>
+
+                  <span class="px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">
+                    Active
+                  </span>
+
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-5 pt-4 border-t border-slate-200">
+
+                  <div>
+                    <p class="text-xs text-slate-400">Email</p>
+                    <p class="text-md text-slate-700 mt-1">sarah@example.com</p>
+                  </div>
+
+                  <div>
+                    <p class="text-xs text-slate-400">Phone</p>
+                    <p class="text-md text-slate-700 mt-1">0161 123 4567</p>
+                  </div>
+
+                </div>
+
+                <label class="flex items-center gap-3 mt-4 pt-4 border-t border-slate-200 cursor-pointer">
+                  <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+
+                  <div>
+                    <p class="text-md font-medium text-slate-700">Show contact details to tenant</p>
+                    <p class="text-xs text-slate-400 mt-0.5">The tenant will be able to contact this property manager.</p>
+                  </div>
+                </label>
+
+              </div>
+
+            </div>
+          </section>
+
+
+          <!-- Bills + Property Rules -->
+          <div class="mt-6 grid grid-cols-1 xl:grid-cols-2 gap-6">
+
+            <!-- Bills & Responsibilities -->
+            <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-5 py-4 border-b border-slate-100 bg-[#FAF4DF]/50">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-md font-semibold text-slate-900">Bills & Responsibilities</h2>
+                    <p class="text-xs text-slate-500 mt-1">Set who is responsible for each property expense.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-width="1.7" d="M6 2.5h12A2.5 2.5 0 0120.5 5v14a2.5 2.5 0 01-2.5 2.5H6A2.5 2.5 0 013.5 19V5A2.5 2.5 0 016 2.5zM8 7h8M8 11h8M8 15h5"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-5">
+
+                <div class="hidden md:grid grid-cols-[1fr_150px] gap-4 px-3 pb-2 text-xs font-medium text-slate-400">
+                  <div>Bill / Responsibility</div>
+                  <div>Responsible Party</div>
+                </div>
+
+                <div class="divide-y divide-slate-100">
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">Council Tax</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Local authority council tax</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Tenant</option>
+                      <option>Landlord</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">Water</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Water and sewerage charges</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Tenant</option>
+                      <option>Landlord</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">Gas</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Gas supply and usage</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Tenant</option>
+                      <option>Landlord</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">Electricity</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Electricity supply and usage</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Tenant</option>
+                      <option>Landlord</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">Building Insurance</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Insurance for the property structure</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Landlord</option>
+                      <option>Tenant</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">Garden Maintenance</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Routine garden maintenance</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Tenant</option>
+                      <option>Landlord</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">Communal Areas</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Cleaning and maintenance of shared areas</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Landlord</option>
+                      <option>Tenant</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">Contents Insurance</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Insurance for tenant belongings</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Tenant</option>
+                      <option>Landlord</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                  <div class="grid grid-cols-1 md:grid-cols-[1fr_150px] gap-3 items-center py-3 px-3">
+                    <div>
+                      <p class="text-md font-medium text-slate-800">TV Licence</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Television licence</p>
+                    </div>
+
+                    <select class="w-full h-9 px-3 rounded-lg border border-slate-200 bg-white text-md text-slate-700 outline-none">
+                      <option>Tenant</option>
+                      <option>Landlord</option>
+                      <option>Shared</option>
+                      <option>Included in Rent</option>
+                      <option>Not Applicable</option>
+                    </select>
+                  </div>
+
+                </div>
+              </div>
+
+            </section>
+
+
+            <!-- Property Rules -->
+            <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-5 py-4 border-b border-slate-100 bg-[#C3DF93]/15">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-md font-semibold text-slate-900">Property Rules</h2>
+                    <p class="text-xs text-slate-500 mt-1">Define the rules and restrictions for this property.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-width="1.7" d="M12 3l8 3v5c0 5.2-3.4 8.8-8 10-4.6-1.2-8-4.8-8-10V6l8-3zm0 5v5m0 3h.01"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-5 grid grid-cols-1 sm:grid-cols-2 gap-5">
+
+                <div>
+                  <label class="text-xs font-medium text-slate-700">Pets</label>
+
+                  <select class="mt-2 w-full h-10 px-3 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639]">
+                    <option>Allowed</option>
+                    <option>Not Allowed</option>
+                    <option>With Permission</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs font-medium text-slate-700">Smoking</label>
+
+                  <select class="mt-2 w-full h-10 px-3 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639]">
+                    <option>Not Allowed</option>
+                    <option>Allowed</option>
+                    <option>Outside Only</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs font-medium text-slate-700">Subletting</label>
+
+                  <select class="mt-2 w-full h-10 px-3 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639]">
+                    <option>Not Allowed</option>
+                    <option>Allowed</option>
+                    <option>With Permission</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs font-medium text-slate-700">Short-term Letting</label>
+
+                  <select class="mt-2 w-full h-10 px-3 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639]">
+                    <option>Not Allowed</option>
+                    <option>Allowed</option>
+                    <option>With Permission</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs font-medium text-slate-700">Decorating</label>
+
+                  <select class="mt-2 w-full h-10 px-3 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639]">
+                    <option>With Permission</option>
+                    <option>Allowed</option>
+                    <option>Not Allowed</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="text-xs font-medium text-slate-700">Parking</label>
+
+                  <select class="mt-2 w-full h-10 px-3 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639]">
+                    <option>Available</option>
+                    <option>Not Available</option>
+                    <option>Street Parking</option>
+                    <option>Permit Required</option>
+                  </select>
+                </div>
+
+              </div>
+
+            </section>
+
+          </div>
+
+
+          <!-- Tenant Information -->
+          <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+            <div class="px-5 py-4 border-b border-slate-100">
+
+              <div class="flex items-start justify-between gap-4">
+
+                <div>
+                  <h2 class="text-md font-semibold text-slate-900">Tenant Information</h2>
+                  <p class="text-xs text-slate-500 mt-1">Information that can be made available to tenants.</p>
+                </div>
+
+                <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-width="1.7" d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2m7-10a4 4 0 100-8 4 4 0 000 8zm7-3a3 3 0 110-6m3 14v-2a4 4 0 00-3-3.87"/>
+                  </svg>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div class="p-5 space-y-5">
+
+              <div>
+
+                <div class="flex items-center justify-between gap-4">
+                  <label class="text-xs font-medium text-slate-700">Emergency Contact</label>
+
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                    <span class="text-xs text-slate-500">Show to tenant</span>
+                  </label>
+                </div>
+
+                <input type="text"
+                  value="Emergency Property Line — 0161 555 0123"
+                  class="mt-2 w-full h-10 px-3 rounded-xl border border-slate-200 text-md outline-none focus:border-[#1D3639]">
+              </div>
+
+
+              <div>
+
+                <div class="flex items-center justify-between gap-4">
+                  <label class="text-xs font-medium text-slate-700">Parking Instructions</label>
+
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                    <span class="text-xs text-slate-500">Show to tenant</span>
+                  </label>
+                </div>
+
+                <textarea rows="3"
+                  class="mt-2 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-md outline-none resize-none focus:border-[#1D3639]">Tenant parking is available in the allocated space at the rear of the property.</textarea>
+              </div>
+
+
+              <div>
+
+                <div class="flex items-center justify-between gap-4">
+                  <label class="text-xs font-medium text-slate-700">Meter Information</label>
+
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" checked class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                    <span class="text-xs text-slate-500">Show to tenant</span>
+                  </label>
+                </div>
+
+                <textarea rows="3"
+                  class="mt-2 w-full px-3 py-2.5 rounded-xl border border-slate-200 text-md outline-none resize-none focus:border-[#1D3639]">Electricity meter is located in the utility cupboard beside the kitchen.</textarea>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- Bottom Save -->
+          <div class="flex justify-end mt-6">
+
+            <button class="h-10 px-5 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#152b2e] transition-colors">
+              Save Changes
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+
+<script src="../app.js"></script>
+<script src="property.js"></script>
+
+<script>
+
+document.querySelectorAll('[data-toggle]').forEach(toggle=>{
+
+  toggle.addEventListener('click',()=>{
+
+    const method=toggle.dataset.toggle;
+    const enabled=toggle.getAttribute('aria-pressed')==='true';
+    const next=!enabled;
+
+    const details=document.getElementById(
+      method==='bank'
+        ? 'bankDetails'
+        : method==='stripe'
+          ? 'stripeDetails'
+          : 'gocardlessDetails'
+    );
+
+    const knob=toggle.querySelector('span');
+
+    toggle.setAttribute('aria-pressed',next);
+
+    if(next){
+
+      toggle.classList.remove('bg-slate-300');
+      toggle.classList.add('bg-[#1D3639]');
+
+      knob.classList.remove('left-1');
+      knob.classList.add('left-6');
+
+      details.classList.remove('hidden');
+
+    }else{
+
+      toggle.classList.remove('bg-[#1D3639]');
+      toggle.classList.add('bg-slate-300');
+
+      knob.classList.remove('left-6');
+      knob.classList.add('left-1');
+
+      details.classList.add('hidden');
+
+    }
+
+  });
+
+});
+
+
+window.addEventListener('load',()=>requestAnimationFrame(()=>{
+  document.getElementById('page').classList.remove('opacity-0');
+}));
+
+</script>
+
+</body>
+</html>

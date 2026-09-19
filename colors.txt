@@ -1,0 +1,37 @@
+# YourLandlordship Colour System
+
+The YourLandlordship colour system is built around a clean white interface with a small set of warm, natural brand colours.
+
+The colours should be used selectively. White and neutral slate tones form the main UI foundation, while the brand colours are used to highlight important states, actions, sections, and visual accents.
+
+## Brand Colours
+
+| Name | Hex | Usage |
+|---|---|---|
+| Brand Orange | `#E3572B` | Primary brand accent, highlights, active accents, important links |
+| Light Brand | `#FAF4DF` | Soft backgrounds, highlighted cards, subtle brand surfaces |
+| Accent Green | `#C3DF93` | Positive states, active status, successful actions |
+| Deep Brand | `#1D3639` | Primary buttons, strong UI elements, icons, important text |
+
+## Base Colours
+
+- **White** — `#FFFFFF`
+  - Main page background
+  - Card backgrounds
+  - Clean content surfaces
+
+- **Black** — `#000000`
+  - Primary brand text where strong contrast is required
+
+- **Slate / Neutral**
+  - Used for secondary text, borders, dividers, muted information and UI structure.
+
+## Usage Principles
+
+- Keep the overall interface predominantly **white and neutral**.
+- Do not use the orange brand colour everywhere. It should remain an accent so that it retains visual importance.
+- Use `#1D3639` for primary actions and strong interactive elements.
+- Use `#FAF4DF` for subtle branded backgrounds rather than large areas of saturated colour.
+- Use `#C3DF93` primarily for positive, active, or completed states.
+- Use `#E3572B` for brand recognition, emphasis, links, highlights and small visual accents.
+- Avoid introducing additional colours unless they are required for a specific semantic state such as warning, error, or information.

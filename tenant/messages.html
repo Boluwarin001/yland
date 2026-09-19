@@ -1,0 +1,417 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>YourLandlordship — Messages</title>
+<script src="tailwind.js"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+<div class="flex h-screen overflow-hidden">
+<div id="sidebarMount"></div>
+
+<div class="flex min-w-0 flex-1 flex-col">
+<div id="headerMount"></div>
+
+<main class="flex-1 overflow-auto">
+<div class="px-6 pt-8 pb-12 lg:px-8">
+<div id="page" class="mx-auto max-w-7xl mt-24 opacity-0">
+
+<!-- Header -->
+<div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+<div>
+<h1 class="text-2xl font-semibold tracking-tight">Messages</h1>
+<p class="text-md mt-1 text-slate-500">Communicate with your landlord and property team.</p>
+</div>
+
+<button onclick="openNewMessage()" class="inline-flex items-center justify-center gap-2 rounded-xl bg-[#1D3639] px-4 py-2.5 text-md font-medium text-white hover:bg-[#29494c]">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.8" stroke-linecap="round" d="M12 5v14M5 12h14"/>
+</svg>
+New Message
+</button>
+</div>
+
+<!-- Messages -->
+<div class="mt-8 grid min-h-[650px] grid-cols-1 overflow-hidden rounded-2xl border border-slate-200 bg-white lg:grid-cols-[340px_minmax(0,1fr)]">
+
+<!-- Conversation List -->
+<aside id="conversationPanel" class="border-b border-slate-200 lg:border-b-0 lg:border-r">
+<div class="border-b border-slate-200 p-4">
+<div class="relative">
+<svg class="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="m21 21-4.35-4.35M10.75 18a7.25 7.25 0 1 1 0-14.5 7.25 7.25 0 0 1 0 14.5z"/>
+</svg>
+<input id="conversationSearch" oninput="filterConversations()" type="text" placeholder="Search messages..." class="text-md w-full rounded-xl border border-slate-200 bg-slate-50 py-2.5 pl-10 pr-4 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+</div>
+</div>
+
+<div id="conversationList" class="max-h-[580px] overflow-auto"></div>
+</aside>
+
+<!-- Conversation -->
+<section class="flex min-h-[650px] min-w-0 flex-col">
+
+<!-- Conversation Header -->
+<div id="conversationHeader" class="flex items-center justify-between border-b border-slate-200 px-5 py-4">
+<div class="flex min-w-0 items-center gap-3">
+<button onclick="showConversations()" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 lg:hidden">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.8" d="M15 18l-6-6 6-6"/>
+</svg>
+</button>
+
+<div class="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#FAF4DF] text-[#1D3639]">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M4 5.75A2.75 2.75 0 0 1 6.75 3h10.5A2.75 2.75 0 0 1 20 5.75v7.5A2.75 2.75 0 0 1 17.25 16H11l-4.5 4v-4H6.75A2.75 2.75 0 0 1 4 13.25z"/>
+</svg>
+</div>
+
+<div class="min-w-0">
+<h2 id="activeConversationTitle" class="truncate font-semibold">Property Management</h2>
+<p id="activeConversationSubtitle" class="truncate text-xs text-slate-400">Springfield Family Home</p>
+</div>
+</div>
+
+<button class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700" title="Conversation options">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="5" cy="12" r="1"/>
+<circle cx="12" cy="12" r="1"/>
+<circle cx="19" cy="12" r="1"/>
+</svg>
+</button>
+</div>
+
+<!-- Messages Area -->
+<div id="messageArea" class="flex-1 overflow-auto bg-slate-50/50 px-5 py-6"></div>
+
+<!-- Composer -->
+<div class="border-t border-slate-200 bg-white p-4">
+<form onsubmit="sendMessage(event)" class="flex items-end gap-3">
+<div class="flex min-w-0 flex-1 items-end rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 focus-within:border-[#1D3639] focus-within:ring-2 focus-within:ring-[#1D3639]/10">
+
+<button type="button" onclick="document.getElementById('messageAttachment').click()" class="mb-0.5 shrink-0 rounded-lg p-2 text-slate-400 hover:bg-white hover:text-[#1D3639]" title="Attach file">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.82-2.82l8.49-8.48"/>
+</svg>
+</button>
+
+<input id="messageAttachment" type="file" class="hidden" onchange="showAttachment(this)">
+
+<textarea id="messageInput" rows="1" placeholder="Write a message..." class="max-h-32 min-h-[42px] flex-1 resize-none bg-transparent px-2 py-2 text-md outline-none" onkeydown="handleMessageKey(event)"></textarea>
+
+</div>
+
+<button class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#1D3639] text-white hover:bg-[#29494c]" title="Send message">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/>
+</svg>
+</button>
+</form>
+
+<div id="attachmentPreview" class="mt-2 hidden"></div>
+</div>
+
+</section>
+</div>
+
+</div>
+</main>
+</div>
+
+<div id="notificationsMount"></div>
+</div>
+
+<!-- New Message Modal -->
+<div id="newMessageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 p-5">
+<div class="w-full max-w-lg overflow-hidden rounded-2xl bg-white shadow-2xl">
+
+<div class="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+<div>
+<h2 class="font-semibold">New Message</h2>
+<p class="mt-1 text-xs text-slate-400">Start a conversation about your tenancy.</p>
+</div>
+
+<button onclick="closeNewMessage()" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-700">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.8" d="M6 6l12 12M18 6L6 18"/>
+</svg>
+</button>
+</div>
+
+<form onsubmit="createConversation(event)" class="space-y-5 p-6">
+
+<div>
+<label class="mb-2 block text-xs font-medium text-slate-500">Subject</label>
+<input id="newSubject" required placeholder="e.g. Question about my tenancy" class="text-md w-full rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+</div>
+
+<div>
+<label class="mb-2 block text-xs font-medium text-slate-500">Message</label>
+<textarea id="newMessage" required rows="5" placeholder="Write your message..." class="text-md w-full resize-none rounded-xl border border-slate-200 px-4 py-3 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10"></textarea>
+</div>
+
+<div class="flex justify-end gap-3 border-t border-slate-100 pt-5">
+<button type="button" onclick="closeNewMessage()" class="text-md rounded-xl border border-slate-200 px-4 py-2.5 font-medium text-slate-700">Cancel</button>
+<button class="text-md rounded-xl bg-[#1D3639] px-4 py-2.5 font-medium text-white hover:bg-[#29494c]">Send Message</button>
+</div>
+
+</form>
+</div>
+</div>
+
+<script src="app.js"></script>
+<script>
+const conversations=[
+{
+id:1,
+title:'Property Management',
+subtitle:'Springfield Family Home',
+unread:2,
+messages:[
+{sender:'landlord',name:'Sarah Williams',text:'Hi Daniel, just a quick reminder that your tenancy agreement has been uploaded to the portal. Please review it when you have a chance.',time:'09:42',date:'Today'},
+{sender:'tenant',name:'You',text:'Thanks Sarah. I have reviewed it and accepted the agreement.',time:'10:05',date:'Today'},
+{sender:'landlord',name:'Sarah Williams',text:'Great. I have also added the move in checklist. Please complete the outstanding items before your move in date.',time:'10:12',date:'Today'}
+]
+},
+{
+id:2,
+title:'Maintenance — Kitchen Sink',
+subtitle:'Maintenance Request MR-1042',
+unread:1,
+messages:[
+{sender:'tenant',name:'You',text:'Hi, the kitchen sink is still leaking underneath the cabinet.',time:'Yesterday 14:22',date:'Yesterday'},
+{sender:'landlord',name:'Sarah Williams',text:'Thanks for letting me know. I have passed this to the maintenance agent and will update you once an appointment is available.',time:'Yesterday 15:10',date:'Yesterday'}
+]
+},
+{
+id:3,
+title:'Move In',
+subtitle:'Springfield Family Home',
+unread:0,
+messages:[
+{sender:'landlord',name:'Sarah Williams',text:'Your move in process has now been activated. Please complete the checklist in the Move In / Move Out section.',time:'12 Sep 2026',date:'12 Sep 2026'}
+]
+}
+];
+
+let activeConversation=1;
+let attachedFile=null;
+
+function renderConversations(filter=''){
+const list=document.getElementById('conversationList');
+const query=filter.toLowerCase().trim();
+
+const filtered=conversations.filter(c=>
+!query||
+c.title.toLowerCase().includes(query)||
+c.subtitle.toLowerCase().includes(query)||
+c.messages.some(m=>m.text.toLowerCase().includes(query))
+);
+
+list.innerHTML=filtered.map(c=>{
+const last=c.messages[c.messages.length-1];
+const active=c.id===activeConversation;
+
+return `
+<button onclick="selectConversation(${c.id})" class="conversation-item flex w-full items-start gap-3 border-b border-slate-100 px-4 py-4 text-left transition ${active?'bg-[#FAF4DF]/70':'hover:bg-slate-50'}">
+<div class="relative flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${active?'bg-[#1D3639] text-white':'bg-slate-100 text-slate-500'}">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M4 5.75A2.75 2.75 0 0 1 6.75 3h10.5A2.75 2.75 0 0 1 20 5.75v7.5A2.75 2.75 0 0 1 17.25 16H11l-4.5 4v-4H6.75A2.75 2.75 0 0 1 4 13.25z"/>
+</svg>
+${c.unread?'<span class="absolute -right-1 -top-1 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#E3572B] px-1 text-[9px] font-semibold text-white">'+c.unread+'</span>':''}
+</div>
+
+<div class="min-w-0 flex-1">
+<div class="flex items-center justify-between gap-2">
+<p class="truncate font-medium ${c.unread?'text-slate-900':'text-slate-700'}">${c.title}</p>
+<span class="shrink-0 text-[10px] text-slate-400">${last.time}</span>
+</div>
+<p class="mt-0.5 truncate text-xs text-slate-400">${c.subtitle}</p>
+<p class="mt-1 truncate text-xs ${c.unread?'font-medium text-slate-600':'text-slate-400'}">${last.text}</p>
+</div>
+</button>`;
+}).join('');
+
+if(!filtered.length){
+list.innerHTML='<div class="px-5 py-12 text-center text-md text-slate-400">No conversations found.</div>';
+}
+}
+
+function renderMessages(){
+const conversation=conversations.find(c=>c.id===activeConversation);
+if(!conversation)return;
+
+document.getElementById('activeConversationTitle').textContent=conversation.title;
+document.getElementById('activeConversationSubtitle').textContent=conversation.subtitle;
+
+const area=document.getElementById('messageArea');
+
+area.innerHTML=conversation.messages.map((message,index)=>`
+<div class="mb-5 flex ${message.sender==='tenant'?'justify-end':'justify-start'}">
+<div class="max-w-[85%] sm:max-w-[70%]">
+${message.sender!=='tenant'?`
+<p class="mb-1 px-1 text-xs font-medium text-slate-500">${message.name}</p>`:''}
+
+<div class="rounded-2xl px-4 py-3 ${message.sender==='tenant'?'rounded-br-md bg-[#1D3639] text-white':'rounded-bl-md border border-slate-200 bg-white text-slate-700'}">
+<p class="text-md leading-6">${message.text}</p>
+</div>
+
+<div class="mt-1 px-1 text-[10px] ${message.sender==='tenant'?'text-right':'text-left'} text-slate-400">${message.time}</div>
+</div>
+</div>
+`).join('');
+
+area.scrollTop=area.scrollHeight;
+}
+
+function selectConversation(id){
+activeConversation=id;
+
+const conversation=conversations.find(c=>c.id===id);
+if(conversation)conversation.unread=0;
+
+renderConversations(document.getElementById('conversationSearch').value);
+renderMessages();
+
+if(window.innerWidth<1024){
+document.getElementById('conversationPanel').classList.add('hidden');
+}
+}
+
+function showConversations(){
+if(window.innerWidth<1024){
+document.getElementById('conversationPanel').classList.remove('hidden');
+}
+}
+
+function filterConversations(){
+renderConversations(document.getElementById('conversationSearch').value);
+}
+
+function handleMessageKey(event){
+if(event.key==='Enter'&&!event.shiftKey){
+event.preventDefault();
+document.querySelector('#messageArea').closest('section').querySelector('form').requestSubmit();
+}
+}
+
+function sendMessage(event){
+event.preventDefault();
+
+const input=document.getElementById('messageInput');
+const text=input.value.trim();
+
+if(!text&&!attachedFile)return;
+
+const conversation=conversations.find(c=>c.id===activeConversation);
+if(!conversation)return;
+
+const now=new Date();
+const time=now.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});
+
+let messageText=text;
+
+if(attachedFile){
+messageText+=(text?' ':'')+'📎 '+attachedFile.name;
+}
+
+conversation.messages.push({
+sender:'tenant',
+name:'You',
+text:messageText,
+time:time,
+date:'Today'
+});
+
+input.value='';
+document.getElementById('messageAttachment').value='';
+attachedFile=null;
+document.getElementById('attachmentPreview').classList.add('hidden');
+
+renderConversations(document.getElementById('conversationSearch').value);
+renderMessages();
+}
+
+function showAttachment(input){
+if(!input.files.length)return;
+
+attachedFile=input.files[0];
+
+const preview=document.getElementById('attachmentPreview');
+
+preview.innerHTML=`
+<div class="inline-flex items-center gap-2 rounded-lg bg-slate-100 px-3 py-2 text-xs text-slate-600">
+<svg class="h-4 w-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M6 3.75h8.25L18 7.5v12.75H6V3.75zM14 3.75V8h4"/>
+</svg>
+<span class="max-w-[240px] truncate">${attachedFile.name}</span>
+<button type="button" onclick="removeAttachment()" class="ml-1 text-slate-400 hover:text-slate-700">×</button>
+</div>`;
+
+preview.classList.remove('hidden');
+}
+
+function removeAttachment(){
+attachedFile=null;
+document.getElementById('messageAttachment').value='';
+document.getElementById('attachmentPreview').classList.add('hidden');
+}
+
+function openNewMessage(){
+document.getElementById('newMessageModal').classList.remove('hidden');
+document.getElementById('newMessageModal').classList.add('flex');
+}
+
+function closeNewMessage(){
+document.getElementById('newMessageModal').classList.add('hidden');
+document.getElementById('newMessageModal').classList.remove('flex');
+}
+
+function createConversation(event){
+event.preventDefault();
+
+const subject=document.getElementById('newSubject').value.trim();
+const message=document.getElementById('newMessage').value.trim();
+
+if(!subject||!message)return;
+
+const id=Date.now();
+
+conversations.unshift({
+id:id,
+title:subject,
+subtitle:'Springfield Family Home',
+unread:0,
+messages:[
+{
+sender:'tenant',
+name:'You',
+text:message,
+time:new Date().toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'}),
+date:'Today'
+}
+]
+});
+
+activeConversation=id;
+
+document.getElementById('newSubject').value='';
+document.getElementById('newMessage').value='';
+
+closeNewMessage();
+renderConversations();
+renderMessages();
+}
+
+document.getElementById('newMessageModal').addEventListener('click',e=>{
+if(e.target.id==='newMessageModal')closeNewMessage();
+});
+
+renderConversations();
+renderMessages();
+
+</script>
+</body>
+</html>

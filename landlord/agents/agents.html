@@ -1,0 +1,287 @@
+<!-- /landlord/agents/agents.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Agents</title>
+  <script src="../tailwind.js"></script>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+    <main id="page" class="flex-1 overflow-auto opacity-0 scale-[0.96] transition-all duration-200 ease-out">
+      <div class="mx-auto px-5 lg:px-6 pt-6 pb-10">
+
+        <div class="mb-6">
+          <h1 class="text-md font-semibold text-slate-900">Agents</h1>
+          <p class="text-sm text-slate-400 mt-1">Manage your property agents, contractors and maintenance providers.</p>
+        </div>
+
+        <a id="addAgentBtn" class="group w-full border border-slate-200 border-1 mt-4 rounded-xl bg-[#1D3639] hover:bg-slate-100 px-4 py-3 flex items-center justify-between transition-all duration-200 cursor-pointer mb-7">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-lg bg-[#E3572B] border border-[#E3572B] flex items-center justify-center group-hover:bg-[#1D3639] group-hover:border-[#1D3639]">
+              <svg class="w-4 h-4 text-white transition-transform duration-200 group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.8" d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <div>
+              <div class="text-md font-semibold text-white group-hover:text-slate-900">Add New Agent</div>
+              <div class="text-xs text-white/60 group-hover:text-slate-500 mt-0.5">Create a new agent profile</div>
+            </div>
+          </div>
+          <div class="w-7 h-7 rounded-full flex items-center justify-center text-white/60 group-hover:bg-slate-100 group-hover:text-slate-900">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg>
+          </div>
+        </a>
+
+        <section class="mt-7">
+          <div class="flex flex-col md:flex-row gap-3">
+            <div class="relative flex-1">
+              <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.5"/>
+                <path stroke="currentColor" stroke-width="1.5" d="m16 16 4 4"/>
+              </svg>
+              <input id="agentSearch" type="text" placeholder="Search agents..." class="w-full h-9 pl-9 pr-3 rounded-lg border border-slate-200 bg-white text-sm outline-none focus:border-[#1D3639] focus:ring-1 focus:ring-[#1D3639]/10">
+            </div>
+            <select id="availabilityFilter" class="h-9 px-3 rounded-lg border border-slate-200 bg-white text-sm text-slate-600 outline-none focus:border-[#1D3639]">
+              <option>All Availability</option>
+              <option>Available</option>
+              <option>Limited availability</option>
+              <option>Unavailable</option>
+            </select>
+          </div>
+        </section>
+
+        <section class="mt-5 overflow-x-auto">
+          <div class="min-w-[980px]">
+            <div class="grid grid-cols-[1.2fr_1.35fr_1.2fr_.9fr_.65fr_.7fr_.8fr] gap-3 px-2 pb-2 border-b border-slate-100 text-sm text-slate-400">
+              <div>Agent</div>
+              <div>Company</div>
+              <div>Contact</div>
+              <div>Availability</div>
+              <div>Properties</div>
+              <div>Jobs</div>
+              <div class="text-right">Total Spend</div>
+            </div>
+            <div id="agentTable"></div>
+          </div>
+
+          <div class="flex justify-end gap-2 mt-4">
+            <button type="button" class="w-36 h-8 border border-slate-200 rounded-lg bg-white hover:bg-slate-50 flex items-center justify-center text-slate-500" aria-label="Previous">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="1.8" d="m14 6-6 6 6 6"/></svg>
+            </button>
+            <button type="button" class="w-36 h-8 border border-slate-200 rounded-lg bg-white hover:bg-slate-50 flex items-center justify-center text-slate-500" aria-label="Next">
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="1.8" d="m10 6 6 6-6 6"/></svg>
+            </button>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+  <div id="notificationsMount"></div>
+</div>
+<!-- =========================================================
+     ADD AGENT MODAL
+========================================================= -->
+
+<div id="addAgentModal" class="hidden fixed inset-0 z-50">
+
+  <div id="modalBackdrop" class="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
+
+  <div class="relative h-full flex items-center justify-center px-4 py-4">
+
+    <div class="w-full max-w-[620px] max-h-[calc(100vh-2rem)] rounded-2xl bg-white shadow-2xl flex flex-col overflow-hidden">
+
+      <div class="px-7 py-5 border-b border-slate-100 flex justify-between items-center shrink-0">
+        <h2 class="text-xl font-semibold">Add Agent</h2>
+        <button id="closeAddAgent" type="button" class="w-9 h-9 rounded-full hover:bg-slate-50 text-slate-500 flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="1.6" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="overflow-y-auto flex-1">
+
+        <div class="px-7 pt-5">
+          <div class="grid grid-cols-2 rounded-xl bg-slate-50 p-1">
+            <button type="button" data-mode="new" class="agent-mode rounded-lg px-4 py-2.5 text-md font-medium bg-white shadow-sm">Create new agent</button>
+            <button type="button" data-mode="existing" class="agent-mode rounded-lg px-4 py-2.5 text-md font-medium text-slate-400">Use existing profile</button>
+          </div>
+        </div>
+
+        <!-- Create New Agent -->
+        <form id="newAgentForm" class="px-7 py-6 space-y-5">
+
+          <div>
+            <label class="block text-md text-slate-500 mb-2">Name</label>
+            <input name="name" required placeholder="Agent name" class="w-full h-12 px-4 rounded-xl border border-slate-200 outline-none focus:border-slate-400 text-md">
+          </div>
+
+          <div>
+            <label class="block text-md text-slate-500 mb-2">Email</label>
+            <input name="email" type="email" required placeholder="agent@example.com" class="w-full h-12 px-4 rounded-xl border border-slate-200 outline-none focus:border-slate-400 text-md">
+          </div>
+
+          <div>
+            <label class="block text-md text-slate-500 mb-2">Phone</label>
+            <input name="phone" type="tel" placeholder="+234..." class="w-full h-12 px-4 rounded-xl border border-slate-200 outline-none focus:border-slate-400 text-md">
+          </div>
+
+          <div>
+            <label class="block text-md text-slate-500 mb-2">Address</label>
+            <input name="address" placeholder="Agent's address" class="w-full h-12 px-4 rounded-xl border border-slate-200 outline-none focus:border-slate-400 text-md">
+          </div>
+
+          <div>
+            <label class="block text-md text-slate-500 mb-2">Availability</label>
+            <select name="availability" class="w-full h-12 px-4 rounded-xl border border-slate-200 bg-white outline-none focus:border-slate-400 text-md">
+              <option value="available">Available</option>
+              <option value="limited">Limited availability</option>
+              <option value="unavailable">Unavailable</option>
+            </select>
+          </div>
+
+          <div>
+            <p class="text-md text-slate-500 mb-2">Specialization <span class="text-slate-400">(select at least one)</span></p>
+            <div class="rounded-xl bg-slate-50 p-4 flex flex-wrap gap-x-5 gap-y-3">
+              <label class="flex items-center gap-2 text-md"><input type="checkbox" name="specialization[]" value="residential" class="w-4 h-4"> Residential</label>
+              <label class="flex items-center gap-2 text-md"><input type="checkbox" name="specialization[]" value="commercial" class="w-4 h-4"> Commercial</label>
+              <label class="flex items-center gap-2 text-md"><input type="checkbox" name="specialization[]" value="property-management" class="w-4 h-4"> Property Management</label>
+              <label class="flex items-center gap-2 text-md"><input type="checkbox" name="specialization[]" value="leasing" class="w-4 h-4"> Leasing</label>
+              <label class="flex items-center gap-2 text-md"><input type="checkbox" name="specialization[]" value="sales" class="w-4 h-4"> Sales</label>
+              <label class="flex items-center gap-2 text-md"><input type="checkbox" name="specialization[]" value="investment" class="w-4 h-4"> Investment</label>
+              <label class="flex items-center gap-2 text-md"><input type="checkbox" name="specialization[]" value="maintenance" class="w-4 h-4"> Maintenance</label>
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-md text-slate-500 mb-2">Company <span class="text-slate-400">(optional)</span></label>
+            <input name="company" placeholder="Company name" class="w-full h-12 px-4 rounded-xl border border-slate-200 outline-none focus:border-slate-400 text-md">
+          </div>
+
+          <div>
+            <label class="block text-md text-slate-500 mb-2">Notes <span class="text-slate-400">(optional)</span></label>
+            <textarea name="notes" rows="3" placeholder="Any additional information about this agent..." class="w-full px-4 py-3 rounded-xl border border-slate-200 outline-none focus:border-slate-400 resize-none text-md"></textarea>
+          </div>
+
+          <div class="pt-2 pb-1 flex justify-end gap-3">
+            <button id="cancelNewAgent" type="button" class="px-5 h-11 rounded-xl border border-slate-200 text-md font-medium hover:bg-slate-50">Cancel</button>
+            <button type="submit" class="px-5 h-11 rounded-xl bg-slate-900 text-white text-md font-medium hover:bg-slate-800">Add Agent</button>
+          </div>
+
+        </form>
+
+
+        <!-- Existing Profile -->
+        <div id="existingAgentPanel" class="hidden px-7 py-6">
+
+          <div>
+            <label class="block text-md text-slate-500 mb-2">Search existing profile</label>
+
+            <div class="relative">
+              <svg class="absolute left-4 top-3.5 w-5 h-5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-width="1.5" stroke-linecap="round" d="m21 21-4.3-4.3m1.3-5.2a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0Z"/></svg>
+              <input id="profileSearch" placeholder="Search by name or email" class="w-full h-12 pl-12 pr-4 rounded-xl border border-slate-200 outline-none focus:border-slate-400 text-md">
+            </div>
+          </div>
+
+          <div id="profileResults" class="mt-5 space-y-3">
+
+            <button type="button" class="w-full rounded-xl border border-slate-200 p-4 text-left hover:border-slate-400 transition flex items-center gap-4">
+
+              <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center font-semibold shrink-0">OK</div>
+
+              <div class="flex-1 min-w-0">
+                <p class="text-md font-semibold">Okeze Kingsley</p>
+                <p class="text-md text-slate-400 truncate">okezekingsley@gmail.com</p>
+                <p class="text-md text-slate-400 mt-0.5">3XG Limited, Lagos</p>
+              </div>
+
+              <span class="text-md text-slate-400">Select</span>
+
+            </button>
+
+          </div>
+
+          <div class="flex justify-end pt-7 pb-1">
+            <button id="cancelExistingAgent" type="button" class="px-5 h-11 rounded-xl border border-slate-200 text-md font-medium hover:bg-slate-50">Cancel</button>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script src="../app.js"></script>
+<script>
+const agents=[
+{id:"byewind",name:"ByeWind",email:"byewind@twitter.com",phone:"+41 0092 293 2903",initials:"BW",company:"Independent",availability:"Available",specializations:["Residential","Property Management"],properties:8,completedJobs:12,totalSpend:"£1,485"},
+{id:"kate",name:"Kate Morrison",email:"melody@altbox.com",phone:"+41 0092 293 2903",initials:"KM",company:"Morrison Property Services",availability:"Available",specializations:["Residential","Leasing"],properties:5,completedJobs:9,totalSpend:"£980"},
+{id:"drew",name:"Drew Cano",email:"max@kt.com",phone:"+41 0092 293 2903",initials:"DC",company:"KT Property Group",availability:"Limited availability",specializations:["Commercial","Property Management"],properties:11,completedJobs:18,totalSpend:"£2,340"},
+{id:"orlando",name:"Orlando Diggs",email:"sean@dellito.com",phone:"+41 0092 293 2903",initials:"OD",company:"Diggs Homes",availability:"Available",specializations:["Residential","Maintenance"],properties:6,completedJobs:14,totalSpend:"£1,125"}];
+
+const table=document.getElementById("agentTable"),search=document.getElementById("agentSearch"),filter=document.getElementById("availabilityFilter");
+
+function renderAgents(){
+  const q=search.value.toLowerCase().trim(),f=filter.value;
+  const rows=agents.filter(a=>(!q||[a.name,a.email,a.company].some(v=>v.toLowerCase().includes(q)))&&(f==="All Availability"||a.availability===f));
+
+  table.innerHTML=rows.length?rows.map(a=>`
+    <a href="agent-view.html?id=${a.id}" class="block group">
+      <div class="grid grid-cols-[1.2fr_1.35fr_1.2fr_.9fr_.65fr_.7fr_.8fr] gap-3 px-2 py-4 items-center text-sm border-b border-slate-100 group-hover:bg-[#FAF4DF]/50 transition-colors">
+        <div class="flex items-center gap-3 min-w-0">
+          <div class="w-9 h-9 rounded-lg bg-slate-100 flex items-center justify-center shrink-0 text-xs font-semibold text-slate-500">${a.initials}</div>
+          <div class="min-w-0">
+            <p class="text-md font-medium text-slate-800 group-hover:text-[#1D3639] truncate">${a.name}</p>
+            <p class="text-xs text-slate-400 truncate">${a.specializations.join(" · ")}</p>
+          </div>
+        </div>
+        <div class="text-md text-slate-700 truncate">${a.company}</div>
+        <div class="leading-tight text-slate-600"><div>${a.phone}</div><div class="text-slate-400 truncate">${a.email}</div></div>
+        <div><span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full ${a.availability==="Available"?"bg-[#C3DF93]/40 text-[#1D3639]":a.availability==="Limited availability"?"bg-[#FAF4DF] text-slate-700":"bg-slate-100 text-slate-500"} text-xs font-medium"><span class="w-1.5 h-1.5 rounded-full ${a.availability==="Available"?"bg-[#1D3639]":a.availability==="Limited availability"?"bg-[#E3572B]":"bg-slate-400"}"></span>${a.availability}</span></div>
+        <div>${a.properties}</div>
+        <div>${a.completedJobs}</div>
+        <div class="text-right font-medium">${a.totalSpend}</div>
+      </div>
+    </a>`).join(""):`<div class="py-10 text-center text-md text-slate-400">No agents found.</div>`;
+}
+
+search.addEventListener("input",renderAgents);
+filter.addEventListener("change",renderAgents);
+
+const modal=document.getElementById("addAgentModal"),form=document.getElementById("newAgentForm"),existing=document.getElementById("existingAgentPanel");
+const openModal=()=>{modal.classList.remove("hidden");document.body.classList.add("overflow-hidden")};
+const closeModal=()=>{modal.classList.add("hidden");document.body.classList.remove("overflow-hidden")};
+
+document.getElementById("addAgentBtn").onclick=openModal;
+document.getElementById("closeAddAgent").onclick=closeModal;
+document.getElementById("modalBackdrop").onclick=closeModal;
+document.getElementById("cancelNewAgent").onclick=closeModal;
+document.getElementById("cancelExistingAgent").onclick=closeModal;
+
+document.querySelectorAll(".agent-mode").forEach(button=>button.onclick=()=>{
+  const mode=button.dataset.mode;
+  form.classList.toggle("hidden",mode!=="new");
+  existing.classList.toggle("hidden",mode!=="existing");
+  document.querySelectorAll(".agent-mode").forEach(tab=>{
+    const active=tab.dataset.mode===mode;
+    tab.classList.toggle("bg-white",active);
+    tab.classList.toggle("shadow-sm",active);
+    tab.classList.toggle("text-slate-400",!active);
+  });
+});
+
+form.onsubmit=e=>{e.preventDefault();console.log("New agent:",Object.fromEntries(new FormData(form)));closeModal()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+document.addEventListener("DOMContentLoaded",()=>{
+  const page=document.getElementById("page");
+  if(page)requestAnimationFrame(()=>page.classList.remove("opacity-0","scale-[0.96]"));
+  renderAgents();
+});
+</script>
+</body>
+</html>

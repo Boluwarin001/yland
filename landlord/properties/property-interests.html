@@ -1,0 +1,295 @@
+<!-- /properties/property-interests.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Interests & Applications</title>
+  <script src="../tailwind.js"></script>
+</head>
+
+<body data-active-tab="interests" class="bg-white text-slate-900 antialiased">
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+        <div id="propertyHeaderMount"></div>
+
+        <div id="page" class="opacity-0 transition-opacity">
+
+          <!-- Public Property -->
+          <section class="mt-8">
+            <div class="rounded-2xl bg-[#FAF4DF] px-5 py-5">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <h2 class="text-lg font-semibold text-slate-900">Public Property Link</h2>
+                    <span class="px-2 py-0.5 rounded-full bg-white/70 text-xs font-medium text-[#1D3639]">Active</span>
+                  </div>
+                  <p class="text-md text-slate-600 mt-1 max-w-2xl">Share this public page with prospective tenants to view the property, arrange viewings or register their interest.</p>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-2">
+                  <div class="h-10 px-4 rounded-xl bg-white/80 border border-white flex items-center text-md text-slate-600">/showcase/property_id</div>
+
+                  <button id="viewPublicLink" title="Open public property page" class="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:bg-[#1D3639] hover:text-white transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5M13 11l6-6M19 14v3a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3"/></svg>
+                  </button>
+
+                  <button id="copyPublicLink" title="Copy public property link" class="w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-500 hover:bg-[#1D3639] hover:text-white transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2" stroke-width="1.5"/><path stroke-width="1.5" stroke-linecap="round" d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></svg>
+                  </button>
+
+                  <button id="disablePublicLink" class="h-10 px-4 rounded-xl border border-[#E3572B]/30 bg-white text-[#E3572B] text-md font-medium hover:bg-[#E3572B] hover:text-white transition">Disable Link</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- Interests -->
+          <section class="mt-8">
+            <div class="mb-4">
+              <div class="flex items-center gap-3">
+                <h2 class="text-lg font-semibold">Interests</h2>
+                <span class="px-2.5 py-1 rounded-full bg-[#C3DF93]/40 text-xs font-medium text-[#1D3639]"><span id="interestCount">6</span> registered</span>
+              </div>
+              <p class="text-md text-slate-500 mt-1">People who have registered their interest through the public property page.</p>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+              <div class="px-5 py-4 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                <p class="text-md text-slate-600"><span id="interestCountHeader" class="font-semibold text-slate-900">6</span> people have registered an interest</p>
+
+                <div class="relative w-full sm:w-72">
+                  <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3m2.3-5.2a7.5 7.5 0 1 1-15 0Z"/></svg>
+                  <input id="interestSearch" type="search" placeholder="Search interests..." class="w-full h-10 pl-10 pr-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:bg-white">
+                </div>
+              </div>
+
+              <div class="overflow-x-auto">
+                <table class="w-full">
+                  <thead class="bg-slate-50 border-b border-slate-100">
+                    <tr class="text-left">
+                      <th class="px-5 py-3 text-xs font-medium text-slate-500">Date Submitted</th>
+                      <th class="px-5 py-3 text-xs font-medium text-slate-500">Name</th>
+                      <th class="px-5 py-3 text-xs font-medium text-slate-500">Preferred Viewing</th>
+                      <th class="px-5 py-3"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="interestTableBody" class="divide-y divide-slate-100"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+
+          <!-- Applications -->
+          <section class="mt-10">
+            <div class="rounded-2xl px-5 py-5">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+                <div>
+                  <div class="flex items-center gap-3">
+                    <h2 class="text-lg font-semibold text-[#1D3639]">Applications</h2>
+                    <span class="px-2.5 py-1 rounded-full bg-white/70 text-xs text-[#1D3639]"><span id="applicationCount">4</span> received</span>
+                  </div>
+                  <p class="text-md text-[#1D3639]/70 mt-1 max-w-2xl">Full applications submitted by prospective tenants for this property.</p>
+                </div>
+
+                <div class="flex items-center gap-2">
+                  <div class="h-10 px-4 rounded-xl bg-white/80 border border-white flex items-center text-md text-slate-600">/apply/property_id</div>
+
+                  <button id="openApplicationLink" title="Open application link in new tab" class="w-10 h-10 rounded-xl border border-white bg-white flex items-center justify-center text-slate-500 hover:bg-[#1D3639] hover:text-white transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M14 5h5v5M13 11l6-6M19 14v3a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h3"/></svg>
+                  </button>
+
+                  <button id="copyApplicationLink" title="Copy application link" class="w-10 h-10 rounded-xl border border-white bg-white flex items-center justify-center text-slate-500 hover:bg-[#1D3639] hover:text-white transition">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2" stroke-width="1.5"/><path stroke-width="1.5" stroke-linecap="round" d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+              <div class="overflow-x-auto">
+                <table class="w-full">
+                  <thead class="bg-slate-50 border-b border-slate-100">
+                    <tr class="text-left">
+                      <th class="px-5 py-3 text-xs font-medium text-slate-500">Date Submitted</th>
+                      <th class="px-5 py-3 text-xs font-medium text-slate-500">Name</th>
+                      <th class="px-5 py-3 text-xs font-medium text-slate-500">Move In</th>
+                      <th class="px-5 py-3 text-xs font-medium text-slate-500">Status</th>
+                      <th class="px-5 py-3"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="applicationTableBody" class="divide-y divide-slate-100"></tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+
+<!-- Interest Modal -->
+<div id="interestModal" class="hidden fixed inset-0 z-50">
+  <div id="interestModalBackdrop" class="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
+
+  <div class="relative min-h-full flex items-start justify-center px-4 py-6 sm:py-10 overflow-y-auto">
+    <div class="relative w-full max-w-[650px] bg-white rounded-2xl shadow-2xl">
+
+      <div class="px-6 py-5 border-b border-slate-100 flex items-center justify-between">
+        <div>
+          <p class="text-xs text-slate-400">Interest submission</p>
+          <h2 id="interestModalName" class="text-xl font-semibold mt-1"></h2>
+        </div>
+
+        <button id="closeInterestModal" type="button" class="w-9 h-9 rounded-full hover:bg-slate-50 text-slate-500 flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6 6l12 12M18 6 6 18"/></svg>
+        </button>
+      </div>
+
+      <div class="p-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-5">
+          <div><p class="text-xs text-slate-400">Name</p><p id="interestName" class="text-md font-medium mt-1"></p></div>
+          <div><p class="text-xs text-slate-400">Date Submitted</p><p id="interestSubmitted" class="text-md font-medium mt-1"></p></div>
+          <div><p class="text-xs text-slate-400">Email</p><p id="interestEmail" class="text-md font-medium mt-1 break-words"></p></div>
+          <div><p class="text-xs text-slate-400">Phone Number</p><p id="interestPhone" class="text-md font-medium mt-1"></p></div>
+          <div><p class="text-xs text-slate-400">Preferred Contact</p><p id="interestContact" class="text-md font-medium mt-1"></p></div>
+          <div><p class="text-xs text-slate-400">Would Like a Viewing</p><p id="interestViewing" class="text-md font-medium mt-1"></p></div>
+          <div><p class="text-xs text-slate-400">Preferred Viewing</p><p id="interestPreferredViewing" class="text-md font-medium mt-1"></p></div>
+          <div><p class="text-xs text-slate-400">Intended Move In</p><p id="interestMoveIn" class="text-md font-medium mt-1"></p></div>
+
+          <div class="sm:col-span-2">
+            <p class="text-xs text-slate-400">Notes / Comments</p>
+            <div id="interestNotes" class="mt-2 rounded-xl bg-slate-50 border border-slate-100 px-4 py-3 text-md text-slate-600"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="px-6 py-4 border-t border-slate-100 flex justify-end">
+        <button id="closeInterestModalBottom" type="button" class="h-10 px-5 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#152b2e]">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script src="../app.js"></script>
+<script src="property.js"></script>
+
+<script>
+const interests=[
+{name:"Daniel Williams",email:"daniel.williams@email.com",phone:"07123 456 781",contact:"Email",viewing:"Yes",preferredViewing:"Saturday, 21 Sep · 11:00",moveIn:"1 Oct 2026",notes:"Would like to view before applying.",submitted:"2 hours ago"},
+{name:"Sarah Thompson",email:"sarah.thompson@email.com",phone:"07987 231 445",contact:"Phone",viewing:"Yes",preferredViewing:"Monday, 23 Sep · 17:30",moveIn:"15 Oct 2026",notes:"Works during the day.",submitted:"5 hours ago"},
+{name:"Michael Brown",email:"michael.brown@email.com",phone:"07456 891 234",contact:"Email",viewing:"No",preferredViewing:"—",moveIn:"1 Nov 2026",notes:"Interested in applying remotely.",submitted:"Yesterday"},
+{name:"Aisha Mohammed",email:"aisha.mohammed@email.com",phone:"07812 665 920",contact:"WhatsApp",viewing:"Yes",preferredViewing:"Wednesday, 25 Sep · 18:00",moveIn:"1 Oct 2026",notes:"Would prefer an evening viewing.",submitted:"2 days ago"},
+{name:"James Carter",email:"james.carter@email.com",phone:"07734 128 650",contact:"Phone",viewing:"Yes",preferredViewing:"Saturday, 28 Sep · 14:00",moveIn:"15 Oct 2026",notes:"Moving from another rental.",submitted:"3 days ago"},
+{name:"Emily Johnson",email:"emily.johnson@email.com",phone:"07555 903 118",contact:"Email",viewing:"No",preferredViewing:"—",moveIn:"1 Dec 2026",notes:"Just gathering information at this stage.",submitted:"5 days ago"}
+];
+
+const applications=[
+{name:"Daniel Williams",submitted:"2 hours ago",moveIn:"1 Oct 2026",status:"Under Review"},
+{name:"Sarah Thompson",submitted:"Yesterday",moveIn:"15 Oct 2026",status:"Under Review"},
+{name:"Michael Brown",submitted:"2 days ago",moveIn:"1 Nov 2026",status:"Approved"},
+{name:"Aisha Mohammed",submitted:"4 days ago",moveIn:"1 Oct 2026",status:"Pending"}
+];
+
+function renderInterests(){
+  const search=document.getElementById("interestSearch").value.trim().toLowerCase();
+  const filtered=interests.filter(x=>`${x.name} ${x.email} ${x.phone} ${x.contact} ${x.notes}`.toLowerCase().includes(search));
+  document.getElementById("interestCount").textContent=filtered.length;
+  document.getElementById("interestCountHeader").textContent=filtered.length;
+
+  document.getElementById("interestTableBody").innerHTML=filtered.length?filtered.map(x=>{
+    const i=interests.indexOf(x);
+    return `<tr data-interest-index="${i}" class="group cursor-pointer hover:bg-[#FAF4DF]/40 transition">
+      <td class="px-5 py-4"><span class="text-md text-slate-500 whitespace-nowrap">${x.submitted}</span></td>
+      <td class="px-5 py-4"><p class="text-md font-medium whitespace-nowrap">${x.name}</p></td>
+      <td class="px-5 py-4"><span class="text-md text-slate-500 whitespace-nowrap">${x.preferredViewing}</span></td>
+      <td class="px-5 py-4 text-right"><svg class="w-4 h-4 ml-auto text-slate-300 group-hover:text-[#1D3639] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></td>
+    </tr>`;
+  }).join(""):`<tr><td colspan="4" class="px-5 py-12 text-center text-md text-slate-400">No interests found.</td></tr>`;
+
+  document.querySelectorAll("[data-interest-index]").forEach(row=>row.addEventListener("click",()=>openInterestModal(interests[Number(row.dataset.interestIndex)])));
+}
+
+function renderApplications(){
+  document.getElementById("applicationCount").textContent=applications.length;
+
+  document.getElementById("applicationTableBody").innerHTML=applications.map(x=>`
+    <tr class="group cursor-pointer hover:bg-[#C3DF93]/20 transition">
+      <td class="px-5 py-4 text-md text-slate-500 whitespace-nowrap">${x.submitted}</td>
+      <td class="px-5 py-4 text-md font-medium whitespace-nowrap">${x.name}</td>
+      <td class="px-5 py-4 text-md text-slate-500 whitespace-nowrap">${x.moveIn}</td>
+      <td class="px-5 py-4"><span class="inline-flex px-2.5 py-1 rounded-full bg-slate-100 text-slate-600 text-xs">${x.status}</span></td>
+      <td class="px-5 py-4 text-right"><svg class="w-4 h-4 ml-auto text-slate-300 group-hover:text-[#1D3639] transition" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m9 18 6-6-6-6"/></svg></td>
+    </tr>
+  `).join("");
+}
+
+function openInterestModal(x){
+  document.getElementById("interestModalName").textContent=x.name;
+  document.getElementById("interestName").textContent=x.name;
+  document.getElementById("interestSubmitted").textContent=x.submitted;
+  document.getElementById("interestEmail").textContent=x.email;
+  document.getElementById("interestPhone").textContent=x.phone;
+  document.getElementById("interestContact").textContent=x.contact;
+  document.getElementById("interestViewing").textContent=x.viewing;
+  document.getElementById("interestPreferredViewing").textContent=x.preferredViewing;
+  document.getElementById("interestMoveIn").textContent=x.moveIn;
+  document.getElementById("interestNotes").textContent=x.notes;
+  document.getElementById("interestModal").classList.remove("hidden");
+  document.body.classList.add("overflow-hidden");
+}
+
+function closeInterestModal(){
+  document.getElementById("interestModal").classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+}
+
+document.getElementById("interestSearch").addEventListener("input",renderInterests);
+document.getElementById("closeInterestModal").addEventListener("click",closeInterestModal);
+document.getElementById("closeInterestModalBottom").addEventListener("click",closeInterestModal);
+document.getElementById("interestModalBackdrop").addEventListener("click",closeInterestModal);
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeInterestModal()});
+
+const publicUrl="/showcase/property_id",applicationUrl="/apply/property_id";
+
+document.getElementById("viewPublicLink").addEventListener("click",()=>window.open(publicUrl,"_blank"));
+
+document.getElementById("copyPublicLink").addEventListener("click",async()=>{
+  await navigator.clipboard.writeText(window.location.origin+publicUrl);
+  const btn=document.getElementById("copyPublicLink");
+  btn.innerHTML='<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4L19 6"/></svg>';
+  setTimeout(()=>btn.innerHTML='<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2" stroke-width="1.5"/><path stroke-width="1.5" stroke-linecap="round" d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></svg>',1500);
+});
+
+document.getElementById("disablePublicLink").addEventListener("click",()=>{if(confirm("Are you sure you want to disable the public property link?"))alert("Public link disabled.")});
+document.getElementById("openApplicationLink").addEventListener("click",()=>window.open(applicationUrl,"_blank"));
+
+document.getElementById("copyApplicationLink").addEventListener("click",async()=>{
+  await navigator.clipboard.writeText(window.location.origin+applicationUrl);
+  const btn=document.getElementById("copyApplicationLink");
+  btn.innerHTML='<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4L19 6"/></svg>';
+  setTimeout(()=>btn.innerHTML='<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2" stroke-width="1.5"/><path stroke-width="1.5" stroke-linecap="round" d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3"/></svg>',1500);
+});
+
+renderInterests();
+renderApplications();
+
+window.addEventListener("load",()=>requestAnimationFrame(()=>document.getElementById("page").classList.remove("opacity-0")));
+</script>
+
+</body>
+</html>

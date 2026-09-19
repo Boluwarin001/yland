@@ -1,0 +1,250 @@
+<!-- /landlord/maintenance/maintenance-item.html -->
+ <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Maintenance Request</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto opacity-0 scale-[0.96] transition-all duration-200 ease-out" id="page">
+      <div class="max-w-[1200px] mx-auto px-5 lg:px-6 pt-6 pb-10">
+
+        <a href="maintenance.html" class="inline-flex items-center gap-2 text-md text-slate-400 hover:text-slate-700 mb-6">← Back to Maintenance</a>
+
+        <div class="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-5 mb-8">
+          <div>
+            <div class="flex items-center gap-2 mb-2">
+              <span id="requestId" class="text-md text-slate-400">MR-1042</span>
+              <span id="requestStatus" class="px-2.5 py-1 rounded-full text-md bg-yellow-50 text-yellow-700">Awaiting approval</span>
+            </div>
+            <h1 id="requestTitle" class="text-2xl font-semibold">Leaking kitchen sink</h1>
+            <p id="requestProperty" class="text-md text-slate-400 mt-1">4B Villareal, Flat 15</p>
+          </div>
+          <div class="flex gap-2">
+            <button id="approveBtn" class="h-10 px-4 rounded-xl bg-slate-900 text-white text-md font-medium">Approve Request</button>
+            <button id="rejectBtn" class="h-10 px-4 rounded-xl border border-slate-200 text-md font-medium">Reject</button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_300px] gap-7">
+
+          <div class="space-y-6">
+
+            <section class="rounded-2xl border border-slate-100 overflow-hidden">
+              <div class="px-6 py-5 border-b border-slate-100">
+                <h2 class="text-md font-semibold">Request details</h2>
+              </div>
+              <div class="p-6 space-y-6">
+                <div>
+                  <p class="text-md text-slate-400 mb-2">Issue</p>
+                  <p id="detailDescription" class="text-md leading-7"></p>
+                </div>
+                <div class="grid grid-cols-2 gap-5">
+                  <div><p class="text-md text-slate-400">Submitted by</p><p id="detailTenant" class="text-md mt-1"></p></div>
+                  <div><p class="text-md text-slate-400">Submitted</p><p id="detailDate" class="text-md mt-1"></p></div>
+                  <div><p class="text-md text-slate-400">Priority</p><p id="detailPriority" class="text-md mt-1"></p></div>
+                  <div><p class="text-md text-slate-400">Property</p><p id="detailProperty" class="text-md mt-1"></p></div>
+                </div>
+                <div>
+                  <p class="text-md text-slate-400 mb-2">Photos / attachments</p>
+                  <div class="grid grid-cols-3 gap-3">
+                    <div class="aspect-square rounded-xl bg-slate-50 flex items-center justify-center text-md text-slate-400">Photo 1</div>
+                    <div class="aspect-square rounded-xl bg-slate-50 flex items-center justify-center text-md text-slate-400">Photo 2</div>
+                    <div class="aspect-square rounded-xl bg-slate-50 flex items-center justify-center text-md text-slate-400">+1</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <section class="rounded-2xl border border-slate-100 overflow-hidden">
+              <div class="px-6 py-5 border-b border-slate-100 flex justify-between">
+                <h2 class="text-md font-semibold">Agent progress</h2>
+                <span id="agentStatus" class="text-md text-slate-400">Not assigned</span>
+              </div>
+              <div id="agentProgress" class="p-6"></div>
+            </section>
+
+            <section class="rounded-2xl border border-slate-100 overflow-hidden">
+              <div class="px-6 py-5 border-b border-slate-100">
+                <h2 class="text-md font-semibold">Comments</h2>
+              </div>
+              <div id="commentsList" class="p-6 space-y-5">
+                <div class="flex gap-3">
+                  <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-semibold shrink-0">YL</div>
+                  <div>
+                    <div class="flex gap-2">
+                      <p class="text-md font-medium">You</p>
+                      <span class="text-md text-slate-400">Today</span>
+                    </div>
+                    <p class="text-md text-slate-500 mt-1">Please check whether the leak has caused any damage underneath the sink.</p>
+                  </div>
+                </div>
+              </div>
+              <form id="commentForm" class="px-6 pb-6 flex gap-3">
+                <textarea id="commentInput" rows="2" placeholder="Add a comment..." class="flex-1 px-4 py-3 rounded-xl border border-slate-200 outline-none focus:border-slate-400 resize-none text-md"></textarea>
+                <button class="self-end h-10 px-4 rounded-xl bg-slate-900 text-white text-md">Comment</button>
+              </form>
+            </section>
+          </div>
+
+          <aside class="space-y-5">
+            <section class="rounded-2xl bg-slate-50 p-6">
+              <h2 class="text-md font-semibold mb-4">Assign agent</h2>
+              <select id="agentSelect" class="w-full h-11 px-3 rounded-xl border border-slate-200 bg-white text-md outline-none">
+                <option value="">Select an agent</option>
+                <option>ByeWind</option>
+                <option>Kate Morrison</option>
+                <option>Drew Cano</option>
+                <option>Orlando Diggs</option>
+              </select>
+              <button id="assignBtn" class="w-full h-10 mt-3 rounded-xl bg-white border border-slate-200 text-md font-medium">Assign Agent</button>
+            </section>
+
+            <section class="rounded-2xl bg-slate-50 p-6">
+              <h2 class="text-md font-semibold mb-5">Request summary</h2>
+              <div class="space-y-4">
+                <div><p class="text-md text-slate-400">Status</p><p id="summaryStatus" class="text-md mt-1"></p></div>
+                <div><p class="text-md text-slate-400">Priority</p><p id="summaryPriority" class="text-md mt-1"></p></div>
+                <div><p class="text-md text-slate-400">Agent</p><p id="summaryAgent" class="text-md mt-1">Not assigned</p></div>
+                <div><p class="text-md text-slate-400">Last updated</p><p id="summaryUpdated" class="text-md mt-1"></p></div>
+              </div>
+            </section>
+          </aside>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+<script src="../app.js"></script>
+<script>
+const requests = {
+  'MR-1042': {id:'MR-1042',status:'Awaiting approval',title:'Leaking kitchen sink',property:'4B Villareal, Flat 15',description:'Water is leaking from the kitchen sink and pooling underneath the cabinet.',tenant:'Sarah Johnson',priority:'High',date:'Sep 9, 2026',agent:null},
+  'MR-1041': {id:'MR-1041',status:'Awaiting approval',title:'Ceiling crack',property:'4B Villareal, Flat 15',description:'A visible crack has appeared across the bedroom ceiling.',tenant:'Michael Smith',priority:'High',date:'Sep 8, 2026',agent:null},
+  'MR-1037': {id:'MR-1037',status:'In progress',title:'Boiler inspection',property:'4B Villareal, Flat 15',description:'The boiler is making unusual noises and needs to be inspected.',tenant:'Sarah Johnson',priority:'High',date:'Sep 6, 2026',agent:'ByeWind'},
+  'MR-1035': {id:'MR-1035',status:'In progress',title:'Bedroom radiator',property:'17 Bagwell Avenue',description:'Radiator is not heating properly.',tenant:'James Brown',priority:'Low',date:'Sep 5, 2026',agent:'Drew Cano'},
+  'MR-1028': {id:'MR-1028',status:'Completed',title:'Ceiling crack',property:'4B Villareal, Flat 15',description:'Bedroom ceiling crack repaired and inspected.',tenant:'Michael Smith',priority:'High',date:'Aug 28, 2026',agent:'ByeWind'}
+};
+
+const request = requests[new URLSearchParams(location.search).get('id')] || requests['MR-1042'];
+
+const fieldMap = [
+  ['requestId', request.id],
+  ['requestTitle', request.title],
+  ['requestProperty', request.property],
+  ['detailDescription', request.description],
+  ['detailTenant', request.tenant],
+  ['detailDate', request.date],
+  ['detailPriority', request.priority],
+  ['detailProperty', request.property],
+  ['summaryPriority', request.priority],
+  ['summaryUpdated', request.date]
+];
+
+fieldMap.forEach(([id, value]) => {
+  document.getElementById(id).textContent = value;
+});
+
+const statusEl = document.getElementById('requestStatus');
+const summaryEl = document.getElementById('summaryStatus');
+const summaryAgent = document.getElementById('summaryAgent');
+
+function setStatus(s) {
+  statusEl.textContent = s;
+  summaryEl.textContent = s;
+  statusEl.className = 'px-2.5 py-1 rounded-full text-md ' + (
+    s === 'Approved' ? 'bg-green-50 text-green-700'
+    : s === 'Rejected' ? 'bg-red-50 text-red-700'
+    : s === 'In progress' ? 'bg-blue-50 text-blue-700'
+    : 'bg-yellow-50 text-yellow-700'
+  );
+}
+
+function showAgent(agent) {
+  summaryAgent.textContent = agent || 'Not assigned';
+  document.getElementById('agentStatus').textContent = agent ? 'Working' : 'Not assigned';
+
+  document.getElementById('agentProgress').innerHTML = agent
+    ? `<div class="flex items-center justify-between gap-4">
+         <div class="flex items-center gap-3">
+           <div class="w-11 h-11 rounded-xl bg-slate-100 flex items-center justify-center text-md font-semibold">${agent.split(' ').map(x => x[0]).join('')}</div>
+           <div>
+             <p class="text-md font-medium">${agent}</p>
+             <p class="text-md text-slate-400">Assigned to this request</p>
+           </div>
+         </div>
+         <span class="text-md text-slate-500">In progress</span>
+       </div>
+       <div class="mt-5">
+         <div class="flex justify-between text-md mb-2"><span class="text-slate-400">Progress</span><span>35%</span></div>
+         <div class="h-1.5 bg-slate-100 rounded-full"><div class="h-full w-[35%] bg-slate-900 rounded-full"></div></div>
+       </div>
+       <div class="mt-5 grid grid-cols-3 gap-2">
+         <div class="bg-slate-50 rounded-lg p-2.5 text-center text-md">Assigned</div>
+         <div class="bg-slate-50 rounded-lg p-2.5 text-center text-md">2 Updates</div>
+         <div class="bg-slate-50 rounded-lg p-2.5 text-center text-md">35%</div>
+       </div>`
+    : `<div class="flex items-center gap-3">
+         <div class="w-11 h-11 rounded-xl bg-slate-50 flex items-center justify-center text-md text-slate-400">—</div>
+         <div>
+           <p class="text-md font-medium">No agent assigned</p>
+           <p class="text-md text-slate-400">Assign an agent to begin work.</p>
+         </div>
+       </div>`;
+}
+
+setStatus(request.status);
+showAgent(request.agent);
+
+if (request.agent) {
+  document.getElementById('agentSelect').value = request.agent;
+}
+
+document.getElementById('approveBtn').onclick = () => setStatus('Approved');
+document.getElementById('rejectBtn').onclick = () => setStatus('Rejected');
+
+document.getElementById('assignBtn').onclick = () => {
+  const a = document.getElementById('agentSelect').value;
+  if (a) {
+    showAgent(a);
+    setStatus('In progress');
+  }
+};
+
+document.getElementById('commentForm').onsubmit = e => {
+  e.preventDefault();
+  const input = document.getElementById('commentInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const safe = text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  document.getElementById('commentsList').insertAdjacentHTML('beforeend',
+    `<div class="flex gap-3">
+       <div class="w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-[10px] font-semibold shrink-0">YL</div>
+       <div>
+         <div class="flex gap-2">
+           <p class="text-md font-medium">You</p>
+           <span class="text-md text-slate-400">Just now</span>
+         </div>
+         <p class="text-md text-slate-500 mt-1">${safe}</p>
+       </div>
+     </div>`);
+
+  input.value = '';
+};
+</script>
+</body>
+</html>

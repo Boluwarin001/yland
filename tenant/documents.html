@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Documents</title>
+  <script src="tailwind.js"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+        <div id="page" class="mx-auto max-w-7xl mt-24 opacity-0">
+
+          <!-- Header -->
+          <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <div>
+              <h1 class="text-md font-semibold text-slate-900">Documents</h1>
+              <p class="text-md text-slate-500 mt-1">View and manage documents shared with you during your tenancy.</p>
+            </div>
+          </div>
+
+
+          <!-- Action Required -->
+          <section class="mt-6 rounded-2xl border border-slate-200 bg-[#FAF4DF]/60 overflow-hidden">
+
+            <div class="px-6 py-5 border-b border-[#eadfbe] flex items-start gap-4">
+
+              <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-width="1.7" d="M12 3l8 3v5c0 5.2-3.4 8.8-8 10-4.6-1.2-8-4.8-8-10V6l8-3z"/>
+                  <path stroke-width="1.7" d="M12 8v5m0 3h.01"/>
+                </svg>
+              </div>
+
+              <div>
+                <h2 class="text-lg font-semibold text-slate-900">Action Required</h2>
+                <p class="text-md text-slate-500 mt-1">These documents require your attention.</p>
+              </div>
+
+            </div>
+
+            <div class="p-6">
+
+              <div class="rounded-2xl border border-[#eadfbe] bg-white p-5">
+
+                <div class="flex flex-col md:flex-row md:items-center gap-4">
+
+                  <div class="w-11 h-11 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l4 4v14H7V3Zm7 1v4h4"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <div class="flex flex-wrap items-center gap-2">
+                      <h3 class="text-md font-semibold text-slate-900">Tenancy Agreement</h3>
+                      <span class="px-2.5 py-1 rounded-full bg-[#FAF4DF] text-[#1D3639] text-xs font-medium">Read & Accept</span>
+                    </div>
+
+                    <p class="text-xs text-slate-500 mt-1">
+                      Please review and accept the latest tenancy agreement.
+                    </p>
+
+                    <p class="text-xs text-slate-400 mt-2">
+                      Version 2 · Uploaded 29 Aug 2026
+                    </p>
+                  </div>
+
+                  <button type="button" data-action="accept" class="h-10 px-5 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#152b2e] transition-colors">
+                    Review Document
+                  </button>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- Search / Filters -->
+          <div class="mt-6 flex flex-col lg:flex-row gap-3">
+
+            <div class="relative flex-1">
+              <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3m2.3-5.2a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/>
+              </svg>
+
+              <input id="documentSearch" type="search" placeholder="Search documents..." class="w-full h-11 pl-10 pr-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+            </div>
+
+            <select id="categoryFilter" class="h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-[#1D3639] lg:w-56">
+              <option value="all">All categories</option>
+              <option value="Legal">Legal</option>
+              <option value="Compliance">Compliance</option>
+              <option value="Move In Documents">Move In Documents</option>
+              <option value="Move Out Documents">Move Out Documents</option>
+              <option value="Info">Info</option>
+              <option value="Others">Others</option>
+            </select>
+
+          </div>
+
+
+          <!-- Document Count -->
+          <div class="flex items-center justify-between mt-5 mb-3">
+            <p id="documentCount" class="text-xs text-slate-400"></p>
+
+            <select id="sortDocuments" class="h-8 px-3 rounded-lg border border-slate-200 bg-white text-xs text-slate-500 outline-none">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="name">Name</option>
+            </select>
+          </div>
+
+
+          <!-- Documents -->
+          <div id="documentGroups" class="space-y-6"></div>
+
+
+          <!-- Help -->
+          <section class="mt-6 rounded-2xl border border-slate-200 bg-[#FAF4DF]/40 p-6">
+
+            <div class="flex items-start gap-4">
+
+              <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" stroke-width="1.7"/>
+                  <path stroke-width="1.7" d="M9.5 9a2.5 2.5 0 1 1 4.7 1.2c-.8 1.1-2.2 1.4-2.2 3m0 3h.01"/>
+                </svg>
+              </div>
+
+              <div>
+                <h2 class="text-md font-semibold text-slate-900">Need help with a document?</h2>
+                <p class="text-md text-slate-500 mt-1">
+                  If you have questions about any of your tenancy documents, contact your landlord or property manager.
+                </p>
+
+                <a href="messages.html" class="inline-flex items-center gap-2 mt-3 text-xs font-semibold text-[#1D3639] hover:text-[#E3572B]">
+                  Contact your property manager
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/>
+                  </svg>
+                </a>
+              </div>
+
+            </div>
+
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+
+<!-- Document Preview Modal -->
+<div id="documentModal" class="fixed inset-0 z-50 hidden">
+
+  <div id="modalBackdrop" class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm"></div>
+
+  <div class="relative min-h-full flex items-center justify-center p-5">
+
+    <div class="w-full max-w-2xl rounded-2xl bg-white border border-slate-200 shadow-xl overflow-hidden">
+
+      <div class="px-6 py-5 border-b border-slate-100 flex items-start justify-between gap-4">
+
+        <div>
+          <p id="modalCategory" class="text-xs text-slate-400"></p>
+          <h2 id="modalTitle" class="text-lg font-semibold text-slate-900 mt-1"></h2>
+          <p id="modalMeta" class="text-xs text-slate-400 mt-1"></p>
+        </div>
+
+        <button type="button" id="closeModal" class="w-9 h-9 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-400">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-width="1.7" d="M6 6l12 12M18 6L6 18"/>
+          </svg>
+        </button>
+
+      </div>
+
+
+      <div class="p-6">
+
+        <div class="h-72 sm:h-96 rounded-2xl bg-slate-50 border border-slate-200 flex items-center justify-center">
+
+          <div class="text-center">
+
+            <div class="w-16 h-16 rounded-2xl bg-white border border-slate-200 flex items-center justify-center mx-auto">
+              <svg class="w-8 h-8 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l4 4v14H7V3Zm7 1v4h4"/>
+              </svg>
+            </div>
+
+            <p class="text-md font-medium text-slate-700 mt-4">Document Preview</p>
+            <p class="text-xs text-slate-400 mt-1">The document viewer will open here.</p>
+
+          </div>
+
+        </div>
+
+
+        <div id="acceptSection" class="hidden mt-5 rounded-2xl bg-[#FAF4DF]/60 border border-[#eadfbe] p-5">
+
+          <div class="flex items-start gap-3">
+
+            <input id="acceptCheckbox" type="checkbox" class="w-4 h-4 mt-1 rounded border-slate-300 accent-[#1D3639]">
+
+            <div>
+              <label for="acceptCheckbox" class="text-md font-medium text-slate-800 cursor-pointer">
+                I have read and accept this document
+              </label>
+
+              <p class="text-xs text-slate-500 mt-1">
+                By accepting, you confirm that you have reviewed the document and agree to the terms presented.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="px-6 py-5 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+
+        <button type="button" id="downloadBtn" class="h-10 px-4 rounded-xl border border-slate-200 text-md font-medium text-slate-600 hover:bg-slate-50">
+          Download
+        </button>
+
+        <div class="flex gap-3">
+
+          <button type="button" id="closeModalBottom" class="h-10 px-4 rounded-xl border border-slate-200 text-md font-medium text-slate-600 hover:bg-slate-50">
+            Close
+          </button>
+
+          <button type="button" id="acceptBtn" class="hidden h-10 px-5 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#152b2e]">
+            Accept Document
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+
+const documents=[
+  {
+    id:"ast",
+    name:"Tenancy Agreement",
+    category:"Legal",
+    version:2,
+    date:"29 Aug 2026",
+    size:"860 KB",
+    description:"Current tenancy agreement for Springfield Family Home.",
+    actionRequired:true,
+    accepted:false
+  },
+  {
+    id:"gas",
+    name:"Gas Safety Certificate",
+    category:"Compliance",
+    version:3,
+    date:"20 Aug 2026",
+    size:"540 KB",
+    description:"Current gas safety certificate for the property.",
+    actionRequired:false
+  },
+  {
+    id:"epc",
+    name:"Energy Performance Certificate (EPC)",
+    category:"Compliance",
+    version:1,
+    date:"14 Jul 2026",
+    size:"1.8 MB",
+    description:"Energy Performance Certificate for the property.",
+    actionRequired:false
+  },
+  {
+    id:"inventory",
+    name:"Move In / Schedule of Condition",
+    category:"Move In Documents",
+    version:1,
+    date:"1 Jul 2026",
+    size:"4.5 MB",
+    description:"Record of the property condition at the beginning of the tenancy.",
+    actionRequired:false
+  },
+  {
+    id:"inventory2",
+    name:"Inventory",
+    category:"Move In Documents",
+    version:2,
+    date:"1 Jul 2026",
+    size:"7.2 MB",
+    description:"Property inventory recorded at the start of the tenancy.",
+    actionRequired:false
+  },
+  {
+    id:"rules",
+    name:"Property Rules",
+    category:"Info",
+    version:1,
+    date:"20 Jun 2026",
+    size:"320 KB",
+    description:"Rules and requirements relating to the property.",
+    actionRequired:false
+  },
+  {
+    id:"emergency",
+    name:"Emergency Contacts",
+    category:"Info",
+    version:1,
+    date:"20 Jun 2026",
+    size:"210 KB",
+    description:"Important emergency and property contact information.",
+    actionRequired:false
+  },
+  {
+    id:"welcome",
+    name:"Tenant Welcome Guide",
+    category:"Info",
+    version:1,
+    date:"1 Jul 2026",
+    size:"720 KB",
+    description:"Useful information about your property and tenancy.",
+    actionRequired:false
+  }
+];
+
+
+const categoryIcons={
+  "Legal":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8 3h8l3 3v15H5V3h3m3 0v4h4V3m-5 8h6m-6 4h6"/></svg>`,
+
+  "Compliance":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 3 4 7v5c0 4.5 3.2 7.8 8 9 4.8-1.2 8-4.5 8-9V7l-8-4Zm0 5v5m0 3h.01"/></svg>`,
+
+  "Move In Documents":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 4l9 6.5V20H3v-9.5ZM8 20v-5h8v5"/></svg>`,
+
+  "Move Out Documents":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 4l9 6.5V20H3v-9.5ZM8 20v-5h8v5m4-6h-7m0 0 3-3m-3 3 3 3"/></svg>`,
+
+  "Info":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.7"/><path stroke-width="1.7" d="M12 10v6m0-9h.01"/></svg>`,
+
+  "Others":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 24 24"><path stroke-width="1.5" d="M4 5h16v14H4V5Zm4 4h8m-8 4h8m-8 4h5"/></svg>`
+};
+
+
+function documentCard(doc){
+
+  const status=doc.actionRequired&&!doc.accepted
+    ? `<span class="px-2.5 py-1 rounded-full bg-[#FAF4DF] text-[#1D3639] text-xs font-medium">Action required</span>`
+    : `<span class="px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">Available</span>`;
+
+  return `
+    <div class="rounded-2xl border border-slate-200 bg-white p-5 hover:border-slate-300 transition-colors">
+
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+
+        <div class="w-11 h-11 rounded-xl bg-[#FAF4DF] flex items-center justify-center text-[#1D3639] shrink-0">
+          ${`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l4 4v14H7V3Zm7 1v4h4"/></svg>`}
+        </div>
+
+        <div class="flex-1 min-w-0">
+
+          <div class="flex flex-wrap items-center gap-2">
+            <h3 class="text-md font-semibold text-slate-900">${doc.name}</h3>
+            ${status}
+          </div>
+
+          <p class="text-xs text-slate-500 mt-1">${doc.description}</p>
+
+          <div class="flex flex-wrap gap-x-4 gap-y-1 mt-2">
+            <span class="text-xs text-slate-400">Version ${doc.version}</span>
+            <span class="text-xs text-slate-400">${doc.date}</span>
+            <span class="text-xs text-slate-400">${doc.size}</span>
+          </div>
+
+        </div>
+
+        <div class="flex items-center gap-2 shrink-0">
+
+          <button type="button" data-open="${doc.id}" class="h-9 px-4 rounded-lg bg-[#1D3639] text-white text-xs font-medium hover:bg-[#152b2e]">
+            ${doc.actionRequired&&!doc.accepted?"Review":"Open"}
+          </button>
+
+          <button type="button" data-download="${doc.id}" class="w-9 h-9 rounded-lg border border-slate-200 text-slate-400 hover:bg-slate-50 flex items-center justify-center" title="Download">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0 4-4m-4 4-4-4M5 20h14"/>
+            </svg>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+  `;
+}
+
+
+function renderDocuments(){
+
+  const search=document.getElementById("documentSearch").value.trim().toLowerCase();
+  const category=document.getElementById("categoryFilter").value;
+  const sort=document.getElementById("sortDocuments").value;
+
+  let filtered=documents.filter(doc=>{
+    const matchesSearch=!search||`${doc.name} ${doc.category} ${doc.description}`.toLowerCase().includes(search);
+    const matchesCategory=category==="all"||doc.category===category;
+    return matchesSearch&&matchesCategory;
+  });
+
+  if(sort==="name"){
+    filtered.sort((a,b)=>a.name.localeCompare(b.name));
+  }else{
+    filtered.sort((a,b)=>{
+      const da=new Date(a.date);
+      const db=new Date(b.date);
+      return sort==="newest"?db-da:da-db;
+    });
+  }
+
+  document.getElementById("documentCount").textContent=
+    `${filtered.length} document${filtered.length===1?"":"s"}`;
+
+  document.getElementById("documentGroups").innerHTML=
+    Object.keys(categoryIcons).map(categoryName=>{
+
+      const docs=filtered.filter(doc=>doc.category===categoryName);
+
+      if(!docs.length)return "";
+
+      return `
+        <section>
+
+          <div class="flex items-center gap-3 mb-3">
+
+            <div class="w-9 h-9 rounded-lg bg-[#FAF4DF] flex items-center justify-center text-[#1D3639]">
+              ${categoryIcons[categoryName]}
+            </div>
+
+            <div>
+              <h2 class="text-md font-semibold text-slate-900">${categoryName}</h2>
+              <p class="text-xs text-slate-400">${docs.length} document${docs.length===1?"":"s"}</p>
+            </div>
+
+          </div>
+
+          <div class="space-y-3">
+            ${docs.map(documentCard).join("")}
+          </div>
+
+        </section>
+      `;
+
+    }).join("")||`
+      <div class="rounded-2xl border border-dashed border-slate-200 p-12 text-center">
+        <p class="text-md font-medium text-slate-700">No documents found</p>
+        <p class="text-xs text-slate-400 mt-1">Try changing your search or category filter.</p>
+      </div>
+    `;
+
+  bindDocumentActions();
+}
+
+
+function bindDocumentActions(){
+
+  document.querySelectorAll("[data-open]").forEach(button=>{
+    button.onclick=()=>{
+      const doc=documents.find(x=>x.id===button.dataset.open);
+      if(doc)openDocument(doc);
+    };
+  });
+
+  document.querySelectorAll("[data-download]").forEach(button=>{
+    button.onclick=()=>{
+      const doc=documents.find(x=>x.id===button.dataset.download);
+      if(doc)alert(`Download: ${doc.name}`);
+    };
+  });
+}
+
+
+const modal=document.getElementById("documentModal");
+let activeDocument=null;
+
+
+function openDocument(doc){
+
+  activeDocument=doc;
+
+  document.getElementById("modalCategory").textContent=doc.category;
+  document.getElementById("modalTitle").textContent=doc.name;
+  document.getElementById("modalMeta").textContent=`Version ${doc.version} · ${doc.date} · ${doc.size}`;
+
+  const needsAcceptance=doc.actionRequired&&!doc.accepted;
+
+  document.getElementById("acceptSection").classList.toggle("hidden",!needsAcceptance);
+  document.getElementById("acceptBtn").classList.toggle("hidden",!needsAcceptance);
+  document.getElementById("acceptCheckbox").checked=false;
+
+  modal.classList.remove("hidden");
+  document.body.classList.add("overflow-hidden");
+}
+
+
+function closeDocument(){
+
+  modal.classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+  activeDocument=null;
+
+}
+
+
+document.getElementById("closeModal").onclick=closeDocument;
+document.getElementById("closeModalBottom").onclick=closeDocument;
+document.getElementById("modalBackdrop").onclick=closeDocument;
+
+
+document.getElementById("acceptBtn").onclick=()=>{
+
+  if(!activeDocument)return;
+
+  if(!document.getElementById("acceptCheckbox").checked){
+    alert("Please confirm that you have read and accepted the document.");
+    return;
+  }
+
+  activeDocument.accepted=true;
+  activeDocument.actionRequired=false;
+
+  closeDocument();
+  renderDocuments();
+
+};
+
+
+document.getElementById("downloadBtn").onclick=()=>{
+
+  if(activeDocument){
+    alert(`Download: ${activeDocument.name}`);
+  }
+
+};
+
+
+document.getElementById("documentSearch").oninput=renderDocuments;
+document.getElementById("categoryFilter").onchange=renderDocuments;
+document.getElementById("sortDocuments").onchange=renderDocuments;
+
+
+document.querySelector("[data-action='accept']").onclick=()=>{
+
+  const doc=documents.find(x=>x.id==="ast");
+
+  if(doc)openDocument(doc);
+
+};
+
+
+document.addEventListener("keydown",e=>{
+
+  if(e.key==="Escape"&&!modal.classList.contains("hidden")){
+    closeDocument();
+  }
+
+});
+
+
+renderDocuments();
+
+</script>
+
+</body>
+</html>

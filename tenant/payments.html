@@ -1,0 +1,497 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Payments</title>
+  <script src="tailwind.js"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+            <div id="page" class="mx-auto max-w-7xl mt-24 opacity-0">
+
+          <!-- Header -->
+          <div class="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <div>
+              <h1 class="text-md font-semibold text-slate-900">Payments</h1>
+              <p class="text-md text-slate-500 mt-1">Manage your rent payments and view your payment history.</p>
+            </div>
+
+            <button type="button" class="h-10 px-5 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#152b2e] transition-colors">
+              Make a Payment
+            </button>
+          </div>
+
+
+          <!-- Payment Summary -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+
+            <div class="rounded-2xl border border-slate-200 bg-white p-5">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-xs text-slate-400">Next Payment</p>
+                  <p class="text-2xl font-semibold text-slate-900 mt-2">£950.00</p>
+                  <p class="text-xs text-slate-500 mt-1">Due 1 October 2026</p>
+                </div>
+
+                <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="2.5" y="5" width="19" height="14" rx="2.5" stroke-width="1.7"/>
+                    <path stroke-width="1.7" d="M2.5 10h19"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 bg-white p-5">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-xs text-slate-400">Payment Status</p>
+                  <div class="flex items-center gap-2 mt-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-[#C3DF93]"></span>
+                    <p class="text-lg font-semibold text-slate-900">Up to date</p>
+                  </div>
+                  <p class="text-xs text-slate-500 mt-1">No outstanding balance</p>
+                </div>
+
+                <div class="w-10 h-10 rounded-xl bg-[#C3DF93]/50 flex items-center justify-center">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-width="1.8" d="M20 6L9 17l-5-5"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="rounded-2xl border border-slate-200 bg-white p-5">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <p class="text-xs text-slate-400">Rent Frequency</p>
+                  <p class="text-lg font-semibold text-slate-900 mt-2">Monthly</p>
+                  <p class="text-xs text-slate-500 mt-1">Due on the 1st of each month</p>
+                </div>
+
+                <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="3" y="4" width="18" height="17" rx="2" stroke-width="1.7"/>
+                    <path stroke-width="1.7" d="M8 2v4m8-4v4M3 9h18"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+          <!-- Payment Options -->
+          <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+            <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+              <div class="flex items-start justify-between gap-4">
+                <div>
+                  <h2 class="text-lg font-semibold text-slate-900">Payment Options</h2>
+                  <p class="text-md text-slate-500 mt-1">Choose how you would like to pay your rent.</p>
+                </div>
+
+                <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-width="1.7" d="M2.5 7.5h19m-16 4h3m-3 4h5M4.5 5h15A2.5 2.5 0 0122 7.5v9a2.5 2.5 0 01-2.5 2.5h-15A2.5 2.5 0 012 16.5v-9A2.5 2.5 0 014.5 5z"/>
+                  </svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="p-6 space-y-3">
+
+              <!-- Bank Transfer -->
+              <div class="rounded-2xl border border-slate-200 overflow-hidden">
+
+                <div class="p-5 flex items-center gap-4">
+                  <div class="w-11 h-11 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-width="1.7" d="M3 10.5L12 4l9 6.5M5 10.5V19m4-8.5V19m6-8.5V19m4-8.5V19M3 20h18M2.5 10.5h19"/>
+                    </svg>
+                  </div>
+
+                  <div class="flex-1 min-w-0">
+                    <p class="text-md font-semibold text-slate-900">Bank Transfer</p>
+                    <p class="text-xs text-slate-500 mt-1">Transfer your rent directly to the landlord's account.</p>
+                  </div>
+
+                  <span class="hidden sm:inline-flex px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">
+                    Available
+                  </span>
+                </div>
+
+                <div class="border-t border-slate-100 bg-[#FAF4DF]/30 p-5">
+
+                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+
+                    <div class="rounded-2xl bg-white border border-slate-200 p-5">
+                      <p class="text-xs text-slate-400 uppercase tracking-wide">Bank Details</p>
+
+                      <div class="grid grid-cols-2 gap-5 mt-4">
+                        <div>
+                          <p class="text-xs text-slate-400">Bank</p>
+                          <p class="text-md font-medium text-slate-900 mt-1">Barclays Bank UK</p>
+                        </div>
+
+                        <div>
+                          <p class="text-xs text-slate-400">Account Name</p>
+                          <p class="text-md font-medium text-slate-900 mt-1">YourLandlordship Ltd</p>
+                        </div>
+
+                        <div>
+                          <p class="text-xs text-slate-400">Sort Code</p>
+                          <p class="text-md font-medium text-slate-900 mt-1">20-45-67</p>
+                        </div>
+
+                        <div>
+                          <p class="text-xs text-slate-400">Account Number</p>
+                          <p class="text-md font-medium text-slate-900 mt-1">•••• 4821</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="rounded-2xl bg-[#1D3639] text-white p-5">
+                      <p class="text-xs text-white/50 uppercase tracking-wide">Payment Reference</p>
+                      <p class="text-xl font-semibold tracking-wide mt-3">PROPERTY-UNIT-RENT</p>
+
+                      <p class="text-xs text-white/60 mt-3">
+                        Please use this reference whenever making a bank transfer so your payment can be identified.
+                      </p>
+
+                      <button type="button" class="mt-5 h-9 px-4 rounded-lg bg-white/10 text-white text-xs font-medium hover:bg-white/20 transition-colors">
+                        Copy Reference
+                      </button>
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+
+
+              <!-- Card Payment -->
+              <div class="rounded-2xl border border-slate-200 p-5 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+
+                <div class="w-11 h-11 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <rect x="2.5" y="5" width="19" height="14" rx="2.5" stroke-width="1.7"/>
+                    <path stroke-width="1.7" d="M2.5 10h19M7 15h3"/>
+                  </svg>
+                </div>
+
+                <div class="flex-1 min-w-0">
+                  <p class="text-md font-semibold text-slate-900">Pay by Card</p>
+                  <p class="text-xs text-slate-500 mt-1">Pay your rent securely online using a debit or credit card.</p>
+                </div>
+
+                <button type="button" class="h-10 px-4 rounded-xl bg-[#1D3639] text-white text-xs font-medium hover:bg-[#152b2e] transition-colors">
+                  Pay £950
+                </button>
+
+              </div>
+
+
+              <!-- Direct Debit -->
+              <div class="rounded-2xl border border-slate-200 p-5 flex items-center gap-4 hover:bg-slate-50 transition-colors">
+
+                <div class="w-11 h-11 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                  <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-width="1.7" d="M4 7h16M4 12h16M4 17h10"/>
+                    <circle cx="18" cy="17" r="2" stroke-width="1.7"/>
+                  </svg>
+                </div>
+
+                <div class="flex-1 min-w-0">
+                  <p class="text-md font-semibold text-slate-900">Direct Debit</p>
+                  <p class="text-xs text-slate-500 mt-1">Set up automatic monthly rent payments.</p>
+                </div>
+
+                <button type="button" class="h-10 px-4 rounded-xl border border-slate-200 text-[#1D3639] text-xs font-medium hover:bg-[#FAF4DF] transition-colors">
+                  Set Up
+                </button>
+
+              </div>
+
+            </div>
+          </section>
+
+
+          <!-- Payment History -->
+          <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+            <div class="px-6 py-5 border-b border-slate-100 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <h2 class="text-lg font-semibold text-slate-900">Payment History</h2>
+                <p class="text-md text-slate-500 mt-1">A record of your rent payments.</p>
+              </div>
+
+              <div class="flex items-center gap-2">
+                <select class="h-9 px-3 rounded-lg border border-slate-200 bg-white text-xs text-slate-600 outline-none focus:border-[#1D3639]">
+                  <option>All Payments</option>
+                  <option>Completed</option>
+                  <option>Pending</option>
+                  <option>Failed</option>
+                </select>
+
+                <select class="h-9 px-3 rounded-lg border border-slate-200 bg-white text-xs text-slate-600 outline-none focus:border-[#1D3639]">
+                  <option>2026</option>
+                  <option>2025</option>
+                  <option>2024</option>
+                </select>
+              </div>
+            </div>
+
+
+            <!-- Desktop Table -->
+            <div class="hidden md:block overflow-x-auto">
+
+              <table class="w-full text-left">
+                <thead>
+                  <tr class="border-b border-slate-100 bg-slate-50/70">
+                    <th class="px-6 py-3 text-xs font-medium text-slate-400">Payment</th>
+                    <th class="px-6 py-3 text-xs font-medium text-slate-400">Date</th>
+                    <th class="px-6 py-3 text-xs font-medium text-slate-400">Method</th>
+                    <th class="px-6 py-3 text-xs font-medium text-slate-400">Reference</th>
+                    <th class="px-6 py-3 text-xs font-medium text-slate-400">Status</th>
+                    <th class="px-6 py-3 text-xs font-medium text-slate-400 text-right">Amount</th>
+                    <th class="px-6 py-3"></th>
+                  </tr>
+                </thead>
+
+                <tbody class="divide-y divide-slate-100">
+
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="px-6 py-4">
+                      <p class="text-md font-medium text-slate-900">October 2026 Rent</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Monthly rent</p>
+                    </td>
+
+                    <td class="px-6 py-4 text-md text-slate-600">01 Oct 2026</td>
+
+                    <td class="px-6 py-4 text-md text-slate-600">Bank Transfer</td>
+
+                    <td class="px-6 py-4 text-xs text-slate-500">PROPERTY-UNIT-RENT</td>
+
+                    <td class="px-6 py-4">
+                      <span class="inline-flex px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">Paid</span>
+                    </td>
+
+                    <td class="px-6 py-4 text-md font-semibold text-slate-900 text-right">£950.00</td>
+
+                    <td class="px-6 py-4 text-right">
+                      <button type="button" class="text-[#1D3639] hover:text-[#E3572B] text-xs font-medium">Receipt</button>
+                    </td>
+                  </tr>
+
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="px-6 py-4">
+                      <p class="text-md font-medium text-slate-900">September 2026 Rent</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Monthly rent</p>
+                    </td>
+
+                    <td class="px-6 py-4 text-md text-slate-600">01 Sep 2026</td>
+
+                    <td class="px-6 py-4 text-md text-slate-600">Bank Transfer</td>
+
+                    <td class="px-6 py-4 text-xs text-slate-500">PROPERTY-UNIT-RENT</td>
+
+                    <td class="px-6 py-4">
+                      <span class="inline-flex px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">Paid</span>
+                    </td>
+
+                    <td class="px-6 py-4 text-md font-semibold text-slate-900 text-right">£950.00</td>
+
+                    <td class="px-6 py-4 text-right">
+                      <button type="button" class="text-[#1D3639] hover:text-[#E3572B] text-xs font-medium">Receipt</button>
+                    </td>
+                  </tr>
+
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="px-6 py-4">
+                      <p class="text-md font-medium text-slate-900">August 2026 Rent</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Monthly rent</p>
+                    </td>
+
+                    <td class="px-6 py-4 text-md text-slate-600">01 Aug 2026</td>
+
+                    <td class="px-6 py-4 text-md text-slate-600">Bank Transfer</td>
+
+                    <td class="px-6 py-4 text-xs text-slate-500">PROPERTY-UNIT-RENT</td>
+
+                    <td class="px-6 py-4">
+                      <span class="inline-flex px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">Paid</span>
+                    </td>
+
+                    <td class="px-6 py-4 text-md font-semibold text-slate-900 text-right">£950.00</td>
+
+                    <td class="px-6 py-4 text-right">
+                      <button type="button" class="text-[#1D3639] hover:text-[#E3572B] text-xs font-medium">Receipt</button>
+                    </td>
+                  </tr>
+
+                  <tr class="hover:bg-slate-50/70 transition-colors">
+                    <td class="px-6 py-4">
+                      <p class="text-md font-medium text-slate-900">July 2026 Rent</p>
+                      <p class="text-xs text-slate-400 mt-0.5">Monthly rent</p>
+                    </td>
+
+                    <td class="px-6 py-4 text-md text-slate-600">01 Jul 2026</td>
+
+                    <td class="px-6 py-4 text-md text-slate-600">Bank Transfer</td>
+
+                    <td class="px-6 py-4 text-xs text-slate-500">PROPERTY-UNIT-RENT</td>
+
+                    <td class="px-6 py-4">
+                      <span class="inline-flex px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">Paid</span>
+                    </td>
+
+                    <td class="px-6 py-4 text-md font-semibold text-slate-900 text-right">£950.00</td>
+
+                    <td class="px-6 py-4 text-right">
+                      <button type="button" class="text-[#1D3639] hover:text-[#E3572B] text-xs font-medium">Receipt</button>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+
+            </div>
+
+
+            <!-- Mobile History -->
+            <div class="md:hidden divide-y divide-slate-100">
+
+              <div class="p-5">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="text-md font-semibold text-slate-900">October 2026 Rent</p>
+                    <p class="text-xs text-slate-500 mt-1">01 Oct 2026 · Bank Transfer</p>
+                  </div>
+
+                  <span class="px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">Paid</span>
+                </div>
+
+                <div class="flex items-end justify-between mt-4">
+                  <div>
+                    <p class="text-xs text-slate-400">Reference</p>
+                    <p class="text-xs text-slate-600 mt-1">PROPERTY-UNIT-RENT</p>
+                  </div>
+
+                  <div class="text-right">
+                    <p class="text-lg font-semibold text-slate-900">£950.00</p>
+                    <button type="button" class="text-xs font-medium text-[#1D3639] hover:text-[#E3572B] mt-1">Receipt</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-5">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="text-md font-semibold text-slate-900">September 2026 Rent</p>
+                    <p class="text-xs text-slate-500 mt-1">01 Sep 2026 · Bank Transfer</p>
+                  </div>
+
+                  <span class="px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">Paid</span>
+                </div>
+
+                <div class="flex items-end justify-between mt-4">
+                  <div>
+                    <p class="text-xs text-slate-400">Reference</p>
+                    <p class="text-xs text-slate-600 mt-1">PROPERTY-UNIT-RENT</p>
+                  </div>
+
+                  <div class="text-right">
+                    <p class="text-lg font-semibold text-slate-900">£950.00</p>
+                    <button type="button" class="text-xs font-medium text-[#1D3639] hover:text-[#E3572B] mt-1">Receipt</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-5">
+                <div class="flex items-start justify-between gap-4">
+                  <div>
+                    <p class="text-md font-semibold text-slate-900">August 2026 Rent</p>
+                    <p class="text-xs text-slate-500 mt-1">01 Aug 2026 · Bank Transfer</p>
+                  </div>
+
+                  <span class="px-2.5 py-1 rounded-full bg-[#C3DF93]/60 text-[#1D3639] text-xs font-medium">Paid</span>
+                </div>
+
+                <div class="flex items-end justify-between mt-4">
+                  <div>
+                    <p class="text-xs text-slate-400">Reference</p>
+                    <p class="text-xs text-slate-600 mt-1">PROPERTY-UNIT-RENT</p>
+                  </div>
+
+                  <div class="text-right">
+                    <p class="text-lg font-semibold text-slate-900">£950.00</p>
+                    <button type="button" class="text-xs font-medium text-[#1D3639] hover:text-[#E3572B] mt-1">Receipt</button>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- Payment Information -->
+          <section class="mt-6 rounded-2xl border border-slate-200 bg-[#FAF4DF]/40 p-6">
+
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="9" stroke-width="1.7"/>
+                  <path stroke-width="1.7" d="M12 10v6m0-9h.01"/>
+                </svg>
+              </div>
+
+              <div>
+                <h2 class="text-md font-semibold text-slate-900">Payment Information</h2>
+                <p class="text-md text-slate-600 mt-1">
+                  Rent payments should be made by the due date shown above. If you have any questions about a payment or believe a payment has been recorded incorrectly, please contact your landlord or property manager.
+                </p>
+              </div>
+            </div>
+
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+<script src="app.js"></script>
+
+<script>
+
+document.querySelectorAll('button').forEach(button=>{
+  if(button.textContent.trim()==='Copy Reference'){
+    button.addEventListener('click',async()=>{
+      try{
+        await navigator.clipboard.writeText('PROPERTY-UNIT-RENT');
+        const original=button.textContent;
+        button.textContent='Copied';
+        setTimeout(()=>button.textContent=original,1500);
+      }catch(e){}
+    });
+  }
+});
+</script>
+
+</body>
+</html>

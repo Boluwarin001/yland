@@ -1,0 +1,968 @@
+<!-- /properties/property-details.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Property Details</title>
+  <script src="../tailwind.js"></script>
+</head>
+
+<body data-active-tab="info" class="bg-white text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+
+        <div id="propertyHeaderMount"></div>
+
+        <div id="page" class="opacity-0 transition-opacity">
+
+          <!-- Page Header -->
+          <div class="mt-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+
+            <div>
+              <h1 class="text-md font-semibold text-slate-900">Property Details</h1>
+              <p class="text-md text-slate-500 mt-1">Manage the basic information, address, financial details and features of this property.</p>
+            </div>
+
+            <button type="submit" form="propertyForm"
+              class="h-9 px-4 rounded-lg bg-[#1D3639] text-white text-xs font-medium hover:bg-[#152b2e] transition-colors">
+              Save Changes
+            </button>
+
+          </div>
+
+
+          <form id="propertyForm" class="mt-6">
+
+
+            <!-- Basic Information -->
+            <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Basic Information</h2>
+                    <p class="text-md text-slate-500 mt-1">General information about the property.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M4 5.5A2.5 2.5 0 016.5 3h11A2.5 2.5 0 0120 5.5v13a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 18.5v-13zM8 7h8M8 11h8M8 15h5"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div class="md:col-span-2">
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Property Name</label>
+
+                  <input name="property_name"
+                    value="Kingslandlord Homes"
+                    required
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Property Type</label>
+
+                  <select name="property_type"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    <option>Apartment</option>
+                    <option>Bungalow</option>
+                    <option>Duplex</option>
+                    <option>Detached House</option>
+                    <option>Semi-Detached House</option>
+                    <option>Terraced House</option>
+                    <option>Townhouse</option>
+                    <option>Maisonette</option>
+                    <option>Studio</option>
+                    <option>Flat</option>
+                    <option>Commercial Property</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Property Status</label>
+
+                  <select name="status"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    <option>Under Creation</option>
+                    <option>Active</option>
+                    <option>Paused</option>
+                    <option>Archived</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">
+                    Year Built <span class="text-slate-400">(optional)</span>
+                  </label>
+
+                  <input name="year_built"
+                    type="number"
+                    placeholder="e.g. 2018"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">
+                    Floor Area <span class="text-slate-400">(sq ft)</span>
+                  </label>
+
+                  <input name="floor_area"
+                    type="number"
+                    placeholder="e.g. 1200"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+
+              </div>
+            </section>
+
+
+            <!-- Property Address -->
+            <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-6 py-5 border-b border-slate-100 bg-[#C3DF93]/15">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Property Address</h2>
+                    <p class="text-md text-slate-500 mt-1">Where the property is physically located.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-5.2 7-11a7 7 0 10-14 0c0 5.8 7 11 7 11zM12 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div class="md:col-span-2">
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Address Line 1</label>
+
+                  <input name="address_1"
+                    value="34 Glemwood Street"
+                    required
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+
+                <div class="md:col-span-2">
+                  <label class="block text-xs font-medium text-slate-600 mb-2">
+                    Address Line 2 <span class="text-slate-400">(optional)</span>
+                  </label>
+
+                  <input name="address_2"
+                    placeholder="Apartment, building or area"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">City / Town</label>
+
+                  <input name="city"
+                    value="Liverpool"
+                    required
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">County / State</label>
+
+                  <input name="county"
+                    placeholder="e.g. Merseyside"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Postcode</label>
+
+                  <input name="postcode"
+                    placeholder="e.g. L1 1AA"
+                    required
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Country</label>
+
+                  <select name="country"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    <option>United Kingdom</option>
+                    <option>Nigeria</option>
+                    <option>Ghana</option>
+                    <option>United States</option>
+                    <option>Canada</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+
+              </div>
+            </section>
+
+
+            <!-- Financial Details -->
+            <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Financial Details</h2>
+                    <p class="text-md text-slate-500 mt-1">Property value and rental information.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 2.5v19M16.5 6.5h-6a2.5 2.5 0 000 5h3a2.5 2.5 0 010 5h-6M5 4.5l-2 2 2 2M19 15.5l2 2-2 2"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Property Value</label>
+
+                  <div class="flex">
+                    <span class="h-11 px-3 rounded-l-xl border border-r-0 border-slate-200 bg-slate-50 flex items-center text-md text-slate-400">£</span>
+
+                    <input name="property_value"
+                      type="number"
+                      placeholder="250000"
+                      class="w-full h-11 px-3 rounded-r-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Monthly Rent</label>
+
+                  <div class="flex">
+                    <span class="h-11 px-3 rounded-l-xl border border-r-0 border-slate-200 bg-slate-50 flex items-center text-md text-slate-400">£</span>
+
+                    <input name="rent_value"
+                      type="number"
+                      value="950"
+                      required
+                      class="w-full h-11 px-3 rounded-r-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Deposit Amount</label>
+
+                  <div class="flex">
+                    <span class="h-11 px-3 rounded-l-xl border border-r-0 border-slate-200 bg-slate-50 flex items-center text-md text-slate-400">£</span>
+
+                    <input name="deposit_amount"
+                      type="number"
+                      placeholder="1900"
+                      class="w-full h-11 px-3 rounded-r-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                  </div>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Rent Frequency</label>
+
+                  <select name="rent_frequency"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    <option>Monthly</option>
+                    <option>Weekly</option>
+                    <option>Quarterly</option>
+                    <option>Yearly</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Deposit Type</label>
+
+                  <select name="deposit_type"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    <option>Fixed amount</option>
+                    <option>Weeks of rent</option>
+                    <option>Months of rent</option>
+                    <option>No deposit</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Currency</label>
+
+                  <select name="currency"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    <option>GBP (£)</option>
+                    <option>NGN (₦)</option>
+                    <option>USD ($)</option>
+                    <option>EUR (€)</option>
+                  </select>
+                </div>
+
+              </div>
+            </section>
+
+
+            <!-- Rooms & Capacity -->
+            <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-6 py-5 border-b border-slate-100 bg-[#C3DF93]/15">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Rooms & Capacity</h2>
+                    <p class="text-md text-slate-500 mt-1">Basic room information for the property.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M4 20V9.5L12 4l8 5.5V20M8 20v-6h8v6M7 10h10"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-6 grid grid-cols-2 sm:grid-cols-4 gap-5">
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Bedrooms</label>
+                  <input name="bedrooms" type="number" min="0" value="3" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Bathrooms</label>
+                  <input name="bathrooms" type="number" min="0" value="2" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Living Rooms</label>
+                  <input name="living_rooms" type="number" min="0" value="1" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Kitchens</label>
+                  <input name="kitchens" type="number" min="0" value="1" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Toilets</label>
+                  <input name="toilets" type="number" min="0" value="2" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Parking Spaces</label>
+                  <input name="parking_spaces" type="number" min="0" value="1" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Floors</label>
+                  <input name="floors" type="number" min="1" value="1" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Maximum Occupants</label>
+                  <input name="max_occupants" type="number" min="1" placeholder="e.g. 6" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+              </div>
+            </section>
+
+
+            <!-- Property Features -->
+            <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Property Features</h2>
+                    <p class="text-md text-slate-500 mt-1">Select everything that applies to this property.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3zM19 15l.7 2.3L22 18l-2.3.7L19 21l-.7-2.3L16 18l2.3-.7L19 15z"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-3">
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="garden" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Garden
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="patio" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Patio
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="balcony" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Balcony
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="terrace" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Terrace
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="driveway" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Driveway
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="garage" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Garage
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="parking" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Off-street Parking
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="ensuite" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  En-suite
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="utility-room" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Utility Room
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="dining-room" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Dining Room
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="home-office" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Home Office
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="storage" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Storage
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="fireplace" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Fireplace
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="air-conditioning" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Air Conditioning
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="central-heating" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Central Heating
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="double-glazing" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Double Glazing
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="smart-home" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Smart Home
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="security-system" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Security System
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="cctv" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  CCTV
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="accessible" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Wheelchair Accessible
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="lift" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Lift / Elevator
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="bike-storage" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Bike Storage
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="communal-garden" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Communal Garden
+                </label>
+
+                <label class="flex items-center gap-3 text-md cursor-pointer">
+                  <input type="checkbox" name="features[]" value="waterfront" class="w-4 h-4 rounded border-slate-300 accent-[#1D3639]">
+                  Waterfront
+                </label>
+
+              </div>
+            </section>
+
+
+            <!-- Condition & Furnishing -->
+            <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-6 py-5 border-b border-slate-100 bg-[#C3DF93]/15">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Condition & Furnishing</h2>
+                    <p class="text-md text-slate-500 mt-1">Describe the property's current condition and setup.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M5 20h14M7 17V8l5-4 5 4v9M9 20v-4h6v4M9 10h.01M15 10h.01"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Furnishing</label>
+
+                  <select name="furnishing"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                    <option>Unfurnished</option>
+                    <option>Part Furnished</option>
+                    <option>Furnished</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Condition</label>
+
+                  <select name="condition"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                    <option>Excellent</option>
+                    <option>Good</option>
+                    <option>Fair</option>
+                    <option>Needs Renovation</option>
+                    <option>Under Construction</option>
+                  </select>
+                </div>
+
+                <div class="md:col-span-2">
+
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Description</label>
+
+                  <textarea name="description"
+                    rows="5"
+                    placeholder="Describe the property, its layout, condition and anything a prospective tenant should know..."
+                    class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10 resize-none"></textarea>
+
+                </div>
+
+              </div>
+            </section>
+
+
+            <!-- Listing Information -->
+            <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Listing Information</h2>
+                    <p class="text-md text-slate-500 mt-1">Information used when presenting the property to prospective tenants.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M5 4h14v16H5zM8 8h8M8 12h8M8 16h5"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">
+                    Listing Title <span class="text-slate-400">(optional)</span>
+                  </label>
+
+                  <input name="listing_title"
+                    placeholder="e.g. Spacious 3 Bedroom Apartment"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Available From</label>
+
+                  <input name="available_from"
+                    type="date"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Minimum Tenancy</label>
+
+                  <select name="minimum_tenancy"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                    <option>6 months</option>
+                    <option>12 months</option>
+                    <option>18 months</option>
+                    <option>24 months</option>
+                    <option>Flexible</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Pets</label>
+
+                  <select name="pets"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                    <option>Not allowed</option>
+                    <option>Considered</option>
+                    <option>Allowed</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Smoking</label>
+
+                  <select name="smoking"
+                    class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-[#1D3639]">
+                    <option>Not allowed</option>
+                    <option>Allowed</option>
+                    <option>Outside only</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label class="block text-xs font-medium text-slate-600 mb-2">Application Link</label>
+
+                  <div class="flex gap-2">
+
+                    <input name="application_link"
+                      value="https://landlordship-auth.vercel.app/public/properties/kingslandlord-homes/699ae48d0779417b7852314d"
+                      readonly
+                      class="flex-1 min-w-0 h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md text-slate-500">
+
+                    <button type="button"
+                      id="copyApplicationLink"
+                      class="w-11 h-11 rounded-xl border border-slate-200 bg-white flex items-center justify-center hover:bg-[#FAF4DF] transition-colors"
+                      title="Copy application link">
+
+                      <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="8" y="8" width="11" height="11" rx="2" stroke-width="1.7"/>
+                        <path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2" stroke-width="1.7"/>
+                      </svg>
+
+                    </button>
+
+                  </div>
+
+                </div>
+
+              </div>
+            </section>
+
+
+            <!-- Property Media -->
+            <section class="mt-6 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+              <div class="px-6 py-5 border-b border-slate-100 bg-[#C3DF93]/15">
+
+                <div class="flex items-start justify-between gap-4">
+
+                  <div>
+                    <h2 class="text-lg font-semibold text-slate-900">Property Media</h2>
+                    <p class="text-md text-slate-500 mt-1">Add photos of the property. Preview and remove images before saving.</p>
+                  </div>
+
+                  <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M4 5.5A2.5 2.5 0 016.5 3h11A2.5 2.5 0 0120 5.5v13a2.5 2.5 0 01-2.5 2.5h-11A2.5 2.5 0 014 18.5v-13zM8 15l2.5-3 2 2 2.5-3 3 4M8 8h.01"/>
+                    </svg>
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="p-6">
+
+                <input id="propertyMedia"
+                  name="media[]"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp,image/gif"
+                  multiple
+                  class="hidden">
+
+                <button id="mediaUploadButton"
+                  type="button"
+                  class="w-full min-h-[170px] rounded-2xl border border-dashed border-slate-300 bg-slate-50 hover:bg-[#FAF4DF]/50 hover:border-[#1D3639]/40 transition flex flex-col items-center justify-center px-6 py-8 text-center">
+
+                  <span class="w-12 h-12 rounded-xl bg-white border border-slate-200 flex items-center justify-center mb-3">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 16V5m0 0L8 9m4-4 4 4M5 16v2a2 2 0 002 2h10a2 2 0 002-2v-2"/>
+                    </svg>
+                  </span>
+
+                  <p class="text-md font-medium text-slate-800">Upload property images</p>
+                  <p class="text-xs text-slate-400 mt-1">PNG, JPG, WEBP or GIF · Multiple images allowed</p>
+
+                </button>
+
+                <div id="mediaPreview" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 mt-5"></div>
+
+              </div>
+            </section>
+
+
+            <!-- Bottom Save -->
+            <div class="sticky bottom-0 z-10 bg-white/95 backdrop-blur border-t border-slate-200 mt-6 py-4 flex items-center justify-between gap-4">
+
+              <p id="formMessage" class="text-xs text-slate-400"></p>
+
+              <div class="flex gap-3 ml-auto">
+
+                <a href="property.html"
+                  class="h-11 px-5 rounded-xl border border-slate-200 flex items-center text-md font-medium hover:bg-slate-50 transition-colors">
+                  Cancel
+                </a>
+
+                <button type="submit"
+                  class="h-11 px-6 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#152b2e] transition-colors">
+                  Save Property
+                </button>
+
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+
+<script src="../app.js"></script>
+<script src="property.js"></script>
+
+<script>
+
+const mediaInput=document.getElementById("propertyMedia");
+const mediaUploadButton=document.getElementById("mediaUploadButton");
+const mediaPreview=document.getElementById("mediaPreview");
+let selectedMedia=[];
+
+mediaUploadButton.addEventListener("click",()=>mediaInput.click());
+
+mediaInput.addEventListener("change",event=>{
+  addMedia(Array.from(event.target.files));
+  mediaInput.value="";
+});
+
+function addMedia(files){
+  const images=files.filter(file=>file.type.startsWith("image/"));
+  selectedMedia=[...selectedMedia,...images];
+  renderMedia();
+}
+
+function renderMedia(){
+
+  mediaPreview.innerHTML="";
+
+  selectedMedia.forEach((file,index)=>{
+
+    const url=URL.createObjectURL(file);
+    const card=document.createElement("div");
+
+    card.className="relative group rounded-xl overflow-hidden bg-slate-100 aspect-[4/3] border border-slate-200";
+
+    card.innerHTML=`
+      <img src="${url}" alt="${file.name}" class="w-full h-full object-cover">
+
+      <button type="button"
+        data-media-index="${index}"
+        class="absolute top-2 right-2 w-8 h-8 rounded-full bg-white/90 text-slate-600 shadow-sm opacity-0 group-hover:opacity-100 transition flex items-center justify-center hover:bg-white"
+        title="Remove image">
+
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-width="1.7" stroke-linecap="round" d="m7 7 10 10M17 7 7 17"/>
+        </svg>
+
+      </button>
+
+      <div class="absolute bottom-0 inset-x-0 px-2.5 py-2 bg-gradient-to-t from-black/60 to-transparent">
+        <p class="text-[11px] text-white truncate">${file.name}</p>
+      </div>
+    `;
+
+    card.querySelector("button").addEventListener("click",()=>{
+
+      URL.revokeObjectURL(url);
+      selectedMedia.splice(index,1);
+      renderMedia();
+
+    });
+
+    mediaPreview.appendChild(card);
+
+  });
+
+}
+
+
+mediaUploadButton.addEventListener("dragover",event=>{
+
+  event.preventDefault();
+
+  mediaUploadButton.classList.add(
+    "border-[#1D3639]",
+    "bg-[#FAF4DF]"
+  );
+
+});
+
+
+mediaUploadButton.addEventListener("dragleave",()=>{
+
+  mediaUploadButton.classList.remove(
+    "border-[#1D3639]",
+    "bg-[#FAF4DF]"
+  );
+
+});
+
+
+mediaUploadButton.addEventListener("drop",event=>{
+
+  event.preventDefault();
+
+  mediaUploadButton.classList.remove(
+    "border-[#1D3639]",
+    "bg-[#FAF4DF]"
+  );
+
+  addMedia(Array.from(event.dataTransfer.files));
+
+});
+
+
+document.getElementById("copyApplicationLink").addEventListener("click",async()=>{
+
+  const input=document.querySelector('[name="application_link"]');
+
+  try{
+
+    await navigator.clipboard.writeText(input.value);
+
+    const button=document.getElementById("copyApplicationLink");
+
+    button.innerHTML=`
+      <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m5 12 4 4L19 6"/>
+      </svg>
+    `;
+
+    setTimeout(()=>{
+      button.innerHTML=`
+        <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <rect x="8" y="8" width="11" height="11" rx="2" stroke-width="1.7"/>
+          <path d="M16 8V6a2 2 0 00-2-2H6a2 2 0 00-2 2v8a2 2 0 002 2h2" stroke-width="1.7"/>
+        </svg>
+      `;
+    },1500);
+
+  }catch(error){
+    console.error(error);
+  }
+
+});
+
+
+document.getElementById("propertyForm").addEventListener("submit",event=>{
+
+  event.preventDefault();
+
+  const formData=new FormData(event.target);
+  const property=Object.fromEntries(formData.entries());
+
+  property.features=formData.getAll("features[]");
+  property.media=selectedMedia;
+
+  selectedMedia.forEach(file=>{
+    formData.append("media[]",file);
+  });
+
+  console.log(property,formData);
+
+  const message=document.getElementById("formMessage");
+
+  message.textContent="Property details saved.";
+  message.className="text-xs text-emerald-600";
+
+  setTimeout(()=>{
+    message.textContent="";
+  },3000);
+
+});
+
+
+window.addEventListener("load",()=>requestAnimationFrame(()=>{
+  document.getElementById("page").classList.remove("opacity-0");
+}));
+
+</script>
+
+</body>
+</html>

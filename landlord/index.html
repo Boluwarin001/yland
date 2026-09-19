@@ -1,0 +1,325 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>YourLandlordship — Dashboard</title>
+<script src="tailwind.js"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main id="page" class="flex-1 overflow-auto opacity-0 scale-[0.96] transition-all duration-200 ease-out">
+      <div class="mx-auto px-5 lg:px-6 pt-6 pb-10">
+
+        <!-- Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-7">
+          <div>
+            <p class="text-sm text-slate-400 mb-1">Dashboard</p>
+            <h1 class="text-2xl font-semibold text-[#1D3639]">Overview</h1>
+            <p class="text-md text-slate-500 mt-1">Here's what's happening across your properties.</p>
+          </div>
+
+          <div class="flex items-center gap-2">
+            <button class="flex items-center gap-2 h-10 px-4 rounded-xl border border-slate-200 text-md font-medium text-slate-600 hover:bg-slate-50 transition">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M8 3v3M16 3v3M4 9h16M5 5h14a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"/>
+              </svg>
+              This month
+            </button>
+          </div>
+        </div>
+
+        <!-- KPI -->
+        <section class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+            <div class="flex items-center justify-between">
+              <p class="text-md font-medium text-slate-500">Properties</p>
+              <div class="w-9 h-9 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 20V8l8-5 8 5v12H4zM8 20v-6h8v6M9 9h.01M15 9h.01"/>
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-end justify-between mt-6">
+              <span class="text-2xl font-semibold text-[#1D3639]">12</span>
+              <span class="text-sm font-medium text-[#1D3639]">+11.02%</span>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+            <div class="flex items-center justify-between">
+              <p class="text-md font-medium text-slate-500">Monthly rent</p>
+              <div class="w-9 h-9 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2" stroke-width="1.5"/>
+                  <path stroke-width="1.5" d="M3 9h18"/>
+                  <circle cx="12" cy="14" r="2" stroke-width="1.5"/>
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-end justify-between mt-6">
+              <span class="text-2xl font-semibold text-[#1D3639]">£8,420</span>
+              <span class="text-sm font-medium text-[#1D3639]">+4.83%</span>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-slate-200 bg-white p-5">
+            <div class="flex items-center justify-between">
+              <p class="text-md font-medium text-slate-500">Occupancy</p>
+              <div class="w-9 h-9 rounded-xl bg-[#C3DF93]/40 flex items-center justify-center">
+                <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="9" cy="8" r="2.5" stroke-width="1.5"/>
+                  <circle cx="16.5" cy="9.5" r="2" stroke-width="1.5"/>
+                  <path stroke-width="1.5" stroke-linecap="round" d="M4.5 18a4.5 4.5 0 0 1 9 0M14 18a4 4 0 0 1 6 1"/>
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-end justify-between mt-6">
+              <span class="text-2xl font-semibold text-[#1D3639]">86%</span>
+              <span class="text-sm font-medium text-[#1D3639]">+2.14%</span>
+            </div>
+          </div>
+
+          <div class="rounded-2xl border border-[#eadfbd] bg-[#FAF4DF] p-5">
+            <div class="flex items-center justify-between">
+              <p class="text-md font-medium text-slate-600">Applications</p>
+              <span class="w-2.5 h-2.5 rounded-full bg-[#E3572B]"></span>
+            </div>
+            <div class="flex items-end justify-between mt-6">
+              <span class="text-2xl font-semibold text-[#1D3639]">4</span>
+              <span class="text-sm text-slate-500">Needs attention</span>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Main -->
+        <section class="grid grid-cols-1 xl:grid-cols-[1.45fr_1fr] gap-5 mt-5">
+
+          <!-- Rental income -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <div class="flex items-start justify-between">
+              <div>
+                <h2 class="text-md font-semibold text-[#1D3639]">Rental income</h2>
+                <p class="text-sm text-slate-400 mt-1">Monthly rental income</p>
+              </div>
+              <button class="text-sm text-slate-400 hover:text-[#1D3639]">2026</button>
+            </div>
+
+            <div class="flex items-end gap-3 mt-7">
+              <span class="text-3xl font-semibold text-[#1D3639]">£8,420</span>
+              <span class="text-sm font-medium text-[#1D3639] mb-1">+4.83%</span>
+            </div>
+
+            <div class="mt-8 h-40 flex items-end gap-2 sm:gap-3">
+              <div class="flex-1 h-[45%] bg-slate-100 rounded-t-md"></div>
+              <div class="flex-1 h-[57%] bg-slate-100 rounded-t-md"></div>
+              <div class="flex-1 h-[51%] bg-slate-100 rounded-t-md"></div>
+              <div class="flex-1 h-[68%] bg-slate-100 rounded-t-md"></div>
+              <div class="flex-1 h-[63%] bg-slate-200 rounded-t-md"></div>
+              <div class="flex-1 h-[76%] bg-slate-200 rounded-t-md"></div>
+              <div class="flex-1 h-[71%] bg-slate-200 rounded-t-md"></div>
+              <div class="flex-1 h-[84%] bg-slate-300 rounded-t-md"></div>
+              <div class="flex-1 h-[78%] bg-slate-300 rounded-t-md"></div>
+              <div class="flex-1 h-[91%] bg-slate-300 rounded-t-md"></div>
+              <div class="flex-1 h-[87%] bg-slate-400 rounded-t-md"></div>
+              <div class="flex-1 h-[96%] bg-[#1D3639] rounded-t-md"></div>
+            </div>
+
+            <div class="flex justify-between mt-2 text-xs text-slate-400">
+              <span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+              <span>Jul</span><span>Aug</span><span>Sep</span><span>Oct</span><span>Nov</span><span>Dec</span>
+            </div>
+          </div>
+
+          <!-- Occupancy -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <div class="flex items-start justify-between">
+              <div>
+                <h2 class="text-md font-semibold text-[#1D3639]">Occupancy</h2>
+                <p class="text-sm text-slate-400 mt-1">Current property status</p>
+              </div>
+              <a href="property.html" class="text-sm text-slate-400 hover:text-[#1D3639]">View all</a>
+            </div>
+
+            <div class="flex justify-center py-7">
+              <div class="relative w-36 h-36 rounded-full border-[16px] border-slate-100 flex items-center justify-center">
+                <div class="absolute inset-[-16px] rounded-full border-[16px] border-[#1D3639] border-r-transparent border-b-transparent rotate-[25deg]"></div>
+                <div class="text-center">
+                  <p class="text-2xl font-semibold text-[#1D3639]">86%</p>
+                  <p class="text-xs text-slate-400 mt-1">occupied</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-3 gap-3 text-center">
+              <div>
+                <p class="text-lg font-semibold text-[#1D3639]">43</p>
+                <p class="text-xs text-slate-400">Occupied</p>
+              </div>
+              <div>
+                <p class="text-lg font-semibold text-[#1D3639]">7</p>
+                <p class="text-xs text-slate-400">Vacant</p>
+              </div>
+              <div>
+                <p class="text-lg font-semibold text-[#1D3639]">4</p>
+                <p class="text-xs text-slate-400">Pending</p>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Activity -->
+        <section class="grid grid-cols-1 xl:grid-cols-[1.4fr_1fr] gap-5 mt-5">
+
+          <!-- Applications -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <h2 class="text-md font-semibold text-[#1D3639]">Recent applications</h2>
+                <p class="text-sm text-slate-400 mt-1">Latest tenant applications</p>
+              </div>
+              <a href="property.html" class="text-sm font-medium text-[#E3572B] hover:underline">View all</a>
+            </div>
+
+            <div class="divide-y divide-slate-100">
+
+              <div class="grid grid-cols-[1.3fr_1fr_auto] items-center gap-4 py-3">
+                <div>
+                  <p class="text-md font-medium text-slate-700">Cursor Doe</p>
+                  <p class="text-sm text-slate-400 mt-1">Springfield Family Home</p>
+                </div>
+                <p class="text-sm text-slate-500">22 Feb 2026</p>
+                <span class="px-2.5 py-1 rounded-lg bg-[#FAF4DF] text-[#E3572B] text-xs font-medium">Pending</span>
+              </div>
+
+              <div class="grid grid-cols-[1.3fr_1fr_auto] items-center gap-4 py-3">
+                <div>
+                  <p class="text-md font-medium text-slate-700">Jane Smith</p>
+                  <p class="text-sm text-slate-400 mt-1">Kingslandlord Homes</p>
+                </div>
+                <p class="text-sm text-slate-500">18 Feb 2026</p>
+                <span class="px-2.5 py-1 rounded-lg bg-[#C3DF93]/30 text-[#1D3639] text-xs font-medium">Approved</span>
+              </div>
+
+              <div class="grid grid-cols-[1.3fr_1fr_auto] items-center gap-4 py-3">
+                <div>
+                  <p class="text-md font-medium text-slate-700">Michael Brown</p>
+                  <p class="text-sm text-slate-400 mt-1">Riverside House</p>
+                </div>
+                <p class="text-sm text-slate-500">15 Feb 2026</p>
+                <span class="px-2.5 py-1 rounded-lg bg-[#FAF4DF] text-[#E3572B] text-xs font-medium">Pending</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Maintenance -->
+          <div class="rounded-2xl border border-slate-200 bg-white p-6">
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <h2 class="text-md font-semibold text-[#1D3639]">Maintenance</h2>
+                <p class="text-sm text-slate-400 mt-1">Open requests</p>
+              </div>
+              <a href="maintenance/maintenance.html" class="text-sm font-medium text-[#E3572B] hover:underline">View all</a>
+            </div>
+
+            <div class="space-y-3">
+
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50">
+                <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center">
+                  <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m14.7 6.3-8.4 8.4a2.8 2.8 0 0 0 4 4l8.4-8.4M15.5 4.5l1-1a2.1 2.1 0 0 1 3 3l-1 1"/>
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-md font-medium text-slate-700">Leaking tap</p>
+                  <p class="text-sm text-slate-400 truncate">Riverside House</p>
+                </div>
+                <span class="text-xs font-medium text-[#E3572B]">High</span>
+              </div>
+
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50">
+                <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center">
+                  <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6 5h12v14H6zM9 9h6M9 13h4"/>
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-md font-medium text-slate-700">Broken light</p>
+                  <p class="text-sm text-slate-400 truncate">Springfield Family Home</p>
+                </div>
+                <span class="text-xs text-slate-400">Normal</span>
+              </div>
+
+              <div class="flex items-center gap-3 p-3 rounded-xl bg-slate-50">
+                <div class="w-9 h-9 rounded-lg bg-white flex items-center justify-center">
+                  <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M7 4h10v16H7z"/>
+                  </svg>
+                </div>
+                <div class="flex-1 min-w-0">
+                  <p class="text-md font-medium text-slate-700">Boiler inspection</p>
+                  <p class="text-sm text-slate-400 truncate">Kingslandlord Homes</p>
+                </div>
+                <span class="text-xs text-slate-400">Normal</span>
+              </div>
+
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Quick actions -->
+        <section class="mt-5">
+          <div class="rounded-2xl border border-slate-200 bg-[#1D3639] p-6">
+            <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+              <div>
+                <h2 class="text-md font-semibold text-white">Quick actions</h2>
+                <p class="text-sm text-slate-300 mt-1">Common tasks for managing your properties.</p>
+              </div>
+
+              <div class="flex flex-wrap gap-2">
+                <a href="property.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white text-[#1D3639] text-sm font-medium hover:bg-slate-100 transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-width="1.6" stroke-linecap="round" d="M12 5v14M5 12h14"/>
+                  </svg>
+                  Add property
+                </a>
+
+                <a href="tenants.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 text-white text-sm font-medium hover:bg-white/15 transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M16 20v-1.5a4.5 4.5 0 0 0-9 0V20M12 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7ZM19 20v-2a3.5 3.5 0 0 0-2.5-3.35"/>
+                  </svg>
+                  View tenants
+                </a>
+
+                <a href="maintenance/maintenance.html" class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/10 text-white text-sm font-medium hover:bg-white/15 transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="m14.7 6.3-8.4 8.4a2.8 2.8 0 0 0 4 4l8.4-8.4"/>
+                  </svg>
+                  Maintenance
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

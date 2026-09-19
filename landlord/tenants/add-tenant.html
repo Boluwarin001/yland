@@ -1,0 +1,161 @@
+<!-- /landlord/tenants/add-tenant.html -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YourLandlordship — Add Tenant</title>
+<script src="../tailwind.js"></script>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+    <main id="page" class="flex-1 overflow-auto opacity-0 transition-opacity duration-200">
+      <div class="max-w-3xl mx-auto px-5 lg:px-8 pt-7 pb-12">
+        <a href="../tenants.html" class="inline-flex items-center gap-2 text-md text-slate-500 hover:text-[#1D3639] transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg>
+          Back to Tenants
+        </a>
+
+        <div class="mt-7">
+          <h1 class="text-xl font-semibold">Add Tenant</h1>
+          <p class="text-md text-slate-400 mt-1">Find an existing tenant account and assign them to one of your properties.</p>
+        </div>
+
+        <div class="flex items-center gap-3 mt-8">
+          <div id="step1Indicator" class="flex items-center gap-2">
+            <span class="w-7 h-7 rounded-full bg-[#1D3639] text-white flex items-center justify-center text-xs font-semibold">1</span>
+            <span class="text-md font-medium text-[#1D3639]">Find Tenant</span>
+          </div>
+          <div class="h-px flex-1 bg-slate-200"></div>
+          <div id="step2Indicator" class="flex items-center gap-2 text-slate-400">
+            <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-xs font-semibold">2</span>
+            <span class="text-md font-medium">Assign Property</span>
+          </div>
+        </div>
+
+        <section id="searchStep" class="mt-7 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+          <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" stroke-width="1.5"/><path stroke-width="1.5" d="m16 16 4 4"/></svg>
+              </div>
+              <div>
+                <h2 class="text-md font-semibold">Find Tenant Account</h2>
+                <p class="text-xs text-slate-400 mt-1">Search using the email address associated with the tenant's account.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6">
+            <label class="block text-xs font-medium text-slate-500 mb-2">Tenant Email Address</label>
+            <div class="flex flex-col sm:flex-row gap-3">
+              <input id="emailInput" type="email" value="daniel.williams@email.com" class="flex-1 h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+              <button id="searchBtn" type="button" class="h-11 px-5 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#15292c] transition-colors">Search</button>
+            </div>
+            <p id="searchError" class="hidden text-xs text-[#E3572B] mt-3"></p>
+
+            <div id="tenantResult" class="hidden mt-6 p-5 rounded-2xl border border-[#C3DF93] bg-[#C3DF93]/10">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 rounded-full bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                    <svg class="w-6 h-6 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5" stroke-width="1.5"/><path stroke-width="1.5" stroke-linecap="round" d="M4.5 20a7.5 7.5 0 0 1 15 0"/></svg>
+                  </div>
+                  <div>
+                    <p id="tenantName" class="text-md font-semibold">Daniel Williams</p>
+                    <p id="tenantEmail" class="text-xs text-slate-500 mt-1">daniel.williams@email.com</p>
+                    <div class="flex items-center gap-2 mt-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-[#1D3639]"></span>
+                      <span class="text-xs text-[#1D3639]">Account found</span>
+                    </div>
+                  </div>
+                </div>
+                <button id="continueBtn" type="button" class="h-10 px-5 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#15292c] transition-colors">Continue</button>
+              </div>
+            </div>
+
+            <div id="notFound" class="hidden mt-6 p-5 rounded-2xl border border-slate-200 bg-slate-50">
+              <div class="flex gap-3">
+                <div class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center shrink-0">
+                  <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5" stroke-width="1.5"/><path stroke-width="1.5" d="m16 16 4 4"/></svg>
+                </div>
+                <div>
+                  <p class="text-md font-medium">No account found</p>
+                  <p class="text-xs text-slate-400 mt-1">We couldn't find a tenant account using this email address. Ask the tenant to create an account before adding them to a property.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="propertyStep" class="hidden mt-7 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+          <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" d="M4 20V9l8-5 8 5v11H4Z"/><path stroke-width="1.5" d="M9 20v-6h6v6"/></svg>
+              </div>
+              <div>
+                <h2 class="text-md font-semibold">Assign Property</h2>
+                <p class="text-xs text-slate-400 mt-1">Select the property you want to assign this tenant to.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6">
+            <div class="p-4 rounded-xl bg-[#C3DF93]/15 border border-[#C3DF93]/40 flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3" stroke-width="1.5"/><path stroke-width="1.5" d="M5 20a7 7 0 0 1 14 0"/></svg>
+              </div>
+              <div>
+                <p id="selectedTenantName" class="text-md font-medium">Daniel Williams</p>
+                <p id="selectedTenantEmail" class="text-xs text-slate-500 mt-0.5">daniel.williams@email.com</p>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <label class="block text-xs font-medium text-slate-500 mb-2">Property</label>
+              <select id="propertySelect" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                <option value="">Select a property</option>
+                <option value="springfield">Springfield Family Home</option>
+                <option value="riverside">Riverside House</option>
+                <option value="manchester">Manchester Central Apartment</option>
+                <option value="salford">Salford Terrace</option>
+                <option value="oakfield">Oakfield House</option>
+              </select>
+              <p id="propertyError" class="hidden text-xs text-[#E3572B] mt-2">Please select a property.</p>
+            </div>
+
+            <div class="mt-6">
+              <label class="block text-xs font-medium text-slate-500 mb-2">Tenant Type</label>
+              <select id="propertySelect" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                <option value="">Primary Tenant</option>
+                <option value="">Other Occupant</option>
+              </select>
+              <p id="propertyError" class="hidden text-xs text-[#E3572B] mt-2">Please select a property.</p>
+            </div>
+
+            <div class="mt-6 p-4 rounded-xl bg-slate-50 border border-slate-100">
+              <p class="text-xs font-medium text-slate-600">What happens next?</p>
+              <p class="text-xs text-slate-400 mt-1">After assigning the property, you can create the tenancy, set the rent and dates, and complete the remaining tenancy details.</p>
+            </div>
+
+            <div class="flex items-center justify-between gap-3 mt-7">
+              <button id="backBtn" type="button" class="h-10 px-4 rounded-xl border border-slate-200 bg-white text-md font-medium text-slate-600 hover:bg-slate-50">Back</button>
+              <button id="assignBtn" type="button" class="h-10 px-5 rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#15292c] transition-colors">Assign Tenant</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+  <div id="notificationsMount"></div>
+</div>
+
+<script src="../app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{const page=document.getElementById("page");if(page)requestAnimationFrame(()=>page.classList.remove("opacity-0"));const email=document.getElementById("emailInput"),search=document.getElementById("searchBtn"),result=document.getElementById("tenantResult"),notFound=document.getElementById("notFound"),error=document.getElementById("searchError"),continueBtn=document.getElementById("continueBtn"),searchStep=document.getElementById("searchStep"),propertyStep=document.getElementById("propertyStep"),backBtn=document.getElementById("backBtn"),assignBtn=document.getElementById("assignBtn"),property=document.getElementById("propertySelect"),propertyError=document.getElementById("propertyError");const showTenant=()=>{const value=email.value.trim().toLowerCase();result.classList.add("hidden");notFound.classList.add("hidden");error.classList.add("hidden");if(!value){error.textContent="Please enter a tenant email address.";error.classList.remove("hidden");return}if(!value.includes("@")){error.textContent="Please enter a valid email address.";error.classList.remove("hidden");return}if(value==="daniel.williams@email.com"){document.getElementById("tenantName").textContent="Daniel Williams";document.getElementById("tenantEmail").textContent=value;result.classList.remove("hidden")}else{notFound.classList.remove("hidden")}};search.addEventListener("click",showTenant);email.addEventListener("keydown",e=>{if(e.key==="Enter")showTenant()});continueBtn.addEventListener("click",()=>{document.getElementById("selectedTenantName").textContent=document.getElementById("tenantName").textContent;document.getElementById("selectedTenantEmail").textContent=document.getElementById("tenantEmail").textContent;searchStep.classList.add("hidden");propertyStep.classList.remove("hidden");document.getElementById("step1Indicator").classList.add("text-slate-400");document.getElementById("step1Indicator").classList.remove("text-[#1D3639]");document.getElementById("step2Indicator").classList.remove("text-slate-400");document.getElementById("step2Indicator").classList.add("text-[#1D3639]");document.querySelector("#step2Indicator span").classList.remove("bg-slate-100");document.querySelector("#step2Indicator span").classList.add("bg-[#1D3639]","text-white")});backBtn.addEventListener("click",()=>{propertyStep.classList.add("hidden");searchStep.classList.remove("hidden")});assignBtn.addEventListener("click",()=>{if(!property.value){propertyError.classList.remove("hidden");return}assignBtn.textContent="Assigning...";setTimeout(()=>window.location.href="../properties/property-tenancy.html",700)});property.addEventListener("change",()=>propertyError.classList.add("hidden"))});
+</script>
+</body>
+</html>

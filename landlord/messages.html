@@ -1,0 +1,573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>YourLandlordship — Messages</title>
+<script src="tailwind.js"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+<div id="sidebarMount"></div>
+
+<div class="flex-1 min-w-0 flex flex-col">
+<div id="headerMount"></div>
+
+<main id="page" class="flex-1 overflow-auto opacity-0 scale-[0.96] transition-all duration-200 ease-out">
+<div class="mx-auto px-6 lg:px-8 pt-7 pb-12">
+
+<!-- Header -->
+<div class="flex items-center justify-between mb-7">
+<div>
+<p class="text-xs text-slate-400 mb-1">Communication</p>
+<h1 class="text-xl font-semibold">Messages</h1>
+<p class="text-sm text-slate-400 mt-1">Communicate with tenants and your property team.</p>
+</div>
+
+<button onclick="openNewMessage()" class="flex items-center gap-2 h-9 px-4 rounded-lg bg-[#1D3639] text-white text-xs font-medium hover:bg-[#29494c] transition">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-linecap="round" stroke-width="1.8" d="M12 5v14M5 12h14"/>
+</svg>
+New Message
+</button>
+</div>
+
+<!-- Messages -->
+<div class="grid grid-cols-1 lg:grid-cols-[340px_minmax(0,1fr)] h-[calc(100vh-190px)] min-h-[620px] rounded-2xl border border-slate-200 overflow-hidden bg-white">
+
+<!-- Conversation List -->
+<aside id="conversationPanel" class="border-r border-slate-200 flex flex-col">
+
+<div class="p-4 border-b border-slate-200">
+<div class="relative">
+<svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="m21 21-4.35-4.35M10.75 18a7.25 7.25 0 1 1 0-14.5 7.25 7.25 0 0 1 0 14.5z"/>
+</svg>
+<input id="conversationSearch" oninput="filterConversations()" type="text" placeholder="Search conversations..." class="w-full h-10 pl-10 pr-3 rounded-xl bg-slate-50 border border-slate-200 text-sm outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+</div>
+</div>
+
+<div class="flex items-center gap-2 px-4 py-3 border-b border-slate-100">
+<button onclick="setFilter('all')" data-filter="all" class="messageFilter px-3 py-1.5 rounded-lg bg-[#1D3639] text-white text-xs font-medium">All</button>
+<button onclick="setFilter('unread')" data-filter="unread" class="messageFilter px-3 py-1.5 rounded-lg text-slate-500 hover:bg-slate-50 text-xs font-medium">Unread</button>
+</div>
+
+<div id="conversationList" class="flex-1 overflow-auto"></div>
+
+</aside>
+
+<!-- Active Conversation -->
+<section class="min-w-0 flex flex-col">
+
+<!-- Conversation Header -->
+<div class="h-[73px] px-5 border-b border-slate-200 flex items-center justify-between">
+
+<div class="flex items-center gap-3 min-w-0">
+
+<button onclick="showConversations()" class="lg:hidden w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center">
+<svg class="w-5 h-5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="m15 18-6-6 6-6"/>
+</svg>
+</button>
+
+<div id="tenantAvatar" class="w-10 h-10 rounded-xl bg-[#FAF4DF] text-[#1D3639] flex items-center justify-center font-semibold text-sm">JD</div>
+
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h2 id="activeTenant" class="text-sm font-semibold truncate">John Doe</h2>
+<span id="activeStatus" class="w-1.5 h-1.5 rounded-full bg-[#C3DF93]"></span>
+</div>
+<p id="activeProperty" class="text-xs text-slate-400 truncate">Springfield Family Home</p>
+</div>
+
+</div>
+
+<div class="flex items-center gap-2">
+
+<a id="tenantLink" href="tenants.html" class="hidden sm:flex items-center gap-2 h-8 px-3 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="12" cy="8" r="3" stroke-width="1.5"/>
+<path stroke-width="1.5" d="M5 20a7 7 0 0 1 14 0"/>
+</svg>
+View Tenant
+</a>
+
+<button class="w-8 h-8 rounded-lg hover:bg-slate-100 flex items-center justify-center text-slate-400">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<circle cx="5" cy="12" r="1"/>
+<circle cx="12" cy="12" r="1"/>
+<circle cx="19" cy="12" r="1"/>
+</svg>
+</button>
+
+</div>
+</div>
+
+<!-- Messages -->
+<div id="messageArea" class="flex-1 overflow-auto bg-slate-50/50 px-5 py-6"></div>
+
+<!-- Composer -->
+<div class="border-t border-slate-200 p-4 bg-white">
+
+<div id="attachmentPreview" class="hidden mb-2"></div>
+
+<form onsubmit="sendMessage(event)" class="flex items-end gap-3">
+
+<div class="flex-1 flex items-end gap-1 bg-slate-50 border border-slate-200 rounded-xl px-2 py-1 focus-within:border-[#1D3639] focus-within:ring-2 focus-within:ring-[#1D3639]/10">
+
+<button type="button" onclick="document.getElementById('messageAttachment').click()" class="w-9 h-9 shrink-0 rounded-lg flex items-center justify-center text-slate-400 hover:bg-white hover:text-[#1D3639]" title="Attach file">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.82-2.82l8.49-8.48"/>
+</svg>
+</button>
+
+<input id="messageAttachment" type="file" class="hidden" onchange="showAttachment(this)">
+
+<textarea id="messageInput" rows="1" placeholder="Write a message..." onkeydown="handleMessageKey(event)" class="flex-1 min-h-[40px] max-h-32 resize-none bg-transparent px-2 py-2 text-sm outline-none"></textarea>
+
+</div>
+
+<button type="submit" class="w-11 h-11 shrink-0 rounded-xl bg-[#1D3639] text-white flex items-center justify-center hover:bg-[#29494c]">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M21 3L10 14M21 3l-7 18-4-7-7-4z"/>
+</svg>
+</button>
+
+</form>
+
+</div>
+
+</section>
+</div>
+
+</div>
+</main>
+
+</div>
+
+<div id="notificationsMount"></div>
+</div>
+
+
+<!-- New Message Modal -->
+<div id="newMessageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 p-5">
+
+<div class="w-full max-w-lg rounded-2xl bg-white shadow-2xl overflow-hidden">
+
+<div class="flex items-center justify-between px-6 py-4 border-b border-slate-200">
+<div>
+<h2 class="font-semibold">New Message</h2>
+<p class="text-xs text-slate-400 mt-1">Send a message to a tenant.</p>
+</div>
+
+<button onclick="closeNewMessage()" class="w-8 h-8 rounded-lg hover:bg-slate-100 text-slate-400 flex items-center justify-center">
+<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.8" d="M6 6l12 12M18 6L6 18"/>
+</svg>
+</button>
+</div>
+
+<form onsubmit="createConversation(event)" class="p-6 space-y-5">
+
+<div>
+<label class="block text-xs font-medium text-slate-500 mb-2">Tenant</label>
+<select id="newTenant" required class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+<option value="">Select tenant</option>
+<option value="John Doe">John Doe — Springfield Family Home</option>
+<option value="Sarah Smith">Sarah Smith — Riverside House</option>
+<option value="Michael Brown">Michael Brown — Kingslandlord Homes</option>
+<option value="Emma Wilson">Emma Wilson — Springfield Family Home</option>
+</select>
+</div>
+
+<div>
+<label class="block text-xs font-medium text-slate-500 mb-2">Subject</label>
+<input id="newSubject" required placeholder="e.g. Tenancy update" class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+</div>
+
+<div>
+<label class="block text-xs font-medium text-slate-500 mb-2">Message</label>
+<textarea id="newMessage" required rows="5" placeholder="Write your message..." class="w-full resize-none rounded-xl border border-slate-200 px-4 py-3 text-sm outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10"></textarea>
+</div>
+
+<div class="flex justify-end gap-2 pt-2 border-t border-slate-100">
+<button type="button" onclick="closeNewMessage()" class="h-9 px-4 rounded-lg border border-slate-200 text-xs font-medium text-slate-600 hover:bg-slate-50">Cancel</button>
+<button type="submit" class="h-9 px-4 rounded-lg bg-[#1D3639] text-white text-xs font-medium hover:bg-[#29494c]">Send Message</button>
+</div>
+
+</form>
+
+</div>
+</div>
+
+
+<script src="app.js"></script>
+
+<script>
+
+const conversations = [
+{
+id:1,
+tenant:"John Doe",
+initials:"JD",
+property:"Springfield Family Home",
+unread:3,
+online:true,
+messages:[
+{sender:"tenant",name:"John Doe",text:"Hi, I wanted to let you know that the kitchen tap has started leaking again.",time:"09:14"},
+{sender:"landlord",name:"You",text:"Thanks for letting me know, John. I'll arrange for the maintenance agent to take a look.",time:"09:31"},
+{sender:"tenant",name:"John Doe",text:"Thank you. Is there any idea when they might come?",time:"10:02"}
+]
+},
+{
+id:2,
+tenant:"Sarah Smith",
+initials:"SS",
+property:"Riverside House",
+unread:1,
+online:false,
+messages:[
+{sender:"landlord",name:"You",text:"Hi Sarah, your tenancy documents are now available in the portal.",time:"Yesterday 15:22"},
+{sender:"tenant",name:"Sarah Smith",text:"Thanks. I'll have a look at them this evening.",time:"Yesterday 16:04"}
+]
+},
+{
+id:3,
+tenant:"Michael Brown",
+initials:"MB",
+property:"Kingslandlord Homes",
+unread:0,
+online:false,
+messages:[
+{sender:"tenant",name:"Michael Brown",text:"Just confirming that the rent payment has gone through.",time:"18 Sep 14:40"},
+{sender:"landlord",name:"You",text:"Thanks Michael. I can confirm that the payment has been received.",time:"18 Sep 15:03"}
+]
+},
+{
+id:4,
+tenant:"Emma Wilson",
+initials:"EW",
+property:"Springfield Family Home",
+unread:0,
+online:true,
+messages:[
+{sender:"landlord",name:"You",text:"Hi Emma, just checking that everything is okay with the property.",time:"16 Sep 11:20"},
+{sender:"tenant",name:"Emma Wilson",text:"Everything is good, thank you.",time:"16 Sep 12:01"}
+]
+}
+];
+
+let activeConversation = 1;
+let activeFilter = "all";
+let attachedFile = null;
+
+function renderConversations(search = ""){
+
+const list = document.getElementById("conversationList");
+const query = search.toLowerCase().trim();
+
+const filtered = conversations.filter(c => {
+
+const matchesSearch =
+!query ||
+c.tenant.toLowerCase().includes(query) ||
+c.property.toLowerCase().includes(query) ||
+c.messages.some(m => m.text.toLowerCase().includes(query));
+
+const matchesFilter =
+activeFilter === "all" || c.unread > 0;
+
+return matchesSearch && matchesFilter;
+
+});
+
+list.innerHTML = filtered.map(c => {
+
+const last = c.messages[c.messages.length - 1];
+const active = c.id === activeConversation;
+
+return `
+<button onclick="selectConversation(${c.id})" class="w-full flex items-start gap-3 px-4 py-4 text-left border-b border-slate-100 ${active ? "bg-[#FAF4DF]/70" : "hover:bg-slate-50"} transition">
+
+<div class="relative w-10 h-10 shrink-0 rounded-xl ${active ? "bg-[#1D3639] text-white" : "bg-slate-100 text-slate-600"} flex items-center justify-center text-xs font-semibold">
+${c.initials}
+${c.unread ? `<span class="absolute -right-1 -top-1 min-w-4 h-4 px-1 rounded-full bg-[#E3572B] text-white text-[9px] flex items-center justify-center">${c.unread}</span>` : ""}
+</div>
+
+<div class="min-w-0 flex-1">
+
+<div class="flex items-center justify-between gap-2">
+<p class="truncate text-sm font-medium ${c.unread ? "text-slate-900" : "text-slate-700"}">${c.tenant}</p>
+<span class="text-[10px] text-slate-400 shrink-0">${last.time}</span>
+</div>
+
+<p class="text-[10px] text-slate-400 truncate mt-0.5">${c.property}</p>
+
+<p class="text-xs truncate mt-1 ${c.unread ? "font-medium text-slate-600" : "text-slate-400"}">${last.text}</p>
+
+</div>
+
+</button>
+`;
+
+}).join("");
+
+if(!filtered.length){
+list.innerHTML = `<div class="px-5 py-12 text-center text-sm text-slate-400">No conversations found.</div>`;
+}
+
+}
+
+function renderMessages(){
+
+const conversation = conversations.find(c => c.id === activeConversation);
+
+if(!conversation) return;
+
+document.getElementById("activeTenant").textContent = conversation.tenant;
+document.getElementById("activeProperty").textContent = conversation.property;
+document.getElementById("tenantAvatar").textContent = conversation.initials;
+document.getElementById("activeStatus").className = `w-1.5 h-1.5 rounded-full ${conversation.online ? "bg-[#C3DF93]" : "bg-slate-300"}`;
+
+const area = document.getElementById("messageArea");
+
+area.innerHTML = conversation.messages.map(message => `
+
+<div class="mb-5 flex ${message.sender === "landlord" ? "justify-end" : "justify-start"}">
+
+<div class="max-w-[85%] sm:max-w-[70%]">
+
+${message.sender !== "landlord" ? `
+<p class="px-1 mb-1 text-[10px] font-medium text-slate-500">${message.name}</p>
+` : ""}
+
+<div class="px-4 py-3 rounded-2xl ${message.sender === "landlord" ? "rounded-br-md bg-[#1D3639] text-white" : "rounded-bl-md bg-white border border-slate-200 text-slate-700"}">
+
+<p class="text-sm leading-6">${message.text}</p>
+
+</div>
+
+<div class="mt-1 px-1 text-[10px] text-slate-400 ${message.sender === "landlord" ? "text-right" : ""}">
+${message.time}
+</div>
+
+</div>
+
+</div>
+
+`).join("");
+
+area.scrollTop = area.scrollHeight;
+
+}
+
+function selectConversation(id){
+
+activeConversation = id;
+
+const conversation = conversations.find(c => c.id === id);
+
+if(conversation) conversation.unread = 0;
+
+renderConversations(document.getElementById("conversationSearch").value);
+renderMessages();
+
+if(window.innerWidth < 1024){
+document.getElementById("conversationPanel").classList.add("hidden");
+}
+
+}
+
+function setFilter(filter){
+
+activeFilter = filter;
+
+document.querySelectorAll(".messageFilter").forEach(button => {
+
+const active = button.dataset.filter === filter;
+
+button.classList.toggle("bg-[#1D3639]",active);
+button.classList.toggle("text-white",active);
+button.classList.toggle("text-slate-500",!active);
+
+});
+
+renderConversations(document.getElementById("conversationSearch").value);
+
+}
+
+function filterConversations(){
+
+renderConversations(document.getElementById("conversationSearch").value);
+
+}
+
+function showConversations(){
+
+if(window.innerWidth < 1024){
+document.getElementById("conversationPanel").classList.remove("hidden");
+}
+
+}
+
+function handleMessageKey(event){
+
+if(event.key === "Enter" && !event.shiftKey){
+event.preventDefault();
+event.target.closest("form").requestSubmit();
+}
+
+}
+
+function sendMessage(event){
+
+event.preventDefault();
+
+const input = document.getElementById("messageInput");
+const text = input.value.trim();
+
+if(!text && !attachedFile) return;
+
+const conversation = conversations.find(c => c.id === activeConversation);
+
+if(!conversation) return;
+
+let messageText = text;
+
+if(attachedFile){
+messageText += (text ? " " : "") + "📎 " + attachedFile.name;
+}
+
+conversation.messages.push({
+sender:"landlord",
+name:"You",
+text:messageText,
+time:new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})
+});
+
+input.value = "";
+document.getElementById("messageAttachment").value = "";
+attachedFile = null;
+
+document.getElementById("attachmentPreview").classList.add("hidden");
+
+renderConversations(document.getElementById("conversationSearch").value);
+renderMessages();
+
+}
+
+function showAttachment(input){
+
+if(!input.files.length) return;
+
+attachedFile = input.files[0];
+
+const preview = document.getElementById("attachmentPreview");
+
+preview.innerHTML = `
+<div class="inline-flex items-center gap-2 px-3 py-2 rounded-lg bg-slate-100 text-xs text-slate-600">
+<svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M6 3.75h8.25L18 7.5v12.75H6V3.75zM14 3.75V8h4"/>
+</svg>
+<span class="max-w-[250px] truncate">${attachedFile.name}</span>
+<button type="button" onclick="removeAttachment()" class="text-slate-400 hover:text-slate-700">×</button>
+</div>
+`;
+
+preview.classList.remove("hidden");
+
+}
+
+function removeAttachment(){
+
+attachedFile = null;
+
+document.getElementById("messageAttachment").value = "";
+document.getElementById("attachmentPreview").classList.add("hidden");
+
+}
+
+function openNewMessage(){
+
+document.getElementById("newMessageModal").classList.remove("hidden");
+document.getElementById("newMessageModal").classList.add("flex");
+
+}
+
+function closeNewMessage(){
+
+document.getElementById("newMessageModal").classList.add("hidden");
+document.getElementById("newMessageModal").classList.remove("flex");
+
+}
+
+function createConversation(event){
+
+event.preventDefault();
+
+const tenant = document.getElementById("newTenant").value;
+const subject = document.getElementById("newSubject").value.trim();
+const message = document.getElementById("newMessage").value.trim();
+
+if(!tenant || !subject || !message) return;
+
+const initials = tenant.split(" ").map(x => x[0]).join("").slice(0,2);
+
+conversations.unshift({
+id:Date.now(),
+tenant:tenant,
+initials:initials,
+property:"Springfield Family Home",
+unread:0,
+online:false,
+messages:[
+{
+sender:"landlord",
+name:"You",
+text:`${subject}: ${message}`,
+time:new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"})
+}
+]
+});
+
+activeConversation = conversations[0].id;
+
+document.getElementById("newTenant").value = "";
+document.getElementById("newSubject").value = "";
+document.getElementById("newMessage").value = "";
+
+closeNewMessage();
+renderConversations();
+renderMessages();
+
+}
+
+document.getElementById("newMessageModal").addEventListener("click",event => {
+
+if(event.target.id === "newMessageModal"){
+closeNewMessage();
+}
+
+});
+
+document.addEventListener("DOMContentLoaded",() => {
+
+renderConversations();
+renderMessages();
+
+const page = document.getElementById("page");
+
+if(page){
+requestAnimationFrame(() => {
+page.classList.remove("opacity-0","scale-[0.96]");
+});
+}
+
+});
+
+</script>
+
+</body>
+</html>

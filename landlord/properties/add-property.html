@@ -1,0 +1,173 @@
+<!-- /landlord/properties/add-property.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Add Property</title>
+  <script src="../tailwind.js"></script>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+    <main class="flex-1 overflow-auto">
+      <div class="max-w-4xl mx-auto px-6 lg:px-8 pt-8 pb-12">
+        <div class="mb-8">
+          <a href="../property.html" class="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-[#1D3639] transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg>
+            Properties
+          </a>
+          <div class="mt-6">
+            <h1 class="text-2xl font-semibold text-slate-900">Add New Property</h1>
+            <p class="text-md text-slate-500 mt-2 max-w-2xl">Create your property with the essential details below. You can add photos, documents, financial information and other details after the property has been created.</p>
+          </div>
+        </div>
+
+        <form id="propertyForm">
+          <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+            <div class="px-6 py-5 bg-[#FAF4DF]/60 border-b border-slate-100 flex items-start gap-4">
+              <div class="w-11 h-11 rounded-xl bg-[#C3DF93] flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M4 20V9l8-5 8 5v11M8 20v-6h8v6M4 20h16"/></svg>
+              </div>
+              <div>
+                <h2 class="text-lg font-semibold">Property Details</h2>
+                <p class="text-md text-slate-500 mt-1">Enter the basic information needed to create this property.</p>
+              </div>
+            </div>
+
+            <div class="p-6 space-y-7">
+              <div>
+                <label for="propertyName" class="block text-md font-medium text-slate-700 mb-2">Property Name <span class="text-[#E3572B]">*</span></label>
+                <input id="propertyName" name="propertyName" type="text" required placeholder="e.g. Springfield Family Home" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none placeholder:text-slate-300 focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                <p class="text-xs text-slate-400 mt-2">A name to help you identify this property within YourLandlordship.</p>
+              </div>
+
+              <div>
+                <label for="address" class="block text-md font-medium text-slate-700 mb-2">Address <span class="text-[#E3572B]">*</span></label>
+                <input id="address" name="address" type="text" required autocomplete="street-address" placeholder="e.g. 34 Glemwood Street" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none placeholder:text-slate-300 focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div>
+                  <label for="city" class="block text-md font-medium text-slate-700 mb-2">Town / City <span class="text-[#E3572B]">*</span></label>
+                  <input id="city" name="city" type="text" required autocomplete="address-level2" placeholder="e.g. Liverpool" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none placeholder:text-slate-300 focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+                <div>
+                  <label for="postcode" class="block text-md font-medium text-slate-700 mb-2">Postcode <span class="text-[#E3572B]">*</span></label>
+                  <input id="postcode" name="postcode" type="text" required autocomplete="postal-code" placeholder="e.g. L1 2AB" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md uppercase outline-none placeholder:text-slate-300 focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                </div>
+              </div>
+
+              <div class="border-t border-slate-100 pt-7">
+                <div class="mb-5">
+                  <h3 class="text-md font-semibold">Property Type</h3>
+                  <p class="text-xs text-slate-400 mt-1">Choose the type that best describes the property.</p>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  <label class="property-type-option relative cursor-pointer">
+                    <input type="radio" name="propertyType" value="Apartment" class="peer sr-only" required>
+                    <div class="rounded-xl border border-slate-200 p-4 peer-checked:border-[#1D3639] peer-checked:bg-[#FAF4DF]/70 hover:bg-slate-50 transition">
+                      <div class="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center mb-3">
+                        <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M5 20V5h14v15M9 9h2m2 0h2M9 13h2m2 0h2M9 17h2m2 0h2"/></svg>
+                      </div>
+                      <p class="text-md font-medium">Apartment</p>
+                      <p class="text-xs text-slate-400 mt-1">Flat or apartment unit</p>
+                    </div>
+                  </label>
+                  <label class="property-type-option relative cursor-pointer">
+                    <input type="radio" name="propertyType" value="House" class="peer sr-only">
+                    <div class="rounded-xl border border-slate-200 p-4 peer-checked:border-[#1D3639] peer-checked:bg-[#FAF4DF]/70 hover:bg-slate-50 transition">
+                      <div class="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center mb-3">
+                        <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m4 11 8-7 8 7M6 10v10h12V10M10 20v-6h4v6"/></svg>
+                      </div>
+                      <p class="text-md font-medium">House</p>
+                      <p class="text-xs text-slate-400 mt-1">Detached, semi or terraced</p>
+                    </div>
+                  </label>
+                  <label class="property-type-option relative cursor-pointer">
+                    <input type="radio" name="propertyType" value="Bungalow" class="peer sr-only">
+                    <div class="rounded-xl border border-slate-200 p-4 peer-checked:border-[#1D3639] peer-checked:bg-[#FAF4DF]/70 hover:bg-slate-50 transition">
+                      <div class="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center mb-3">
+                        <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 20V11l8-7 8 7v9M7 20v-5h10v5M10 11h4"/></svg>
+                      </div>
+                      <p class="text-md font-medium">Bungalow</p>
+                      <p class="text-xs text-slate-400 mt-1">Single-storey property</p>
+                    </div>
+                  </label>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 border-t border-slate-100 pt-7">
+                <div>
+                  <label for="bedrooms" class="block text-md font-medium text-slate-700 mb-2">Bedrooms <span class="text-[#E3572B]">*</span></label>
+                  <select id="bedrooms" name="bedrooms" required class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    <option value="">Select bedrooms</option>
+                    <option value="Studio">Studio</option>
+                    <option value="1">1 bedroom</option>
+                    <option value="2">2 bedrooms</option>
+                    <option value="3">3 bedrooms</option>
+                    <option value="4">4 bedrooms</option>
+                    <option value="5">5 bedrooms</option>
+                    <option value="6+">6+ bedrooms</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="bathrooms" class="block text-md font-medium text-slate-700 mb-2">Bathrooms <span class="text-[#E3572B]">*</span></label>
+                  <select id="bathrooms" name="bathrooms" required class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-md text-slate-700 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+                    <option value="">Select bathrooms</option>
+                    <option value="1">1 bathroom</option>
+                    <option value="2">2 bathrooms</option>
+                    <option value="3">3 bathrooms</option>
+                    <option value="4+">4+ bathrooms</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="px-6 py-5 border-t border-slate-100 bg-slate-50/60 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div class="flex items-start gap-3">
+                <div class="w-8 h-8 rounded-lg bg-[#C3DF93]/60 flex items-center justify-center shrink-0 mt-0.5">
+                  <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 16v-4m0-4h.01M4.5 20h15a1.5 1.5 0 0 0 1.3-2.25l-7.5-13a1.5 1.5 0 0 0-2.6 0l-7.5 13A1.5 1.5 0 0 0 4.5 20Z"/></svg>
+                </div>
+                <div>
+                  <p class="text-md font-medium text-slate-700">Don't worry about the rest yet.</p>
+                  <p class="text-xs text-slate-400 mt-1">You can add rent, photos, documents, features and other property details after creation.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="mt-6 flex flex-col-reverse sm:flex-row sm:items-center sm:justify-between gap-3">
+            <a href="../property.html" class="h-11 px-5 rounded-xl border border-slate-200 bg-white text-md font-medium text-slate-600 inline-flex items-center justify-center hover:bg-slate-50 transition">Cancel</a>
+            <button type="submit" class="h-11 px-6 rounded-xl bg-[#1D3639] text-white text-md font-medium inline-flex items-center justify-center gap-2 hover:bg-[#152b2e] transition">
+              Create Property
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  <div id="notificationsMount"></div>
+</div>
+
+<script src="../app.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded",()=>{
+  const form=document.getElementById("propertyForm");
+  form.addEventListener("submit",e=>{
+    e.preventDefault();
+    if(!form.checkValidity()){form.reportValidity();return;}
+    const button=form.querySelector('button[type="submit"]');
+    button.disabled=true;
+    button.innerHTML='<svg class="w-4 h-4 animate-spin" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="1.7" class="opacity-30"/><path stroke-width="1.7" stroke-linecap="round" d="M21 12a9 9 0 0 0-9-9"/></svg> Creating...';
+    setTimeout(()=>{
+      window.location.href="property-index.html";
+    },700);
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!-- /properties/property-index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Property Details</title>
+  <script src="../tailwind.js"></script>
+</head>
+
+<body data-active-tab="home" class="bg-white text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+    <main class="flex-1 overflow-auto transition-all duration-200 ease-out">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+
+        <div id="propertyHeaderMount"></div>
+
+        <div class="opacity-0" id="page">
+
+        <!-- HOME -->
+        <section id="homePanel" class="tab-panel">
+
+          <!-- Property Snapshot + Stage Hero -->
+          <div class="grid grid-cols-1 xl:grid-cols-2 gap-5 mt-7">
+
+            <!-- Property Snapshot -->
+            <div class="rounded-2xl bg-slate-50 p-6">
+
+              <div class="flex items-center justify-between mb-5">
+                <div>
+                  <h2 class="text-md font-semibold">Property Snapshot</h2>
+                  <p class="text-sm text-slate-400 mt-1">Key information at a glance</p>
+                </div>
+
+                <button id="developerStageSwitch" type="button" class="h-8 px-3 rounded-lg border border-slate-200 bg-white hover:bg-slate-100 text-[11px] font-medium text-slate-600 flex items-center gap-2" title="Developer preview: cycle through property stages">
+                  <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 7h11M13 4l3 3-3 3M20 17H9m2-3-3 3 3 3"/>
+                  </svg>
+                  <span data-stage-label>Stage 2/4</span>
+                </button>
+              </div>
+
+              <div class="grid grid-cols-2 md:grid-cols-3 gap-x-7 gap-y-6">
+
+                <div>
+                  <p class="text-sm text-slate-400">Property</p>
+                  <p class="text-md font-medium mt-1">Kingslandlord Homes</p>
+                </div>
+
+                <div>
+                  <p class="text-sm text-slate-400">Property Type</p>
+                  <p class="text-md font-medium mt-1">Apartment</p>
+                </div>
+
+                <div>
+                  <p class="text-sm text-slate-400">Bedrooms</p>
+                  <p class="text-md font-medium mt-1">3</p>
+                </div>
+
+                <div>
+                  <p class="text-sm text-slate-400">Bathrooms</p>
+                  <p class="text-md font-medium mt-1">2</p>
+                </div>
+
+                <div>
+                  <p class="text-sm text-slate-400">Furnished</p>
+                  <p class="text-md font-medium mt-1">Yes</p>
+                </div>
+
+                <div>
+                  <p class="text-sm text-slate-400">Postcode</p>
+                  <p class="text-md font-medium mt-1">M5 2XX</p>
+                </div>
+
+              </div>
+
+              <div class="border-t border-slate-200 mt-7 pt-5 flex flex-wrap gap-x-7 gap-y-2 text-[11px] text-slate-400">
+                <span><strong class="text-slate-700">Created:</strong> 12/01/2026</span>
+                <span><strong class="text-slate-700">Listed:</strong> 18/01/2026</span>
+                <span><strong class="text-slate-700">Last updated:</strong> 22/02/2026</span>
+              </div>
+
+            </div>
+
+            <!-- Stage Hero -->
+            <div id="stageHero" class="relative min-h-[300px] rounded-2xl overflow-hidden bg-cover bg-center" style="background-image: url('');">
+
+              <div id="stageHeroOverlay" class="absolute inset-0 bg-gradient-to-l from-slate-950/90 via-slate-950/55 to-transparent"></div>
+
+              <div class="relative min-h-[300px] p-6 flex justify-end">
+
+                <div class="w-full max-w-[320px] flex flex-col items-end text-right text-white">
+
+                  <!-- Status -->
+                  <span id="heroStatusBadge" class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-emerald-500/90 text-white text-xs font-medium">
+                    <span id="heroStatusDot" class="w-1.5 h-1.5 rounded-full bg-white"></span>
+                    <span id="heroStatusText">Accepting applications</span>
+                  </span>
+
+                  <!-- Stage content -->
+                  <div class="mt-auto">
+
+                    <h2 id="heroStageTitle" class="text-2xl font-semibold leading-tight">
+                      Active with no tenants
+                    </h2>
+                    <p id="heroStageDescription" class="text-sm text-white/70 mt-2 leading-relaxed">
+                      This property is currently accepting applications.
+                    </p>
+                    <!-- Action -->
+                    <button id="heroAction" type="button" class="mt-5 h-10 px-4 rounded-xl bg-white text-slate-900 text-xs font-semibold inline-flex items-center gap-2 hover:bg-slate-100 transition">
+                      <span id="heroActionText">View Applications</span>
+
+                      <svg id="heroActionIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M7 17 17 7M8 7h9v9"/>
+                      </svg>
+                    </button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Property Rent -->
+          <div class="mt-7">
+
+            <div class="mb-4">
+              <h2 class="text-base text-lg font-semibold">Property Rent</h2>
+              <p class="text-xs text-slate-400 mt-1">A quick view of the property's rental position.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+
+              <div class="rounded-2xl bg-[#e7f2ff] px-5 py-5">
+                <p class="text-sm text-slate-400">Rental Value</p>
+                <p id="rentalValue" class="text-3xl font-semibold mt-3">£950</p>
+                <p class="text-xs text-slate-400 mt-1">per month</p>
+              </div>
+
+              <div class="rounded-2xl bg-[#ededff] px-5 py-5">
+                <p class="text-sm text-slate-400">Total Rent Paid</p>
+                <p id="totalRentPaid" class="text-3xl font-semibold mt-3">£0</p>
+                <p class="text-xs text-slate-400 mt-1">since tenancy began</p>
+              </div>
+
+              <div class="rounded-2xl bg-[#e7f2ff] px-5 py-5">
+                <p class="text-sm text-slate-400">Next Rent Due</p>
+                <p id="nextRentDue" class="text-3xl font-semibold mt-3">£950</p>
+                <p id="nextRentDate" class="text-xs text-slate-400 mt-1">Due when tenancy starts</p>
+              </div>
+
+              <div class="rounded-2xl bg-slate-50 border border-slate-100 px-5 py-5">
+                <p class="text-sm text-slate-400">Payment Status</p>
+                <p id="paymentStatus" class="text-sm font-semibold mt-4">No active tenancy</p>
+                <p class="text-xs text-slate-400 mt-1">Rent collection begins with a tenant.</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Property Summary -->
+          <div class="mt-7">
+
+            <h2 class="text-lg text-base font-semibold mb-4">Property Summary</h2>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+
+              <div class="rounded-2xl border border-slate-200 p-5">
+                <p class="text-sm text-slate-500">Applications</p>
+                <p id="applicationsCount" class="text-3xl font-semibold mt-4">4</p>
+                <p id="applicationsNote" class="text-sm text-slate-400 mt-1">1 new this week</p>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 p-5">
+                <p class="text-sm text-slate-500">Maintenance Requests</p>
+                <p id="maintenanceCount" class="text-3xl font-semibold mt-4">2</p>
+                <p id="maintenanceNote" class="text-sm text-slate-400 mt-1">0 high priority</p>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 p-5">
+                <p class="text-sm text-slate-500">Active Units</p>
+                <p id="activeUnitsCount" class="text-3xl font-semibold mt-4">1</p>
+                <p id="activeUnitsNote" class="text-sm text-slate-400 mt-1">0 currently occupied</p>
+              </div>
+
+              <div class="rounded-2xl border border-slate-200 p-5">
+                <p class="text-sm text-slate-500">Occupancy</p>
+                <p id="occupancyCount" class="text-3xl font-semibold mt-4">0%</p>
+                <p id="occupancyNote" class="text-sm text-slate-400 mt-1">No tenants assigned</p>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="mt-7 rounded-2xl border border-slate-100 p-6">
+
+            <div class="flex items-center justify-between mb-5">
+              <div>
+                <h2 class="text-lg font-semibold">Recent Activity</h2>
+                <p class="text-sm text-slate-400 mt-1">What's happening with this property</p>
+              </div>
+
+              <button class="text-md text-slate-400">View all</button>
+            </div>
+
+            <div class="space-y-5">
+
+              <div class="flex gap-3">
+                <div class="w-7 h-7 rounded-full bg-sky-50 flex items-center justify-center text-xs shrink-0">↗</div>
+                <div>
+                  <p class=""><span class="font-medium">New application interest</span> was received.</p>
+                  <p class="text-sm text-slate-400 mt-1">22 February 2026 · 2 days ago</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <div class="w-7 h-7 rounded-full bg-slate-50 flex items-center justify-center text-xs shrink-0">□</div>
+                <div>
+                  <p class=""><span class="font-medium">Property listing</span> was updated.</p>
+                  <p class="text-md  text-slate-400 mt-1">18 February 2026 · 6 days ago</p>
+                </div>
+              </div>
+
+              <div class="flex gap-3">
+                <div class="w-7 h-7 rounded-full bg-slate-50 flex items-center justify-center text-xs shrink-0">⌁</div>
+                <div>
+                  <p class=""><span class="font-medium">Maintenance request</span> was opened.</p>
+                  <p class="text-md text-slate-400 mt-1">15 February 2026 · 9 days ago</p>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <div id="notificationsMount"></div>
+
+</div>
+
+<script src="../app.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const stageButton = document.getElementById("developerStageSwitch");
+  const hero = document.getElementById("stageHero");
+  const heroStatusBadge = document.getElementById("heroStatusBadge");
+  const heroStatusDot = document.getElementById("heroStatusDot");
+  const heroAction = document.getElementById("heroAction");
+
+  if (!stageButton) return;
+
+  const stages = [
+    {
+      title: "Under Creation",
+      description: "This property is still being created and is not currently active.",
+      status: "Not public",
+      statusClass: "bg-slate-700/90 text-white",
+      dotClass: "bg-slate-300",
+      image: "../assets/images/property-inactive.jpg",
+      action: "Complete Property",
+      actionTab: "info",
+      rentalValue: "£950",
+      totalRentPaid: "£0",
+      nextRentDue: "£0",
+      nextRentDate: "No tenancy",
+      paymentStatus: "No active tenancy",
+      applications: "0",
+      applicationsNote: "Not accepting applications",
+      maintenance: "0",
+      maintenanceNote: "No active requests",
+      units: "1",
+      unitsNote: "Unit setup in progress",
+      occupancy: "0%",
+      occupancyNote: "Property inactive"
+    },
+    {
+      title: "Active with no tenants",
+      description: "This property is currently accepting applications.",
+      status: "Public",
+      statusClass: "bg-emerald-500/90 text-white",
+      dotClass: "bg-white",
+      image: "../assets/images/property-no-tenants.jpg",
+      action: "View Applications",
+      actionTab: "interest",
+      rentalValue: "£950",
+      totalRentPaid: "£0",
+      nextRentDue: "£950",
+      nextRentDate: "Due when tenancy starts",
+      paymentStatus: "No active tenancy",
+      applications: "4",
+      applicationsNote: "1 new this week",
+      maintenance: "2",
+      maintenanceNote: "0 high priority",
+      units: "1",
+      unitsNote: "0 currently occupied",
+      occupancy: "0%",
+      occupancyNote: "No tenants assigned"
+    },
+    {
+      title: "Active with Tenants",
+      description: "This property has active tenants and rent collection is enabled.",
+      status: "Public",
+      statusClass: "bg-blue-500/90 text-white",
+      dotClass: "bg-white",
+      image: "../assets/images/property-active.jpg",
+      action: "View Tenants",
+      actionTab: "tenant",
+      rentalValue: "£950",
+      totalRentPaid: "£8,550",
+      nextRentDue: "£950",
+      nextRentDate: "11 March 2026",
+      paymentStatus: "Rent collection active",
+      applications: "1",
+      applicationsNote: "No pending applications",
+      maintenance: "2",
+      maintenanceNote: "1 requires attention",
+      units: "1",
+      unitsNote: "1 currently occupied",
+      occupancy: "100%",
+      occupancyNote: "Tenant assigned"
+    },
+    {
+      title: "Inactive / Paused",
+      description: "This property has been paused and is not currently available for applications.",
+      status: "Not public",
+      statusClass: "bg-amber-500/90 text-white",
+      dotClass: "bg-white",
+      image: "../assets/images/property-paused.jpg",
+      action: "Unpause Property",
+      actionTab: "info",
+      rentalValue: "£950",
+      totalRentPaid: "£8,550",
+      nextRentDue: "£0",
+      nextRentDate: "No rent scheduled",
+      paymentStatus: "Rent collection paused",
+      applications: "0",
+      applicationsNote: "Applications paused",
+      maintenance: "1",
+      maintenanceNote: "1 open request",
+      units: "1",
+      unitsNote: "Property paused",
+      occupancy: "0%",
+      occupancyNote: "Not available"
+    }
+  ];
+
+  let currentStage = Math.floor(Math.random() * stages.length);
+
+  const fields = {
+    rentalValue: "rentalValue",
+    totalRentPaid: "totalRentPaid",
+    nextRentDue: "nextRentDue",
+    nextRentDate: "nextRentDate",
+    paymentStatus: "paymentStatus",
+    applicationsCount: "applications",
+    applicationsNote: "applicationsNote",
+    maintenanceCount: "maintenance",
+    maintenanceNote: "maintenanceNote",
+    activeUnitsCount: "units",
+    activeUnitsNote: "unitsNote",
+    occupancyCount: "occupancy",
+    occupancyNote: "occupancyNote"
+  };
+
+  function setText(id, value) {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  }
+
+  function updateStage() {
+
+    const stage = stages[currentStage];
+
+    setText("heroStageTitle", stage.title);
+    setText("heroStageDescription", stage.description);
+    setText("heroStatusText", stage.status);
+    setText("heroActionText", stage.action);
+
+    hero.style.backgroundImage = `url('${stage.image}')`;
+
+    heroStatusBadge.className = "inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium " + stage.statusClass;
+    heroStatusDot.className = "w-1.5 h-1.5 rounded-full " + stage.dotClass;
+
+    for (const [id, key] of Object.entries(fields)) {
+      setText(id, stage[key]);
+    }
+
+    const label = stageButton.querySelector("[data-stage-label]");
+    if (label) label.textContent = `Stage ${currentStage + 1}/4`;
+  }
+
+  stageButton.addEventListener("click", () => {
+    currentStage = (currentStage + 1) % stages.length;
+    updateStage();
+  });
+
+  heroAction.addEventListener("click", () => {
+    const stage = stages[currentStage];
+    if (stage.actionTab) {
+      const tab = document.querySelector(`[data-tab="${stage.actionTab}"]`);
+      if (tab) tab.click();
+    }
+
+  });
+
+  updateStage();
+
+});
+</script>
+
+
+
+<script src="property.js"></script>
+
+</body>
+</html>

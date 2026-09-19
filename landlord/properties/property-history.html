@@ -1,0 +1,368 @@
+<!-- /landlord/properties/property-history.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — History</title>
+  <script src="../tailwind.js"></script>
+</head>
+
+<body data-active-tab="history" class="bg-white text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+        <div id="propertyHeaderMount"></div>
+
+        <div id="page" class="opacity-0 transition-opacity">
+
+          <!-- Header -->
+          <div class="mt-8 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4">
+            <div>
+              <h1 class="text-md font-semibold text-slate-900">Property History</h1>
+              <p class="text-md text-slate-500 mt-1">A complete record of activity and changes relating to this property.</p>
+            </div>
+          </div>
+
+          <!-- Filters -->
+          <section class="mt-6">
+            <div class="flex flex-wrap items-center gap-2">
+              <button data-filter="all" class="history-filter px-3 py-1.5 rounded-lg bg-[#1D3639] text-white text-xs font-medium transition-colors">All</button>
+              <button data-filter="financial" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Financial</button>
+              <button data-filter="property" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Property</button>
+              <button data-filter="tenancy" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Tenancy</button>
+              <button data-filter="maintenance" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Maintenance</button>
+              <button data-filter="applications" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Applications</button>
+              <button data-filter="documents" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Documents</button>
+              <button data-filter="portal" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Portal</button>
+              <button data-filter="compliance" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Compliance</button>
+              <button data-filter="communication" class="history-filter px-3 py-1.5 rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 text-xs font-medium transition-colors">Communications</button>
+            </div>
+
+            <div class="mt-4 flex flex-col sm:flex-row gap-3">
+              <div class="relative flex-1">
+                <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="6.5" stroke-width="1.5"/>
+                  <path stroke-width="1.5" stroke-linecap="round" d="m16 16 4 4"/>
+                </svg>
+                <input id="historySearch" type="text" placeholder="Search history..." class="w-full h-10 pl-9 pr-3 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-[#1D3639] focus:ring-1 focus:ring-[#1D3639]/10">
+              </div>
+
+              <select id="dateFilter" class="h-10 px-3 rounded-xl border border-slate-200 bg-white text-md text-slate-600 outline-none focus:border-[#1D3639]">
+                <option value="all">All time</option>
+                <option value="today">Today</option>
+                <option value="7">Last 7 days</option>
+                <option value="30">Last 30 days</option>
+                <option value="90">Last 90 days</option>
+              </select>
+            </div>
+          </section>
+
+          <!-- History -->
+          <section class="mt-8">
+            <div id="historyList" class="space-y-8">
+
+              <!-- 19 September -->
+              <div class="history-day">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="h-px flex-1 bg-slate-100"></div>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">19 September 2026</span>
+                  <div class="h-px flex-1 bg-slate-100"></div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="financial" data-search="rent payment received september daniel williams £950">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-[#C3DF93]/50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.5" stroke-linecap="round" d="M12 6v12M15.5 9.5c0-1.1-1.6-2-3.5-2s-3.5.9-3.5 2 1.6 2 3.5 2 3.5.9 3.5 2-1.6 2-3.5 2-3.5-.9-3.5-2"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Rent Payment Received</span>
+                        <span class="ml-2 text-xs font-medium text-[#1D3639]">Financial</span>
+                      </div>
+                      <span class="text-xs text-slate-400">14:32</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">£950 rent payment received for September 2026.</p>
+                    <p class="text-xs text-slate-400 mt-2">Daniel Williams · TEN-2026-001</p>
+                  </div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="documents" data-search="gas safety certificate uploaded document">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-slate-100 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6 3.5h8l4 4V20a.5.5 0 0 1-.5.5h-11A.5.5 0 0 1 6 20V3.5Z"/>
+                      <path stroke-width="1.5" stroke-linecap="round" d="M14 3.5V8h4M9 12h6M9 15.5h4"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Document Uploaded</span>
+                        <span class="ml-2 text-xs font-medium text-slate-500">Documents</span>
+                      </div>
+                      <span class="text-xs text-slate-400">11:18</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">Gas Safety Certificate uploaded.</p>
+                    <p class="text-xs text-slate-400 mt-2">Enoch Adediran</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 18 September -->
+              <div class="history-day">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="h-px flex-1 bg-slate-100"></div>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">18 September 2026</span>
+                  <div class="h-px flex-1 bg-slate-100"></div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="property" data-search="property updated property value changed">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.5" stroke-linecap="round" d="M12 3.5 4 8v12.5h16V8l-8-4.5Z"/>
+                      <path stroke-width="1.5" stroke-linecap="round" d="M9 20.5v-6h6v6M8 10h.01M12 10h.01M16 10h.01"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Property Updated</span>
+                        <span class="ml-2 text-xs font-medium text-slate-500">Property</span>
+                      </div>
+                      <span class="text-xs text-slate-400">16:42</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">Property value changed from £285,000 to £290,000.</p>
+                    <p class="text-xs text-slate-400 mt-2">Enoch Adediran</p>
+                  </div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="portal" data-search="application link copied portal">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-[#1D3639]/10 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <rect x="8" y="8" width="11" height="11" rx="1.5" stroke-width="1.5"/>
+                      <path stroke-width="1.5" d="M5 16H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v1"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Application Link Copied</span>
+                        <span class="ml-2 text-xs font-medium text-[#1D3639]">Portal</span>
+                      </div>
+                      <span class="text-xs text-slate-400">13:07</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">The public application link was copied.</p>
+                    <p class="text-xs text-slate-400 mt-2">Enoch Adediran</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 17 September -->
+              <div class="history-day">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="h-px flex-1 bg-slate-100"></div>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">17 September 2026</span>
+                  <div class="h-px flex-1 bg-slate-100"></div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="maintenance" data-search="maintenance request created leaking tap kitchen">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-amber-50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.5" stroke-linecap="round" d="m14.5 6.5-8 8M13 4l7 7M6.5 14.5 4 17l3 3 2.5-2.5"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Maintenance Request Created</span>
+                        <span class="ml-2 text-xs font-medium text-amber-600">Maintenance</span>
+                      </div>
+                      <span class="text-xs text-slate-400">10:24</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">Tenant reported a leaking kitchen tap.</p>
+                    <p class="text-xs text-slate-400 mt-2">Daniel Williams · MNT-2026-018</p>
+                  </div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="tenancy" data-search="tenant tenancy renewed daniel williams">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-blue-50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <circle cx="12" cy="8" r="3" stroke-width="1.5"/>
+                      <path stroke-width="1.5" stroke-linecap="round" d="M5.5 20a6.5 6.5 0 0 1 13 0"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Tenancy Renewed</span>
+                        <span class="ml-2 text-xs font-medium text-blue-600">Tenancy</span>
+                      </div>
+                      <span class="text-xs text-slate-400">09:12</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">Tenancy renewed until 31 August 2027.</p>
+                    <p class="text-xs text-slate-400 mt-2">Daniel Williams · TEN-2026-001</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 15 September -->
+              <div class="history-day">
+                <div class="flex items-center gap-3 mb-3">
+                  <div class="h-px flex-1 bg-slate-100"></div>
+                  <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">15 September 2026</span>
+                  <div class="h-px flex-1 bg-slate-100"></div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="applications" data-search="application received emma wilson">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-purple-50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.5" stroke-linecap="round" d="M6 4.5h9l3 3V19a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 6 19V4.5Z"/>
+                      <path stroke-width="1.5" stroke-linecap="round" d="M9 12h6M9 15.5h4M14 4.5V8h4"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Application Received</span>
+                        <span class="ml-2 text-xs font-medium text-purple-600">Applications</span>
+                      </div>
+                      <span class="text-xs text-slate-400">18:06</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">New application received for Unit 2.</p>
+                    <p class="text-xs text-slate-400 mt-2">Emma Wilson · APP-2026-041</p>
+                  </div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="compliance" data-search="inspection completed property compliance">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-teal-50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-teal-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="8" stroke-width="1.5"/>
+                      <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m8.5 12 2.2 2.2 4.8-5"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Property Inspection Completed</span>
+                        <span class="ml-2 text-xs font-medium text-teal-600">Compliance</span>
+                      </div>
+                      <span class="text-xs text-slate-400">15:40</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">Annual property inspection completed.</p>
+                    <p class="text-xs text-slate-400 mt-2">Enoch Adediran</p>
+                  </div>
+                </div>
+
+                <div class="history-event group flex gap-4 py-4 border-b border-slate-100" data-category="financial" data-search="expense added plumbing maintenance £185">
+                  <div class="w-10 h-10 shrink-0 rounded-xl bg-[#C3DF93]/50 flex items-center justify-center">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.5" stroke-linecap="round" d="M12 6v12M15.5 9.5c0-1.1-1.6-2-3.5-2s-3.5.9-3.5 2 1.6 2 3.5 2 3.5.9 3.5 2-1.6 2-3.5 2-3.5-.9-3.5-2"/>
+                    </svg>
+                  </div>
+
+                  <div class="min-w-0 flex-1">
+                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-1">
+                      <div>
+                        <span class="text-md font-semibold text-slate-900">Expense Added</span>
+                        <span class="ml-2 text-xs font-medium text-[#1D3639]">Financial</span>
+                      </div>
+                      <span class="text-xs text-slate-400">11:15</span>
+                    </div>
+
+                    <p class="text-md text-slate-600 mt-1">£185 plumbing expense recorded against the property.</p>
+                    <p class="text-xs text-slate-400 mt-2">Enoch Adediran · EXP-2026-012</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div id="emptyState" class="hidden py-16 text-center">
+              <div class="w-10 h-10 mx-auto rounded-xl bg-slate-100 flex items-center justify-center">
+                <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <circle cx="11" cy="11" r="6.5" stroke-width="1.5"/>
+                  <path stroke-width="1.5" stroke-linecap="round" d="m16 16 4 4"/>
+                </svg>
+              </div>
+              <p class="text-md font-medium text-slate-700 mt-3">No history found</p>
+              <p class="text-md text-slate-400 mt-1">Try changing your filters or search term.</p>
+            </div>
+          </section>
+
+        </div>
+      </main>
+    </div>
+
+    <div id="notificationsMount"></div>
+  </div>
+
+  <script src="../app.js"></script>
+  <script src="property.js"></script>
+
+  <script>
+    const filters=document.querySelectorAll('.history-filter'),events=document.querySelectorAll('.history-event'),search=document.getElementById('historySearch'),dateFilter=document.getElementById('dateFilter'),empty=document.getElementById('emptyState');
+
+    filters.forEach(btn=>btn.addEventListener('click',()=>{
+      filters.forEach(b=>b.classList.remove('bg-[#1D3639]','text-white'));
+      filters.forEach(b=>b.classList.add('bg-slate-100','text-slate-600'));
+      btn.classList.remove('bg-slate-100','text-slate-600');
+      btn.classList.add('bg-[#1D3639]','text-white');
+      filterHistory();
+    }));
+
+    search.addEventListener('input',filterHistory);
+    dateFilter.addEventListener('change',filterHistory);
+
+    function filterHistory(){
+      const category=document.querySelector('.history-filter.bg-\\[\\#1D3639\\]')?.dataset.filter||'all';
+      const query=search.value.toLowerCase().trim();
+      let visible=0;
+
+      events.forEach(event=>{
+        const matchesCategory=category==='all'||event.dataset.category===category;
+        const matchesSearch=!query||event.dataset.search.toLowerCase().includes(query);
+        const show=matchesCategory&&matchesSearch;
+        event.classList.toggle('hidden',!show);
+        if(show)visible++;
+      });
+
+      document.querySelectorAll('.history-day').forEach(day=>{
+        const visibleEvents=[...day.querySelectorAll('.history-event:not(.hidden)')];
+        day.classList.toggle('hidden',visibleEvents.length===0);
+      });
+
+      empty.classList.toggle('hidden',visible!==0);
+    }
+
+    window.addEventListener('load',()=>{
+      const page=document.getElementById('page');
+      requestAnimationFrame(()=>page.classList.remove('opacity-0'));
+    });
+  </script>
+
+</body>
+</html>

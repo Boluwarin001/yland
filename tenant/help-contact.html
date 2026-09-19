@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>YourLandlordship — Help & Contact</title>
+<script src="tailwind.js"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+<div class="flex h-screen overflow-hidden">
+<div id="sidebarMount"></div>
+
+<div class="flex min-w-0 flex-1 flex-col">
+<div id="headerMount"></div>
+
+<main class="flex-1 overflow-auto">
+<div class="px-6 pt-8 pb-12 lg:px-8">
+<div id="page" class="mx-auto max-w-7xl mt-24 opacity-0">
+
+<!-- Header -->
+<div>
+<h1 class="text-2xl font-semibold tracking-tight">Help & Contact</h1>
+<p class="text-md mt-1 text-slate-500">Find answers or get help with your tenancy.</p>
+</div>
+
+<!-- Search -->
+<div class="mt-8 rounded-2xl border border-slate-200 bg-[#FAF4DF]/60 p-6 sm:p-8">
+<div class="mx-auto max-w-2xl text-center">
+<div class="mx-auto flex h-12 w-12 items-center justify-center rounded-2xl bg-white text-[#1D3639]">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="m21 21-4.35-4.35M10.75 18a7.25 7.25 0 1 1 0-14.5 7.25 7.25 0 0 1 0 14.5z"/>
+</svg>
+</div>
+
+<h2 class="mt-4 text-lg font-semibold">How can we help?</h2>
+<p class="mt-1 text-md text-slate-500">Search our help topics or browse the options below.</p>
+
+<div class="relative mt-5">
+<svg class="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="m21 21-4.35-4.35M10.75 18a7.25 7.25 0 1 1 0-14.5 7.25 7.25 0 0 1 0 14.5z"/>
+</svg>
+<input id="helpSearch" oninput="searchHelp()" placeholder="Search for help..." class="text-md w-full rounded-xl border border-slate-200 bg-white py-3.5 pl-12 pr-4 outline-none focus:border-[#1D3639] focus:ring-2 focus:ring-[#1D3639]/10">
+</div>
+</div>
+</div>
+
+<!-- Help categories -->
+<div id="helpResults" class="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+
+<button onclick="openHelp('tenancy')" data-help="tenancy agreement lease rent tenancy" class="help-card rounded-2xl border border-slate-200 bg-white p-5 text-left transition hover:-translate-y-0.5 hover:border-[#1D3639]/30 hover:shadow-sm">
+<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FAF4DF] text-[#1D3639]">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M6 3.75h12v16.5H6V3.75zM9 8h6M9 12h6M9 16h4"/>
+</svg>
+</div>
+<h2 class="mt-4 font-semibold">My Tenancy</h2>
+<p class="text-md mt-1 text-slate-500">Questions about your lease, rent, deposit and tenancy dates.</p>
+</button>
+
+<button onclick="openHelp('payments')" data-help="payments rent payment money bank transfer rent due" class="help-card rounded-2xl border border-slate-200 bg-white p-5 text-left transition hover:-translate-y-0.5 hover:border-[#1D3639]/30 hover:shadow-sm">
+<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FAF4DF] text-[#1D3639]">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M4 7h16v10H4V7zM4 10h16M8 14h3"/>
+</svg>
+</div>
+<h2 class="mt-4 font-semibold">Payments</h2>
+<p class="text-md mt-1 text-slate-500">Help with rent payments, receipts and payment history.</p>
+</button>
+
+<button onclick="openHelp('maintenance')" data-help="maintenance repair issue emergency broken leak" class="help-card rounded-2xl border border-slate-200 bg-white p-5 text-left transition hover:-translate-y-0.5 hover:border-[#1D3639]/30 hover:shadow-sm">
+<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FAF4DF] text-[#1D3639]">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M14.7 6.3a4 4 0 01-5.4 5.4L4 17l3 3 5.3-5.3a4 4 0 005.4-5.4l-2.2 2.2-2.1-2.1z"/>
+</svg>
+</div>
+<h2 class="mt-4 font-semibold">Maintenance</h2>
+<p class="text-md mt-1 text-slate-500">Report issues, track repairs and understand maintenance requests.</p>
+</button>
+
+<button onclick="openHelp('documents')" data-help="documents upload file tenancy agreement proof identity document" class="help-card rounded-2xl border border-slate-200 bg-white p-5 text-left transition hover:-translate-y-0.5 hover:border-[#1D3639]/30 hover:shadow-sm">
+<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FAF4DF] text-[#1D3639]">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M6 3.75h8.25L18 7.5v12.75H6V3.75zM14 3.75V8h4M8.5 12h7M8.5 15h5"/>
+</svg>
+</div>
+<h2 class="mt-4 font-semibold">Documents</h2>
+<p class="text-md mt-1 text-slate-500">Find, view, accept and upload your tenancy documents.</p>
+</button>
+
+<button onclick="openHelp('move')" data-help="move in move out keys inventory checklist" class="help-card rounded-2xl border border-slate-200 bg-white p-5 text-left transition hover:-translate-y-0.5 hover:border-[#1D3639]/30 hover:shadow-sm">
+<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FAF4DF] text-[#1D3639]">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M5 12h14M13 6l6 6-6 6M5 6v12"/>
+</svg>
+</div>
+<h2 class="mt-4 font-semibold">Move In / Move Out</h2>
+<p class="text-md mt-1 text-slate-500">Understand checklists, uploads, keys and property handover.</p>
+</button>
+
+<button onclick="openHelp('account')" data-help="account settings password email notification security" class="help-card rounded-2xl border border-slate-200 bg-white p-5 text-left transition hover:-translate-y-0.5 hover:border-[#1D3639]/30 hover:shadow-sm">
+<div class="flex h-11 w-11 items-center justify-center rounded-xl bg-[#FAF4DF] text-[#1D3639]">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M12 15a3 3 0 100-6 3 3 0 000 6zm7.4-3a7.4 7.4 0 00-.1-1.2l2-1.5-2-3.4-2.4 1a7.4 7.4 0 00-2-1.2L14.6 3h-5l-.3 2.7a7.4 7.4 0 00-2 1.2l-2.4-1-2 3.4 2 1.5A7.4 7.4 0 005.6 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.4-1a7.4 7.4 0 002 1.2l.3 2.7h5l.3-2.7a7.4 7.4 0 002-1.2l2.4 1 2-3.4-2-1.5c.1-.4.1-.8.1-1.2z"/>
+</svg>
+</div>
+<h2 class="mt-4 font-semibold">Account & Settings</h2>
+<p class="text-md mt-1 text-slate-500">Manage your account details, password and notifications.</p>
+</button>
+
+</div>
+
+<div id="noResults" class="mt-8 hidden rounded-2xl border border-slate-200 bg-white px-6 py-12 text-center">
+<p class="font-medium">No help topics found</p>
+<p class="text-md mt-1 text-slate-500">Try searching for something else or contact your property team.</p>
+</div>
+
+<!-- Contact -->
+<div class="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+
+<div class="rounded-2xl border border-slate-200 bg-white p-6">
+<div class="flex items-start gap-4">
+<div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#1D3639] text-white">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M4 5.75A2.75 2.75 0 0 1 6.75 3h10.5A2.75 2.75 0 0 1 20 5.75v7.5A2.75 2.75 0 0 1 17.25 16H11l-4.5 4v-4H6.75A2.75 2.75 0 0 1 4 13.25z"/>
+</svg>
+</div>
+<div>
+<h2 class="font-semibold">Contact your landlord</h2>
+<p class="text-md mt-1 text-slate-500">Have a question about your property or tenancy? Send your landlord a message.</p>
+<a href="messages.html" class="mt-4 inline-flex items-center gap-2 text-md font-medium text-[#1D3639] hover:text-[#E3572B]">Open Messages <span>→</span></a>
+</div>
+</div>
+</div>
+
+<div class="rounded-2xl border border-slate-200 bg-[#FAF4DF]/60 p-6">
+<div class="flex items-start gap-4">
+<div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-white text-[#1D3639]">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.7" d="M12 18h.01M9.5 9a2.5 2.5 0 115 0c0 2-2.5 2-2.5 2.5V13"/>
+<circle cx="12" cy="12" r="9"/>
+</svg>
+</div>
+<div>
+<h2 class="font-semibold text-[#1D3639]">Need urgent help?</h2>
+<p class="text-md mt-1 text-slate-500">For emergencies affecting your safety or causing serious damage, contact the appropriate emergency service first.</p>
+<p class="mt-3 text-xs text-slate-500">For property emergencies, also contact your landlord or emergency maintenance contact listed in your tenancy information.</p>
+</div>
+</div>
+</div>
+
+</div>
+
+</div>
+</main>
+</div>
+
+<div id="notificationsMount"></div>
+</div>
+
+<!-- Help Modal -->
+<div id="helpModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-slate-900/40 p-5">
+<div class="w-full max-w-2xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+
+<div class="flex items-center justify-between border-b border-slate-200 px-6 py-4">
+<div>
+<h2 id="helpTitle" class="font-semibold">Help</h2>
+<p class="mt-1 text-xs text-slate-400">Information about your tenancy.</p>
+</div>
+<button onclick="closeHelp()" class="rounded-lg p-2 text-slate-400 hover:bg-slate-100">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+<path stroke-width="1.8" d="M6 6l12 12M18 6L6 18"/>
+</svg>
+</button>
+</div>
+
+<div id="helpContent" class="max-h-[65vh] overflow-auto px-6 py-6"></div>
+
+<div class="flex justify-end border-t border-slate-200 px-6 py-4">
+<button onclick="closeHelp()" class="text-md rounded-xl bg-[#1D3639] px-4 py-2.5 font-medium text-white">Close</button>
+</div>
+
+</div>
+</div>
+
+<script src="app.js"></script>
+<script>
+const helpContent={
+tenancy:{
+title:'My Tenancy',
+content:`
+<div class="space-y-5">
+<div><h3 class="font-medium">Where can I find my tenancy details?</h3><p class="mt-1 text-md leading-6 text-slate-500">Open My Tenancy from the sidebar to view your property, tenancy dates, rent, deposit and tenancy agreement.</p></div>
+<div><h3 class="font-medium">Where can I find my tenancy agreement?</h3><p class="mt-1 text-md leading-6 text-slate-500">Your tenancy agreement is available through My Tenancy and Documents.</p></div>
+<div><h3 class="font-medium">I have a question about my lease.</h3><p class="mt-1 text-md leading-6 text-slate-500">If the information is not covered in your tenancy documents, contact your landlord through Messages.</p></div>
+</div>`
+},
+payments:{
+title:'Payments',
+content:`
+<div class="space-y-5">
+<div><h3 class="font-medium">Where can I see my rent?</h3><p class="mt-1 text-md leading-6 text-slate-500">Open Payments to see your rent amount, payment history and upcoming payments.</p></div>
+<div><h3 class="font-medium">My payment is missing.</h3><p class="mt-1 text-md leading-6 text-slate-500">If a payment has been made but is not showing, contact your landlord and provide the payment details.</p></div>
+</div>`
+},
+maintenance:{
+title:'Maintenance',
+content:`
+<div class="space-y-5">
+<div><h3 class="font-medium">How do I report a problem?</h3><p class="mt-1 text-md leading-6 text-slate-500">Open Maintenance and select Report an Issue. Include as much detail as possible and add photographs where useful.</p></div>
+<div><h3 class="font-medium">How do I track a repair?</h3><p class="mt-1 text-md leading-6 text-slate-500">Open the relevant maintenance request to see its current status, messages, appointments and progress.</p></div>
+</div>`
+},
+documents:{
+title:'Documents',
+content:`
+<div class="space-y-5">
+<div><h3 class="font-medium">How do I upload a document?</h3><p class="mt-1 text-md leading-6 text-slate-500">When your landlord requests an upload, select Upload from the relevant checklist item and choose your file.</p></div>
+<div><h3 class="font-medium">How do I accept a document?</h3><p class="mt-1 text-md leading-6 text-slate-500">Open the requested document, review it and select Read & Accept when you are ready.</p></div>
+</div>`
+},
+move:{
+title:'Move In / Move Out',
+content:`
+<div class="space-y-5">
+<div><h3 class="font-medium">Why can't I see the checklist?</h3><p class="mt-1 text-md leading-6 text-slate-500">Move In / Move Out is activated by your landlord. If it has not been activated yet, the checklist will not be available.</p></div>
+<div><h3 class="font-medium">Who completes the checklist?</h3><p class="mt-1 text-md leading-6 text-slate-500">You complete tenant actions such as confirmations, document acceptance and requested uploads. Some items, such as inspections or key handover, may be completed by the landlord.</p></div>
+</div>`
+},
+account:{
+title:'Account & Settings',
+content:`
+<div class="space-y-5">
+<div><h3 class="font-medium">How do I change my details?</h3><p class="mt-1 text-md leading-6 text-slate-500">Open Settings and update your personal and contact information.</p></div>
+<div><h3 class="font-medium">How do I change my password?</h3><p class="mt-1 text-md leading-6 text-slate-500">Open Settings, select Change Password and follow the instructions.</p></div>
+<div><h3 class="font-medium">How do I change notifications?</h3><p class="mt-1 text-md leading-6 text-slate-500">Notification preferences can be managed from Settings.</p></div>
+</div>`
+}
+};
+
+function openHelp(type){
+const item=helpContent[type];
+if(!item)return;
+
+document.getElementById('helpTitle').textContent=item.title;
+document.getElementById('helpContent').innerHTML=item.content;
+document.getElementById('helpModal').classList.remove('hidden');
+document.getElementById('helpModal').classList.add('flex');
+}
+
+function closeHelp(){
+document.getElementById('helpModal').classList.add('hidden');
+document.getElementById('helpModal').classList.remove('flex');
+}
+
+function searchHelp(){
+const query=document.getElementById('helpSearch').value.toLowerCase().trim();
+const cards=document.querySelectorAll('.help-card');
+let visible=0;
+
+cards.forEach(card=>{
+const matches=!query||card.dataset.help.includes(query);
+card.classList.toggle('hidden',!matches);
+if(matches)visible++;
+});
+
+document.getElementById('noResults').classList.toggle('hidden',visible>0);
+}
+
+document.getElementById('helpModal').addEventListener('click',e=>{
+if(e.target.id==='helpModal')closeHelp();
+});
+
+</script>
+</body>
+</html>

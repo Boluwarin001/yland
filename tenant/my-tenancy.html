@@ -1,0 +1,406 @@
+<!-- tenant/my-tenancy -->
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YourLandlordship — My Tenancy</title>
+<script src="tailwind.js"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+            <div id="page" class="mx-auto max-w-7xl mt-24 opacity-0">
+
+          <!-- Header -->
+          <div>
+            <p class="text-xs text-slate-400 mb-1">My Home</p>
+            <h1 class="text-xl font-semibold">My Tenancy</h1>
+            <p class="text-md text-slate-400 mt-1">View your current tenancy and property information.</p>
+          </div>
+
+          <!-- Property Header -->
+          <section class="mt-7 rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+            <div class="px-6 py-6 bg-[#FAF4DF]">
+              <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5">
+
+                <div class="flex items-start gap-4">
+                  <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center shrink-0">
+                    <svg class="w-6 h-6 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-width="1.5" d="M4 20V9l8-5 8 5v11H4Z"/>
+                      <path stroke-width="1.5" d="M9 20v-6h6v6"/>
+                    </svg>
+                  </div>
+
+                  <div>
+                    <h2 class="text-lg font-semibold">Springfield Family Home</h2>
+                    <p class="text-md text-slate-500 mt-1">100 Blackfriars Road, Salford</p>
+                  </div>
+                </div>
+
+                <span class="px-2.5 py-1 rounded-full bg-[#C3DF93] text-[#1D3639] text-xs font-medium w-fit">Active Tenancy</span>
+
+              </div>
+            </div>
+
+            <div class="p-6">
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+
+                <div>
+                  <p class="text-xs text-slate-400">Tenancy Type</p>
+                  <p class="text-md font-medium mt-1">Fixed Term</p>
+                </div>
+
+                <div>
+                  <p class="text-xs text-slate-400">Start Date</p>
+                  <p class="text-md font-medium mt-1">1 Oct 2026</p>
+                </div>
+
+                <div>
+                  <p class="text-xs text-slate-400">End Date</p>
+                  <p class="text-md font-medium mt-1">30 Sep 2027</p>
+                </div>
+
+                <div>
+                  <p class="text-xs text-slate-400">Monthly Rent</p>
+                  <p class="text-md font-medium mt-1">£950</p>
+                </div>
+
+              </div>
+
+            </div>
+          </section>
+
+          <!-- Main Grid -->
+          <section class="grid grid-cols-1 xl:grid-cols-3 gap-5 mt-5">
+
+            <div class="xl:col-span-2 space-y-5">
+
+              <!-- Tenancy Details -->
+              <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+                <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 class="text-md font-semibold">Tenancy Details</h2>
+                      <p class="text-xs text-slate-400 mt-1">Information about your current tenancy agreement.</p>
+                    </div>
+                    <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                    <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="4" y="4" width="16" height="16" rx="2" stroke-width="1.5"/>
+                        <path stroke-width="1.5" d="M8 8h8M8 12h8M8 16h5"/>
+                    </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-6">
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
+
+                    <div>
+                      <p class="text-xs text-slate-400">Tenancy Reference</p>
+                      <p class="text-md font-medium mt-1">TEN-2026-001</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Tenancy Status</p>
+                      <p class="text-md font-medium text-[#1D3639] mt-1">Active</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Start Date</p>
+                      <p class="text-md font-medium mt-1">1 October 2026</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">End Date</p>
+                      <p class="text-md font-medium mt-1">30 September 2027</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Monthly Rent</p>
+                      <p class="text-md font-medium mt-1">£950</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Payment Frequency</p>
+                      <p class="text-md font-medium mt-1">Monthly</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Deposit</p>
+                      <p class="text-md font-medium mt-1">£1,100</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Deposit Status</p>
+                      <p class="text-md font-medium text-[#1D3639] mt-1">Protected</p>
+                    </div>
+
+                  </div>
+
+                </div>
+              </section>
+
+              <!-- Property Details -->
+              <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+                <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 class="text-md font-semibold">Property Details</h2>
+                      <p class="text-xs text-slate-400 mt-1">Information about the property you are renting.</p>
+                    </div>
+
+                    <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                      <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-width="1.5" d="M4 20V9l8-5 8 5v11H4Z"/>
+                        <path stroke-width="1.5" d="M9 20v-6h6v6"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-6">
+
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-6">
+
+                    <div>
+                      <p class="text-xs text-slate-400">Property Name</p>
+                      <p class="text-md font-medium mt-1">Springfield Family Home</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Property Type</p>
+                      <p class="text-md font-medium mt-1">House</p>
+                    </div>
+
+                    <div class="sm:col-span-2">
+                      <p class="text-xs text-slate-400">Address</p>
+                      <p class="text-md font-medium mt-1">100 Blackfriars Road, Salford, Greater Manchester</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Bedrooms</p>
+                      <p class="text-md font-medium mt-1">3</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Bathrooms</p>
+                      <p class="text-md font-medium mt-1">2</p>
+                    </div>
+
+                  </div>
+
+                </div>
+              </section>
+
+              <!-- Tenancy Agreement -->
+              <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+                <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 class="text-md font-semibold">Tenancy Agreement</h2>
+                      <p class="text-xs text-slate-400 mt-1">Your current tenancy agreement.</p>
+                    </div>
+
+                    <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                      <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l4 4v14H7V3Zm7 1v4h4"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-6">
+
+                  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 p-4 rounded-xl bg-slate-100">
+
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center shrink-0">
+                        <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l4 4v14H7V3Zm7 1v4h4"/>
+                        </svg>
+                      </div>
+
+                      <div>
+                        <p class="text-md font-medium">Tenancy Agreement</p>
+                        <p class="text-xs text-slate-400 mt-1">Uploaded 28 September 2026 · Version 1</p>
+                      </div>
+                    </div>
+
+                    <a href="documents.html" class="h-9 px-4 rounded-lg border border-[#1D3639] text-[#1D3639] text-md font-medium hover:bg-[#1D3639] hover:text-white transition flex items-center justify-center">
+                      View Document
+                    </a>
+
+                  </div>
+
+                </div>
+              </section>
+
+            </div>
+
+            <!-- Right -->
+            <div class="space-y-5">
+
+              <!-- Landlord -->
+              <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+                <div class="px-6 py-5 border-b border-slate-100 bg-[#C3DF93]/15">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 class="text-md font-semibold">Landlord</h2>
+                      <p class="text-xs text-slate-400 mt-1">Your landlord for this property.</p>
+                    </div>
+
+                    <div class="w-10 h-10 rounded-xl bg-[#C3DF93] flex items-center justify-center">
+                      <svg class="w-5 h-5 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="3.5" stroke-width="1.5"/>
+                        <path stroke-width="1.5" stroke-linecap="round" d="M4.5 20a7.5 7.5 0 0 1 15 0"/>
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-6">
+
+                  <p class="text-lg font-semibold">James Anderson</p>
+                  <p class="text-md text-slate-400 mt-1">Property Owner</p>
+
+                  <div class="mt-5 space-y-4">
+
+                    <div>
+                      <p class="text-xs text-slate-400">Email</p>
+                      <p class="text-md font-medium mt-1">james.anderson@email.com</p>
+                    </div>
+
+                    <div>
+                      <p class="text-xs text-slate-400">Phone</p>
+                      <p class="text-md font-medium mt-1">07123 456 789</p>
+                    </div>
+
+                  </div>
+
+                  <a href="messages.html" class="mt-6 h-10 w-full rounded-xl bg-[#1D3639] text-white text-md font-medium hover:bg-[#15292c] transition flex items-center justify-center">
+                    Message Landlord
+                  </a>
+
+                </div>
+              </section>
+
+              <!-- Rent Summary -->
+              <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+                <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+                  <div class="flex items-start justify-between gap-4">
+                    <div>
+                      <h2 class="text-md font-semibold">Rent Summary</h2>
+                      <p class="text-xs text-slate-400 mt-1">Your current rent information.</p>
+                    </div>
+
+                    <div class="w-10 h-10 rounded-xl bg-[#FAF4DF] flex items-center justify-center">
+                      <span class="text-md font-medium text-[#1D3639]">£</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="p-6">
+
+                  <div>
+                    <p class="text-xs text-slate-400">Monthly Rent</p>
+                    <p class="text-2xl font-semibold mt-1">£950</p>
+                  </div>
+
+                  <div class="mt-6 pt-5 border-t border-slate-100 space-y-4">
+
+                    <div class="flex justify-between gap-4">
+                      <span class="text-md text-slate-500">Payment Frequency</span>
+                      <span class="text-md font-medium">Monthly</span>
+                    </div>
+
+                    <div class="flex justify-between gap-4">
+                      <span class="text-md text-slate-500">Next Payment</span>
+                      <span class="text-md font-medium">1 Oct 2026</span>
+                    </div>
+
+                    <div class="flex justify-between gap-4">
+                      <span class="text-md text-slate-500">Status</span>
+                      <span class="px-2.5 py-1 rounded-full bg-[#C3DF93] text-[#1D3639] text-xs font-medium">Up to date</span>
+                    </div>
+
+                  </div>
+
+                  <a href="payments.html" class="mt-6 h-10 w-full rounded-xl border border-[#1D3639] text-[#1D3639] text-md font-medium hover:bg-[#1D3639] hover:text-white transition flex items-center justify-center">
+                    View Payment History
+                  </a>
+
+                </div>
+              </section>
+
+              <!-- Important Dates -->
+              <section class="rounded-2xl border border-slate-200 bg-white overflow-hidden">
+
+                <div class="px-6 py-5 border-b border-slate-100 bg-[#FAF4DF]/60">
+                  <h2 class="text-md font-semibold">Important Dates</h2>
+                  <p class="text-xs text-slate-400 mt-1">Key dates for your tenancy.</p>
+                </div>
+
+                <div class="p-6 space-y-5">
+
+                  <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                      <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="4" y="5" width="16" height="15" rx="2" stroke-width="1.5"/>
+                        <path stroke-width="1.5" d="M8 3v4M16 3v4M4 10h16"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-xs text-slate-400">Tenancy Started</p>
+                      <p class="text-md font-medium mt-1">1 October 2026</p>
+                    </div>
+                  </div>
+
+                  <div class="flex items-start gap-3">
+                    <div class="w-9 h-9 rounded-lg bg-[#FAF4DF] flex items-center justify-center shrink-0">
+                      <svg class="w-4 h-4 text-[#1D3639]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <rect x="4" y="5" width="16" height="15" rx="2" stroke-width="1.5"/>
+                        <path stroke-width="1.5" d="M8 3v4M16 3v4M4 10h16"/>
+                      </svg>
+                    </div>
+                    <div>
+                      <p class="text-xs text-slate-400">Tenancy Ends</p>
+                      <p class="text-md font-medium mt-1">30 September 2027</p>
+                    </div>
+                  </div>
+
+                </div>
+              </section>
+
+            </div>
+
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+<script src="app.js"></script>
+
+</body>
+</html>

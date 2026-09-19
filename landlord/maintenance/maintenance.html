@@ -1,0 +1,145 @@
+<!-- /landlord/maintenance/maintenance.html -->
+ <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Maintenance</title>
+  <script src="../tailwind.js"></script>
+</head>
+
+<body class="bg-white text-slate-900 antialiased">
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto opacity-0 scale-[0.96] transition-all duration-200 ease-out" id="page">
+      <div class="max-w-[1200px] mx-auto px-5 lg:px-6 pt-6 pb-10">
+
+        <div class="flex justify-between items-center mb-7">
+          <h1 class="text-md font-semibold">Maintenance</h1>
+          <button class="px-3 py-2 rounded-lg bg-slate-900 text-white text-md whitespace-nowrap">+ Create New Request</button>
+        </div>
+
+        <div class="flex items-center gap-2 mb-7 overflow-x-auto">
+          <button data-filter="all" class="filter-btn px-3 py-2 rounded-lg bg-slate-900 text-white text-md whitespace-nowrap">All</button>
+          <button data-filter="yet-to-start" class="filter-btn px-3 py-2 rounded-lg bg-slate-50 text-slate-500 text-md whitespace-nowrap">Yet to Start <span class="text-slate-400">12</span></button>
+          <button data-filter="in-progress" class="filter-btn px-3 py-2 rounded-lg bg-slate-50 text-slate-500 text-md whitespace-nowrap">In Progress <span class="text-slate-400">17</span></button>
+          <button data-filter="completed" class="filter-btn px-3 py-2 rounded-lg bg-slate-50 text-slate-500 text-md whitespace-nowrap">Completed <span class="text-slate-400">8</span></button>
+        </div>
+
+        <div id="requestBoard" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+
+          <section data-column="yet-to-start">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-md font-semibold">Yet to Start <span class="text-slate-400">12</span></h2>
+            </div>
+            <div class="h-1 rounded-full bg-yellow-300 mb-4"></div>
+            <div id="yetToStartList" class="space-y-3"></div>
+          </section>
+
+          <section data-column="in-progress">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-md font-semibold">In Progress <span class="text-slate-400">17</span></h2>
+            </div>
+            <div class="h-1 rounded-full bg-blue-300 mb-4"></div>
+            <div id="inProgressList" class="space-y-3"></div>
+          </section>
+
+          <section data-column="completed">
+            <div class="flex items-center justify-between mb-3">
+              <h2 class="text-md font-semibold">Completed <span class="text-slate-400">8</span></h2>
+            </div>
+            <div class="h-1 rounded-full bg-green-400 mb-4"></div>
+            <div id="completedList" class="space-y-3"></div>
+          </section>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+<script src="../app.js"></script>
+<script>
+const requests = [
+  {id:"MR-1042",status:"yet-to-start",property:"4B Villareal, Flat 15",title:"Leaking kitchen sink",description:"Water is leaking from the kitchen sink and pooling underneath the cabinet.",tenant:"Sarah Johnson",priority:"High",date:"Sep 9, 2026",agent:null},
+  {id:"MR-1041",status:"yet-to-start",property:"4B Villareal, Flat 15",title:"Ceiling crack",description:"A visible crack has appeared across the bedroom ceiling.",tenant:"Michael Smith",priority:"High",date:"Sep 8, 2026",agent:null},
+  {id:"MR-1039",status:"yet-to-start",property:"12 Larry Street",title:"Broken bathroom tap",description:"The bathroom tap is leaking continuously.",tenant:"David Williams",priority:"Low",date:"Sep 7, 2026",agent:null},
+  {id:"MR-1037",status:"in-progress",property:"4B Villareal, Flat 15",title:"Boiler inspection",description:"The boiler is making unusual noises and needs to be inspected.",tenant:"Sarah Johnson",priority:"High",date:"Sep 6, 2026",agent:"ByeWind"},
+  {id:"MR-1035",status:"in-progress",property:"17 Bagwell Avenue",title:"Bedroom radiator",description:"Radiator is not heating properly.",tenant:"James Brown",priority:"Low",date:"Sep 5, 2026",agent:"Drew Cano"},
+  {id:"MR-1032",status:"in-progress",property:"8 Morrison Road",title:"Front door lock",description:"The front door lock is becoming difficult to operate.",tenant:"Emily Davis",priority:"Medium",date:"Sep 3, 2026",agent:"Kate Morrison"},
+  {id:"MR-1028",status:"completed",property:"4B Villareal, Flat 15",title:"Ceiling crack",description:"Bedroom ceiling crack repaired and inspected.",tenant:"Michael Smith",priority:"High",date:"Aug 28, 2026",agent:"ByeWind"},
+  {id:"MR-1024",status:"completed",property:"12 Larry Street",title:"Bathroom tap",description:"Bathroom tap replaced successfully.",tenant:"David Williams",priority:"Low",date:"Aug 24, 2026",agent:"Kate Morrison"},
+  {id:"MR-1020",status:"completed",property:"5 Meadow Lane",title:"Light switches",description:"Faulty light switches replaced.",tenant:"Rachel Wilson",priority:"Low",date:"Aug 20, 2026",agent:"Orlando Diggs"}
+];
+
+const listIds = {
+  'yet-to-start': 'yetToStartList',
+  'in-progress': 'inProgressList',
+  'completed': 'completedList'
+};
+
+function card(r) {
+  const dot = r.status === 'yet-to-start' ? 'bg-yellow-300'
+    : r.status === 'in-progress' ? 'bg-blue-400'
+    : 'bg-green-400';
+
+  const priority = r.priority === 'High' ? 'text-red-500'
+    : r.priority === 'Medium' ? 'text-yellow-600'
+    : 'text-slate-400';
+
+  const initials = r.tenant.split(' ').map(x => x[0]).join('').slice(0, 2);
+
+  return `<button type="button" data-id="${r.id}" class="request-card w-full text-left bg-slate-50 rounded-xl p-4 hover:bg-slate-100 transition">
+    <div class="flex justify-between gap-3">
+      <span class="text-md text-slate-400 truncate">${r.property}</span>
+      <span class="w-2 h-2 rounded-full ${dot} mt-1.5 shrink-0"></span>
+    </div>
+    <p class="text-md font-semibold mt-2.5">${r.title}</p>
+    <p class="text-md text-slate-400 mt-1 line-clamp-2">${r.description}</p>
+    <div class="flex justify-between items-center mt-4">
+      <div class="flex items-center gap-2 min-w-0">
+        <span class="w-6 h-6 rounded-full bg-slate-200 flex items-center justify-center text-[10px] font-semibold">${initials}</span>
+        <span class="text-md text-slate-500 truncate">${r.tenant}</span>
+      </div>
+      <span class="text-md ${priority}">${r.priority}</span>
+    </div>
+  </button>`;
+}
+
+function render() {
+  Object.entries(listIds).forEach(([status, id]) => {
+    document.getElementById(id).innerHTML = requests.filter(r => r.status === status).map(card).join('');
+  });
+
+  document.querySelectorAll('.request-card').forEach(c => {
+    c.onclick = () => location.href = `maintenance-item.html?id=${c.dataset.id}`;
+  });
+}
+
+render();
+
+const filterIdle = 'filter-btn px-3 py-2 rounded-lg bg-slate-50 text-slate-500 text-md whitespace-nowrap';
+const filterActive = 'filter-btn px-3 py-2 rounded-lg bg-slate-900 text-white text-md whitespace-nowrap';
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.filter-btn').forEach(x => x.className = filterIdle);
+    btn.className = filterActive;
+
+    document.querySelectorAll('#requestBoard section').forEach(section => {
+      section.classList.toggle(
+        'hidden',
+        btn.dataset.filter !== 'all' && section.dataset.column !== btn.dataset.filter
+      );
+    });
+  };
+});
+</script>
+</body>
+</html>

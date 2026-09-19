@@ -1,0 +1,415 @@
+The following is a consolidated, structured directory of all the views required
+for your landlord and tenancy management platform. This list combines the
+initial structure, onboarding workflows, lifecycle steps, and operational views
+into a single reference document for your UI/UX design phase.
+
+Part 1: Public & Authentication Views
+
+These pages are accessible to non-logged-in users, prospective tenants, or users
+navigating registration and entry.
+
+1.1 Marketing & Public Portals
+
+  - 1.1.1 Landing Page (/)
+      - Target Audience: All visitors (Landlords, Tenants, Agents).
+      - Purpose: Introduce the platform, values, pricing, and convert visitors
+        to registered users.
+      - Key UI Components: Navigation bar (with Login/Register CTAs), hero
+        section, feature breakdown tabs (role-specific benefits), pricing tier
+        comparison grid, testimonial slider, FAQ accordion, footer with policy
+        links.
+      - Primary Actions: "Get Started" (leads to signup), "Login", "Contact
+        Sales".
+  - 1.1.2 Landlord Showcase Page (/public/landlords/[landlord-showcase-id])
+      - Target Audience: Public searchers, prospective tenants.
+      - Purpose: Display all available properties under a single landlord or
+        agency portfolio.
+      - Key UI Components: Landlord profile card (name/logo, short bio),
+        property search bar, filter controls (by rent price, number of
+        bedrooms/bathrooms, property type, pet allowance), responsive grid of
+        listing cards.
+      - Primary Actions: Click on listing card, contact landlord/agent form.
+  - 1.1.3 Property Detail Page
+    (/public/landlords/[landlord-showcase-id]/[property_id])
+      - Target Audience: Prospective tenants.
+      - Purpose: Showcase images, features, compliance, and terms of a specific
+        listing.
+      - Key UI Components: Photo/video carousel, listing status badge
+        (Available, Pending), core metrics bar (rent price, deposit amount, date
+        available), rich-text description area, features/amenities icon
+        checklist, map location indicator (approximate area for security),
+        compliance summary (EPC rating, safety certificates validated).
+      - Primary Actions: "Book a Viewing" button, "Apply Now" button, "Share
+        Listing" utility.
+  - 1.1.4 Viewing Booking Page (/public/viewings/book/[property_id])
+      - Target Audience: Prospective tenants.
+      - Purpose: Schedule a physical or virtual walkthrough.
+      - Key UI Components: Dynamic calendar showing host-allocated availability
+        slots, host details panel, registration form (Name, Email, Phone,
+        preferred viewing type [In-person/Video call]).
+      - Primary Actions: "Confirm Appointment", "Cancel/Back".
+
+1.2 Tenancy Application & Screening
+
+  - 1.2.1 Application Form
+    (/public/landlords/[landlord-showcase-id]/[property_id]/apply)
+      - Target Audience: Applicants.
+      - Purpose: Initiate the formal lease application.
+      - Key UI Components: Multi-step progress indicator, basic details section,
+        employment/income details, references (past landlord, current employer),
+        identification upload utility, data privacy consent checkbox.
+      - Primary Actions: "Next Step", "Save and Continue Later", "Submit
+        Application".
+  - 1.2.2 Tenant Referencing Pack Submission
+    (/dashboard/tenant/referencing/submit)
+      - Target Audience: Applied tenants requested to undergo background checks.
+      - Purpose: Collect secure financial and identification records.
+      - Key UI Components: Secure document upload dropzones (3 months of
+        payslips, bank statements, government-issued photo ID), credit check
+        authorization signature field.
+      - Primary Actions: "Submit Verification Pack".
+
+1.3 Authentication & Setup
+
+  - 1.3.1 Login Page (/auth/login)
+      - Target Audience: Registered users.
+      - Purpose: Secure access to dashboard.
+      - Key UI Components: Email and password input fields, password visibility
+        toggle, "Remember Me" checkbox, "Forgot Password?" hyperlink, OAuth
+        buttons (Login with Google, etc.).
+      - Primary Actions: "Sign In", "Create an Account" link.
+  - 1.3.2 Signup Page (/auth/signup)
+      - Target Audience: New users.
+      - Purpose: Register account on the platform.
+      - Key UI Components: Role selector tabs/radio cards (Landlord, Tenant,
+        Agent), email and password input fields, password strength validator,
+        Terms of Service check-box.
+      - Primary Actions: "Register Account", "Log In instead" link.
+  - 1.3.3 Forgot Password Page (/auth/forgot-password)
+      - Target Audience: Registered users who lost credentials.
+      - Purpose: Initiate password recovery workflow.
+      - Key UI Components: Email address input field, recaptcha widget.
+      - Primary Actions: "Send Recovery Instructions", "Return to Login".
+  - 1.3.4 Reset Password Page (/auth/reset-password)
+      - Target Audience: Users coming from a recovery email link.
+      - Purpose: Set new secure password.
+      - Key UI Components: New password input, confirm password input, criteria
+        validation checklist.
+      - Primary Actions: "Update Password".
+  - 1.3.5 Onboarding Wizard (/auth/onboarding)
+      - Target Audience: Post-registration users.
+      - Purpose: Collect essential role setup data.
+      - Key UI Components: Dynamic steps based on role:
+          - Landlord: Bank details for automated payouts (Stripe Connect
+            integration), company name or individual tax status setup.
+          - Tenant: Invite/pairing code input (if invited directly by their
+            landlord).
+          - Agent: Company logo, license registration numbers, geographic
+            coverage list.
+      - Primary Actions: "Complete Setup", "Skip for Now".
+
+Part 2: Landlord Dashboard Views
+
+These views allow landlords to manage listings, inspect compliance, coordinate
+leases, run analytics, and manage personnel.
+
+2.1 Core Management Pages
+
+  - 2.1.1 Overview Dashboard (/dashboard/landlord/overview)
+      - Purpose: Multi-metric central status screen.
+      - Key UI Components:
+          - Sidebar: Navigation links to all primary sections.
+          - Middle: Financial performance charts (income vs. expense), occupancy
+            health gauges, open maintenance priority charts.
+          - Right: Actionable feed (critical notifications, upcoming
+            inspections, expired compliance certificates, unpaid rent warnings).
+  - 2.1.2 Properties List Overview (/dashboard/landlord/properties) - done
+      - Purpose: View and manage all properties owned.
+      - Key UI Components: Metric cards (Total Assets, Occupancy Rate %, Monthly
+        Revenue, Pending Compliance), portfolio showcase link display with quick
+        "Copy" button, search bar, status filters, property table (Property
+        Name, Location, Property Type, Units/Rooms count, Listing Status,
+        Occupancy Status, Monthly Rent, Action dropdown).
+      - Primary Actions: "Add New Property", "Export Spreadsheet".
+  - 2.1.3 Add New Property Wizard (/dashboard/landlord/properties/new) - done
+      - Purpose: Create a property listing and populate inventory details.
+      - Key UI Components: Multi-step form tabs:
+          - Step 1 (Basic Details): Property name, construction year, renovation
+            year, type (Apartment, Studio, Detached, Semi-detached).
+          - Step 2 (Location): Country dropdown (default UK), address line 1,
+            city, state/region, postcode.
+          - Step 3 (Specifications): Bedrooms, bathrooms, parking bays, square
+            footage, standard rental value, listing description.
+          - Step 4 (Compliance & Files): Checklist for compliance documents,
+            individual file upload targets (Gas Safety Certificate, Electricity
+            Certificate, EPC, AST, EICR, Gas Boiler documentation).
+      - Primary Actions: "Cancel", "Previous Step", "Next Step", "Save and
+        Publish".
+
+2.2 Property-Specific Sub-Views (Property Detail Page)
+
+Accessed at /dashboard/landlord/properties/[property_id]/. Includes tabs to view
+and manage specific properties.
+
+  - 2.2.1 Property Overview Tab (.../overview) done
+      - Purpose: Quick individual property diagnostics.
+      - Key UI Components: Status badges (Active Lease, Vacant, Maintenance
+        Hold), current active tenant card, monthly financial tracker widget,
+        active tickets alert card, compliance checklist dashboard.
+  - 2.2.2 Property Applications Tab (.../applications) -done
+      - Purpose: Manage prospective applicants for this property.
+      - Key UI Components: Direct application link generator, quick statistics
+        (Total Applications, Reviewing, Accepted, Rejected), applicant table
+        (Applicant name, Contact, Submission date, Employment, Status tag, View
+        Application action button).
+  - 2.2.3 Application Detail Evaluation (.../applications/[application_id]) - done
+      - Purpose: Evaluate a single tenant application in detail.
+      - Key UI Components: Personal statement text block, income-to-rent ratio
+        calculator, screening details block, employer and landlord references
+        block, ID proof document viewer, chat integration link.
+      - Primary Actions: "Approve Application", "Reject Application", "Request
+        Reference Check".
+  - 2.2.4 Property Info / Edit Tab (.../property_info) - done
+      - Purpose: Modify physical assets and descriptions of the property.
+      - Key UI Components: Editable inputs for all metrics collected during the
+        creation wizard, media upload grid for property photos.
+      - Primary Actions: "Save Changes", "Unpublish Listing".
+  - 2.2.5 Tenant Information Tab (.../tenant_information) 
+      - Purpose: Record active leaseholder status.
+      - Key UI Components: Primary tenant profile card, emergency contacts
+        block, lease start/end milestones, security deposit tracking (deposit
+        scheme validation number), rent cycle parameters.
+      - Primary Actions: "Message Tenant", "Log Violation", "Terminate Lease".
+  - 2.2.6 Documents Tab (.../documents)
+      - Purpose: compliance and contract vault for the specific property.
+      - Key UI Components: Document categories grid: Legal (Lease, Deeds,
+        Insurance policy), Compliance (Gas safety, EPC rating, Electrical safety
+        certificates), file list with expiry dates and alert tags.
+      - Primary Actions: "Add Certificate", "Download Selected", "Share Folder".
+  - 2.2.7 Rent History Tab (.../rent_history) - clicking on each one should show rent history details
+      - Purpose: Financial ledger for the chosen property.
+      - Key UI Components: Metric summaries (Annual Income, Outstanding Balance,
+        Payment Punctuality Grade), payment history table (Payment Date,
+        Expected, Received, Status [On-Time, Late, Pending, Failed], Payment
+        Method, Bank Transaction Reference).
+      - Primary Actions: "Log Payment Manually", "Export Ledger".
+  - 2.2.8 Maintenance History Tab (.../maintenance_history)
+      - Purpose: View previous and existing tickets for this asset.
+      - Key UI Components: Filter toggles (Open, In Progress, Resolved), history
+        list (Ticket ID, Title, Priority, Cost, Date Closed, Assigned
+        Contractor, Contractor Rating).
+  - 2.2.9 Units / Rooms Configuration Tab (.../units)
+      - Purpose: Sub-divide properties for HMO (Houses in Multiple Occupation)
+        layout options.
+      - Key UI Components: Individual unit/room card grid containing unit
+        name/number, occupancy indicator, en-suite checkbox, assigned tenant
+        profile avatar, and monthly rent price tag.
+      - Primary Actions: "Add New Unit", "Configure Room Layout".
+
+2.3 Lease Creation & Sign-off (Landlord Flow)
+
+  - 2.3.1 Contract Builder
+    (/dashboard/landlord/properties/[property_id]/lease/create)
+      - Purpose: Generate the legal AST (Assured Shorthold Tenancy).
+      - Key UI Components: Contract source selector (Upload Custom PDF or Draft
+        with System Builder), term and clauses text blocks, fields for rent
+        payment schedules, special conditions.
+      - Primary Actions: "Generate Agreement", "Send to Tenant for E-Sign".
+  - 2.3.2 Co-Sign Page
+    (/dashboard/landlord/properties/[property_id]/lease/[lease_id]/sign)
+      - Purpose: Complete execution of the contract.
+      - Key UI Components: PDF viewer showing tenant's signature block and
+        metadata, landlord sign box, date/place validation inputs.
+      - Primary Actions: "Countersign Contract", "Return with Annotations".
+
+2.4 Operations & Logistics
+
+  - 2.4.1 Maintenance Tickets Hub (/dashboard/landlord/maintenance)
+      - Purpose: Global operations management desk.
+      - Key UI Components: Priority status blocks (Critical, Medium, Low), board
+        filter tools, table of work orders (Tenant, Assigned Property,
+        Description, Urgency, Service Category, Status badge).
+  - 2.4.2 Maintenance Action Panel
+    (/dashboard/landlord/maintenance/[maintenance_id])
+      - Purpose: Direct resolution control interface.
+      - Key UI Components: Issue description with expandable image gallery
+        attachment, tenant availability notes, scheduling coordinator widget,
+        agent/contractor selector dropdown, job billing estimator tracker,
+        internal chat sidebar (comprising landlord, tenant, and contractor).
+      - Primary Actions: "Accept Ticket", "Reject Ticket", "Assign Contractor",
+        "Approve Contractor Quote", "Mark Ticket Completed".
+  - 2.4.3 People - Agents Directory (/dashboard/landlord/people/agents)
+      - Purpose: Co-manager delegation hub.
+      - Key UI Components: Agent portfolio metrics, active management
+        assignments table (Agent name, Verified badge, Properties managed,
+        Active tasks, Performance score).
+      - Primary Actions: "Invite New Agent", "Adjust Permissions", "Remove
+        Agent".
+  - 2.4.4 People - Tenants Directory (/dashboard/landlord/people/tenants)
+      - Purpose: System-wide contact listing of all current and past
+        leaseholders.
+      - Key UI Components: Search bar, filtering by property, tenants directory
+        grid indicating emergency status, active lease links, outstanding
+        balance values.
+  - 2.4.5 Income & Expense Logger (/dashboard/landlord/expenses/new)
+      - Purpose: Manual data input for cash flow tracking.
+      - Key UI Components: Date picker, amount input, expense categorization
+        selector, property/room assignment dropdown, proof-of-payment image file
+        uploader.
+      - Primary Actions: "Save Entry", "Delete Entry".
+  - 2.4.6 Financial Performance & Tax Hub (/dashboard/landlord/reports)
+      - Purpose: Tax preparation and portfolio yields analytics.
+      - Key UI Components: Interactive graphs (Total Cash Flow, Deductible
+        Expenses, Projected Tax Liabilities), property margin ranking list, tax
+        document builder settings panel.
+      - Primary Actions: "Export P&L Statement", "Generate Tax Return Helper
+        Spreadsheet".
+  - 2.4.7 Global Documents Vault (/dashboard/landlord/documents)
+      - Purpose: Central directory for all documents across the platform.
+      - Key UI Components: Global folders, expiry date warning timeline tracker,
+        file type filters.
+
+Part 3: Tenant Dashboard Views
+
+A workspace focused on billing transparency, contract compliance, and reporting
+maintenance.
+
+  - 3.1 Tenant Dashboard Overview (/dashboard/tenant/overview)
+      - Purpose: Quick navigation portal for active tenants.
+      - Key UI Components: Next rent payment invoice status card with immediate
+        "Pay Now" CTA, quick action menu (Report Maintenance, Message Landlord,
+        Download Lease), notifications list, lease duration timeline tracking
+        bar.
+  - 3.2 Maintenance Log (/dashboard/tenant/maintenance)
+      - Purpose: Tenant's repair records tracker.
+      - Key UI Components: Grid layout of submitted tickets split into Open,
+        Scheduled, and Past; brief progress updates alongside contractor
+        details.
+      - Primary Actions: "Submit New Repair Request".
+  - 3.3 New Maintenance Request Form (/dashboard/tenant/maintenance/add)
+      - Purpose: Issue submission form.
+      - Key UI Components: Ticket title, issue category selector, priority level
+        tags, detailed description area, camera capture/video-upload zone for
+        issues, landlord access permission instructions (e.g. key-box info, pets
+        on site).
+      - Primary Actions: "Cancel", "Submit Request".
+  - 3.4 Maintenance Tracking & Chat
+    (/dashboard/tenant/maintenance/[maintenance_id])
+      - Purpose: Live diagnostic status tracker.
+      - Key UI Components: Visual workflow progression bar (Logged -> Approved
+        -> Scheduled -> In-progress -> Completed), contractor details (name,
+        photo, business name, scheduled visit window), direct messaging chat
+        panel.
+      - Primary Actions: "Reschedule Visit", "Confirm Work Complete", "Message
+        Landlord/Contractor".
+  - 3.5 Rent Payment Center (/dashboard/tenant/rent)
+      - Purpose: Lease payments control center.
+      - Key UI Components: Rent balance dashboard, Bank account connection
+        details (GoCardless/Direct Debit), dynamic auto-pay toggle settings,
+        historical payments list with transaction receipt download icons.
+      - Primary Actions: "Set Up Auto-Pay", "Pay Current Invoice Manually".
+  - 3.6 Payment Confirmation Detail (/dashboard/tenant/rent/[rent_id])
+      - Purpose: Access receipt records.
+      - Key UI Components: Invoice breakdown (Base Rent, Parking, Sub-totals),
+        payment provider transaction proof, payment timestamp, landlord details.
+      - Primary Actions: "Download PDF Receipt", "Print Statement".
+  - 3.7 E-Signing Tenant Portal (/dashboard/tenant/onboarding/lease/[lease_id])
+      - Purpose: Tenant review and execution of the lease contract.
+      - Key UI Components: Interactive agreement viewer with zoom functions,
+        highlighted mandatory text zones for signature insertion, date input,
+        e-signature validation pad.
+      - Primary Actions: "Submit Signed Contract", "Request Alteration (add
+        comments)".
+  - 3.8 Move-In Inventory Verification
+    (/dashboard/tenant/onboarding/inventory/[inventory_id])
+      - Purpose: Tenant walkthrough verify tool for check-in state.
+      - Key UI Components: Room-by-room inventory verification view, comparative
+        view of landlord rating vs. tenant evaluation, file attachment field to
+        upload opposing state evidence.
+      - Primary Actions: "Approve Inventory Statement", "Submit Discrepancy
+        Record".
+  - 3.9 Welcome Pack & Utilities Guide (/dashboard/tenant/welcome)
+      - Purpose: Information on how to use the property.
+      - Key UI Components: Emergency contact profiles, appliance user manuals
+        download links, location notes for property utility hubs (stopcock, fuse
+        box, water meters), waste collection calendar tracker.
+  - 3.10 Tenant Document Center (/dashboard/tenant/documents)
+      - Purpose: Personal documents storage.
+      - Key UI Components: Folders for Signed Lease Contracts, Safety
+        Certificates copies, Rent Receipts, ID Upload histories.
+  - 3.11 Building Noticeboard (/dashboard/tenant/building-notices)
+      - Purpose: View building-wide announcements.
+      - Key UI Components: Announcement list (e.g., utility shutdowns, fire
+        alarm tests), building rules list.
+
+Part 4: Agent Dashboard Views
+
+Views dedicated to agents delegated to coordinate properties on behalf of
+landlords.
+
+  - 4.1 Agent Dashboard Overview (/dashboard/agent/overview)
+      - Purpose: Multi-landlord task management console.
+      - Key UI Components: KPI cards showing Active Portfolios Managed, Open
+        Viewing Requests, Overdue Rents, Pending Maintenance; priority list of
+        urgent operations requiring intervention.
+  - 4.2 Assigned Properties List (/dashboard/agent/properties)
+      - Purpose: Portfolio control dashboard.
+      - Key UI Components: Filter toggles grouped by landlord, status trackers
+        for each asset, rent tracking dashboard.
+  - 4.3 Assigned Maintenance Kanban (/dashboard/agent/maintenance)
+      - Purpose: Resolve property tasks on behalf of the owner.
+      - Key UI Components: Kanban boards (New Tickets, Awaiting Landlord
+        Approval, Scheduled, Completed), instant contractor messaging shortcuts.
+  - 4.4 Assigned Tenants Directory (/dashboard/agent/people/tenants)
+      - Purpose: Contact registry of tenants within the agent's assigned
+        portfolio.
+      - Key UI Components: Detailed profile tabs with direct connection tools
+        (e.g. Chat, Email, Phone), lease compliance histories, late-payment
+        records.
+
+Part 5: Contractor / Third-Party Views
+
+Simplified views for external trade contacts to interact with maintenance
+tickets without requiring access to the core landlord portal.
+
+  - 5.1 Contractor Work Order Page
+    (/public/contractor/work-order/[work_order_id])
+      - Purpose: External portal for contractors to review, accept, and invoice
+        a maintenance ticket.
+      - Key UI Components: Property address details (with tenant phone number
+        for access), descriptions and photo attachments, quote input box, file
+        attachment zone for invoicing and after-repair photos.
+      - Primary Actions: "Accept Work Order", "Upload Invoice", "Mark Job
+        Complete".
+
+Part 6: Shared System-Wide Views
+
+These structural dashboards are used across roles, dynamically adapting to the
+permissions of the logged-in user.
+
+  - 6.1 Shared Operations Calendar (/dashboard/[role]/calendar)
+      - Purpose: Operational timeline for property activities.
+      - Key UI Components: Dynamic calendar view (Day, Week, Month, Agenda),
+        interactive indicators (Rent Due, Viewings scheduled, Gas safety
+        expiration dates, Inspection schedules).
+  - 6.2 Messaging Hub / Inbox (/dashboard/[role]/chat)
+      - Purpose: Real-time, centralized platform communications.
+      - Key UI Components: Active chat threads sidebar (Landlord-Tenant,
+        Landlord-Agent, Landlord-Contractor), main chat window, file upload clip
+        attachment button, historical message search tool.
+  - 6.3 In-App Notification Center (/dashboard/[role]/notifications)
+      - Purpose: Central logs for all transactional updates.
+      - Key UI Components: Categories tabs (Urgent, Billing, System,
+        Maintenance), clean-all option, unread filters.
+  - 6.4 User Settings Portal (/dashboard/[role]/settings)
+      - Purpose: Manage preferences and profiles.
+      - Sub-tabs:
+          - Personal Profile: Profile image, name, contact options, change
+            password forms.
+          - Notification Controls: Toggle inputs for Email, SMS, Push
+            notification preferences across categories.
+          - Billing & Subscriptions (Landlord): Current SaaS subscription model
+            details, linked cards input grid, past system billing invoices.
+          - Payment Integration (Landlord): Payout setups (Stripe Connect).
+
+

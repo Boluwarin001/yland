@@ -1,0 +1,516 @@
+<!-- /properties/property-documents.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Property Documents</title>
+  <script src="../tailwind.js"></script>
+
+<style>
+  .modal-overlay { opacity: 0; transition: opacity 180ms ease; }
+  .modal-overlay.is-open { opacity: 1; }
+  .modal-panel { opacity: 0; transform: translateY(8px) scale(.985); transition: opacity 180ms ease, transform 180ms ease; }
+  .modal-panel.is-open { opacity: 1; transform: translateY(0) scale(1); }
+</style>
+
+</head>
+
+<body data-active-tab="documents" class="bg-slate-50 text-slate-900 antialiased">
+
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+
+    <main class="flex-1 overflow-auto">
+      <div class="px-7 lg:px-8 pt-8 pb-12">
+
+        <div id="propertyHeaderMount"></div>
+
+        <div class="opacity-0" id="page">
+
+          <div class="flex flex-col lg:flex-row gap-4 mb-6 mt-8">
+            <div class="relative flex-1">
+              <svg class="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="m21 21-4.3-4.3m2.3-5.2a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"/></svg>
+              <input id="documentSearch" type="search" placeholder="Search documents..." class="w-full h-11 pl-10 pr-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-slate-400">
+            </div>
+            <select id="categoryFilter" class="h-11 px-4 rounded-xl border border-slate-200 bg-white text-md outline-none focus:border-slate-400 lg:w-52">
+              <option value="all">All categories</option>
+              <option value="Legal">Legal</option>
+              <option value="Compliance">Compliance</option>
+              <option value="Move In Documents">Move In Documents</option>
+              <option value="Move Out Documents">Move Out Documents</option>
+              <option value="Info">Info</option>
+              <option value="Others">Others</option>
+            </select>
+            
+            <button id="uploadDocumentBtn" type="button" class="h-10 px-4 rounded-xl bg-slate-900 text-white text-md font-medium hover:bg-slate-800">+ Upload Document</button>
+
+          </div>
+
+          <div class="max-w-[1200px] m-auto flex items-center justify-between mb-3">
+            <p id="documentCount" class="text-md text-slate-400"></p>
+            <div class="flex items-center gap-2">
+              <button id="listViewBtn" type="button" class="w-9 h-9 rounded-lg bg-white border border-slate-200 flex items-center justify-center" title="List view">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" d="M5 7h14M5 12h14M5 17h14"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <div id="documentGroups" class="max-w-[1200px] m-auto space-y-6"></div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="notificationsMount"></div>
+</div>
+
+
+<!-- Upload modal -->
+<div id="documentModal" class="hidden fixed inset-0 z-50 modal-overlay">
+  <div id="documentModalBackdrop" class="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
+
+  <div class="relative min-h-full flex items-start justify-center px-3 sm:px-4 py-5 sm:py-8 overflow-y-auto" onclick="closeModal()">
+    <div id="documentModalPanel" class="modal-panel w-full max-w-[680px] rounded-2xl bg-white shadow-2xl" onclick="event.stopPropagation()">
+
+      <div class="px-7 py-6 border-b border-slate-100 flex items-center justify-between">
+        <div>
+          <h2 class="text-xl font-semibold">Upload Document</h2>
+          <p class="text-md text-slate-400 mt-1">Add a new document or upload another version.</p>
+        </div>
+        <button id="closeDocumentModal" type="button" class="w-9 h-9 rounded-full hover:bg-slate-50 text-slate-500">✕</button>
+      </div>
+
+      <form id="documentForm" class="px-7 py-6 space-y-5">
+
+        <div>
+          <label class="block text-md text-slate-500 mb-2">Document Category</label>
+          <select id="documentCategory" name="category" required class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-slate-400">
+            <option value="">Select category</option>
+            <option>Legal</option>
+            <option>Compliance</option>
+            <option>Move In Documents</option>
+            <option>Move Out Documents</option>
+            <option>Info</option>
+            <option>Others</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-md text-slate-500 mb-2">Document Type</label>
+          <select id="documentType" name="document_type" required class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-slate-400">
+            <option value="">Select document type</option>
+          </select>
+        </div>
+
+        <div id="customNameWrap" class="hidden">
+          <label class="block text-md text-slate-500 mb-2">Document Name</label>
+          <input id="customDocumentName" name="custom_name" placeholder="Enter the document name" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-slate-400">
+        </div>
+
+        <div id="existingVersionWrap" class="hidden">
+          <label class="block text-md text-slate-500 mb-2">Upload as new version of</label>
+          <select id="existingDocument" name="existing_document" class="w-full h-11 px-4 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-slate-400">
+            <option value="">This is a new document</option>
+          </select>
+          <p class="text-md text-slate-400 mt-2">Previous versions will remain available.</p>
+        </div>
+
+        <div>
+          <label class="block text-md text-slate-500 mb-2">Document File</label>
+          <input id="documentFile" name="file" type="file" required accept=".pdf,.doc,.docx,.xls,.xlsx,.jpg,.jpeg,.png,.webp" class="hidden">
+          <button id="documentDropzone" type="button" class="w-full rounded-2xl border border-dashed border-slate-300 bg-slate-50 hover:bg-slate-100 transition p-7 text-center">
+            <span class="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center mx-auto mb-3">
+              <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 16V5m0 0L8 9m4-4 4 4M5 16v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>
+            </span>
+            <p id="fileName" class="text-md font-medium">Choose a document</p>
+            <p class="text-md text-slate-400 mt-1">PDF, Word, Excel or image files</p>
+          </button>
+        </div>
+
+        <div>
+          <label class="block text-md text-slate-500 mb-2">Document Description <span class="text-slate-400">(optional)</span></label>
+          <textarea name="description" rows="3" placeholder="Add a short description or note about this document..." class="w-full px-4 py-3 rounded-xl border border-slate-200 bg-slate-50 text-md outline-none focus:border-slate-400 resize-none"></textarea>
+        </div>
+
+        <div class="flex justify-end gap-3 pt-2">
+          <button id="cancelDocument" type="button" class="h-11 px-5 rounded-xl border border-slate-200 text-md font-medium hover:bg-slate-50">Cancel</button>
+          <button type="submit" class="h-11 px-6 rounded-xl bg-slate-900 text-white text-md font-medium hover:bg-slate-800">Upload Document</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+<!-- Version modal -->
+<div id="versionModal" class="hidden fixed inset-0 z-50 modal-overlay">
+  <div id="versionModalBackdrop" class="absolute inset-0 bg-black/20 backdrop-blur-[2px]"></div>
+
+  <div class="relative min-h-full flex items-start justify-center px-3 sm:px-4 py-5 sm:py-8 overflow-y-auto" onclick="closeVersions()">
+    <div id="versionModalPanel" class="modal-panel w-full max-w-[650px] rounded-2xl bg-white shadow-2xl" onclick="event.stopPropagation()">
+      <div class="px-7 py-6 border-b border-slate-100 flex items-center justify-between">
+        <div>
+          <p class="text-md text-slate-400">Document history</p>
+          <h2 id="versionModalTitle" class="text-xl font-semibold mt-1">Versions</h2>
+        </div>
+        <button id="closeVersionModal" type="button" class="w-9 h-9 rounded-full hover:bg-slate-50 text-slate-500">✕</button>
+      </div>
+      <div id="versionList" class="p-7 space-y-3"></div>
+    </div>
+  </div>
+</div>
+
+
+<script src="../app.js"></script>
+
+<script>
+const documentTypes = {
+  "Legal":["Contract","Assured Shorthold Tenancy (AST)","Lease Agreement","Tenancy Agreement","Renewal Agreement","Guarantor Agreement","Guarantor Form","Deed of Assignment","Deed of Variation","Property Management Agreement","Agent Agreement","Landlord Agreement","Addendum","Notice to Quit","Section 8 Notice","Section 21 Notice","Rent Increase Notice","Possession Notice","Court Order","Other Legal Document"],
+  "Compliance":["Gas Safety Certificate","Gas Appliance Service Record","Electrical Installation Condition Report (EICR)","Electrical Safety Certificate","Portable Appliance Testing (PAT)","Energy Performance Certificate (EPC)","Fire Risk Assessment","Fire Alarm Certificate","Smoke Alarm Certificate","Carbon Monoxide Alarm Certificate","Emergency Lighting Certificate","Fire Extinguisher Certificate","Legionella Risk Assessment","Asbestos Survey","Asbestos Management Plan","HMO Licence","Selective Licence","Additional Licensing Certificate","Planning Permission","Building Regulations Certificate","Building Control Completion Certificate","Planning Compliance Document","Environmental Health Certificate","Water Hygiene Certificate","Insurance Certificate","Other Compliance Document"],
+  "Move In Documents":["Move In / Schedule of Condition","Inventory","Check-In Report","Meter Reading Record","Key Handover Record","Tenant Welcome Pack","Deposit Registration Certificate","Deposit Prescribed Information","Move-In Inspection Report","Other Move In Document"],
+  "Move Out Documents":["Termination Notice","Notice of Termination","Move Out / Schedule of Condition","Inventory","Check-Out Report","Final Meter Reading Record","Key Return Record","Deposit Return Statement","Deposit Deduction Statement","Move-Out Inspection Report","Other Move Out Document"],
+  "Info":["Property Rules","Property Guide","Tenant Guide","Emergency Contacts","Maintenance Guide","Appliance Manuals","Heating Guide","Boiler Manual","Electrical Consumer Unit Guide","Waste & Recycling Guide","Parking Information","Local Area Guide","Utilities Information","Internet / Broadband Information","Insurance Information","Emergency Procedures","Other Information"],
+  "Others":["Property Layout","Floor Plan","Site Plan","Garden Plan","Parking Plan","Room Measurements","Property Photos","Marketing Brochure","Valuation Report","Survey Report","Mortgage Document","Purchase Documents","Title Document","Land Registry Document","Planning Drawings","Architectural Drawings","Building Plans","Renovation Records","Contractor Documents","Quotation","Invoice","Receipt","Warranty","Guarantee","Manufacturer Document","Other"]
+};
+
+const documents = [
+  {id:"contract",name:"Property Management Agreement",category:"Legal",version:2,tenantVisible:false,date:"Sep 5, 2026",uploadedBy:"Enoch",size:"1.2 MB",file:"property-management-v2.pdf",description:"Current property management agreement.",versions:[
+    {version:2,date:"Sep 5, 2026",uploadedBy:"Enoch",size:"1.2 MB",file:"property-management-v2.pdf"},
+    {version:1,date:"Jun 12, 2026",uploadedBy:"Enoch",size:"1.1 MB",file:"property-management-v1.pdf"}
+  ]},
+  {id:"ast",name:"Assured Shorthold Tenancy (AST)",category:"Legal",version:1,tenantVisible:false,date:"Aug 29, 2026",uploadedBy:"Enoch",size:"860 KB",file:"ast-v1.pdf",versions:[{version:1,date:"Aug 29, 2026",uploadedBy:"Enoch",size:"860 KB",file:"ast-v1.pdf"}]},
+  {id:"gas",name:"Gas Safety Certificate",category:"Compliance",version:3,tenantVisible:false,date:"Aug 20, 2026",uploadedBy:"ByeWind",size:"540 KB",file:"gas-certificate-v3.pdf",versions:[
+    {version:3,date:"Aug 20, 2026",uploadedBy:"ByeWind",size:"540 KB",file:"gas-certificate-v3.pdf"},
+    {version:2,date:"Aug 20, 2025",uploadedBy:"ByeWind",size:"510 KB",file:"gas-certificate-v2.pdf"},
+    {version:1,date:"Aug 19, 2024",uploadedBy:"ByeWind",size:"490 KB",file:"gas-certificate-v1.pdf"}
+  ]},
+  {id:"epc",name:"Energy Performance Certificate (EPC)",category:"Compliance",version:1,tenantVisible:false,date:"Jul 14, 2026",uploadedBy:"Enoch",size:"1.8 MB",file:"epc.pdf",versions:[{version:1,date:"Jul 14, 2026",uploadedBy:"Enoch",size:"1.8 MB",file:"epc.pdf"}]},
+  {id:"inventory-in",name:"Move In / Schedule of Condition",category:"Move In Documents",version:1,tenantVisible:false,date:"Jul 1, 2026",uploadedBy:"Kate Morrison",size:"4.5 MB",file:"move-in-condition.pdf",versions:[{version:1,date:"Jul 1, 2026",uploadedBy:"Kate Morrison",size:"4.5 MB",file:"move-in-condition.pdf"}]},
+  {id:"inventory",name:"Inventory",category:"Move In Documents",version:2,tenantVisible:false,date:"Jul 1, 2026",uploadedBy:"Kate Morrison",size:"7.2 MB",file:"inventory-v2.pdf",versions:[
+    {version:2,date:"Jul 1, 2026",uploadedBy:"Kate Morrison",size:"7.2 MB",file:"inventory-v2.pdf"},
+    {version:1,date:"Jun 28, 2026",uploadedBy:"Kate Morrison",size:"6.9 MB",file:"inventory-v1.pdf"}
+  ]},
+  {id:"rules",name:"Property Rules",category:"Info",version:1,tenantVisible:false,date:"Jun 20, 2026",uploadedBy:"Enoch",size:"320 KB",file:"property-rules.pdf",versions:[{version:1,date:"Jun 20, 2026",uploadedBy:"Enoch",size:"320 KB",file:"property-rules.pdf"}]},
+  {id:"layout",name:"Property Layout",category:"Others",version:1,tenantVisible:false,date:"May 18, 2026",uploadedBy:"Enoch",size:"2.4 MB",file:"property-layout.pdf",versions:[{version:1,date:"May 18, 2026",uploadedBy:"Enoch",size:"2.4 MB",file:"property-layout.pdf"}]}
+];
+
+const categoryIcons = {
+  "Legal":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M8 3h8l3 3v15H5V3h3m3 0v4h4V3m-5 8h6m-6 4h6"/></svg>`,
+  "Compliance":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 3 4 7v5c0 4.5 3.2 7.8 8 9 4.8-1.2 8-4.5 8-9V7l-8-4Zm0 5v5m0 3h.01"/></svg>`,
+  "Move In Documents":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 4l9 6.5V20H3v-9.5ZM8 20v-5h8v5"/></svg>`,
+  "Move Out Documents":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M3 10.5 12 4l9 6.5V20H3v-9.5ZM8 20v-5h8v5m4-6h-7m0 0 3-3m-3 3 3 3"/></svg>`,
+  "Info":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Zm0-10v6m0-9h.01"/></svg>`,
+  "Others":`<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M4 5h16v14H4V5Zm4 4h8m-8 4h8m-8 4h5"/></svg>`
+};
+
+function documentCard(doc) {
+  return `
+    <div class="bg-orange-50 rounded-xl border border-slate-200 px-4 sm:px-5 py-4 hover:border-slate-200 transition">
+      <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+        <div class="flex items-start gap-3 min-w-0 flex-1">
+          <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 shrink-0">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l4 4v14H7V3Zm7 1v4h4"/></svg>
+          </div>
+
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-2 min-w-0">
+              <p class="text-md font-medium break-words">${doc.name}</p>
+              <span class="shrink-0 px-2 py-0.5 rounded-md bg-slate-100 text-[11px] text-slate-500">v${doc.version}</span>
+              ${doc.tenantVisible ? `<span class="shrink-0 px-2 py-0.5 rounded-md bg-emerald-50 text-[11px] text-emerald-600">Tenant visible</span>` : ""}
+            </div>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mt-1">
+              <span class="text-md text-slate-400">${doc.date}</span>
+              <span class="text-md text-slate-400">Uploaded by ${doc.uploadedBy}</span>
+              <span class="text-md text-slate-400">${doc.size}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-1 sm:justify-end sm:shrink-0 border-t border-slate-100 sm:border-0 pt-3 sm:pt-0">
+          <button type="button" data-action="tenant" data-id="${doc.id}" class="h-9 px-2.5 sm:px-3 rounded-lg text-md ${doc.tenantVisible ? "text-emerald-600 bg-emerald-50" : "text-slate-500 hover:bg-slate-50"}" title="${doc.tenantVisible ? "Hide from tenant" : "Show to tenant"}">
+            <span class="flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M2.5 12s3.5-5 9.5-5 9.5 5 9.5 5-3.5 5-9.5 5-9.5-5-9.5-5Z"/><circle cx="12" cy="12" r="2.2" stroke-width="1.5"/></svg>
+              <span class="hidden sm:inline">${doc.tenantVisible ? "Shown to Tenant" : "Show to Tenant"}</span>
+            </span>
+          </button>
+          <button type="button" data-action="versions" data-id="${doc.id}" class="h-9 px-2.5 sm:px-3 rounded-lg text-md text-slate-500 hover:bg-slate-50">Versions ${doc.versions.length > 1 ? `(${doc.versions.length})` : ""}</button>
+          <button type="button" data-action="new-version" data-id="${doc.id}" class="h-9 px-2.5 sm:px-3 rounded-lg text-md text-slate-500 hover:bg-slate-50">+ Version</button>
+          <button type="button" data-action="download" data-id="${doc.id}" class="w-9 h-9 rounded-lg text-slate-400 hover:bg-slate-50 flex items-center justify-center" title="Download">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M12 4v11m0 0 4-4m-4 4-4-4M5 20h14"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function renderDocuments() {
+  const search = document.getElementById("documentSearch").value.trim().toLowerCase();
+  const category = document.getElementById("categoryFilter").value;
+  const filtered = documents.filter(doc => {
+    const matchesSearch = !search || `${doc.name} ${doc.category} ${doc.uploadedBy}`.toLowerCase().includes(search);
+    return matchesSearch && (category === "all" || doc.category === category);
+  });
+
+  document.getElementById("documentCount").textContent = `${filtered.length} document${filtered.length === 1 ? "" : "s"}`;
+
+  document.getElementById("documentGroups").innerHTML = Object.keys(documentTypes).map(categoryName => {
+    const docs = filtered.filter(doc => doc.category === categoryName);
+    if (!docs.length) return "";
+
+    return `
+      <section class="mb-20">
+        <div class="flex items-center gap-3 mb-3">
+          <div class="w-9 h-9 rounded-lg bg-white border border-slate-100 flex items-center justify-center text-slate-400">${categoryIcons[categoryName]}</div>
+          <div>
+            <h3 class="text-md font-semibold">${categoryName}</h3>
+            <p class="text-md text-slate-400">${docs.length} document${docs.length === 1 ? "" : "s"}</p>
+          </div>
+        </div>
+        <div class="space-y-2">${docs.map(documentCard).join("")}</div>
+      </section>
+    `;
+  }).join("") || `<div class="rounded-2xl border border-dashed border-slate-200 bg-white p-12 text-center"><p class="text-md font-medium">No documents found</p><p class="text-md text-slate-400 mt-1">Try another search or upload a new document.</p></div>`;
+
+  document.querySelectorAll("[data-action]").forEach(button => {
+    button.onclick = () => {
+      const doc = documents.find(x => x.id === button.dataset.id);
+      if (!doc) return;
+      if (button.dataset.action === "versions") showVersions(doc);
+      if (button.dataset.action === "new-version") openUpload(doc);
+      if (button.dataset.action === "download") alert(`Download: ${doc.file}`);
+      if (button.dataset.action === "tenant") {
+        doc.tenantVisible = !doc.tenantVisible;
+        renderDocuments();
+      }
+    };
+  });
+}
+
+function populateDocumentTypes(category, selected = "") {
+  const type = document.getElementById("documentType");
+  const options = category ? [...documentTypes[category], "Custom document name"] : [];
+  type.innerHTML = `<option value="">Select document type</option>${options.map(x => `<option value="${x}">${x}</option>`).join("")}`;
+  type.value = selected;
+  document.getElementById("customNameWrap").classList.toggle("hidden", selected !== "Custom document name");
+}
+
+const modal = document.getElementById("documentModal");
+const modalPanel = document.getElementById("documentModalPanel");
+const versionModal = document.getElementById("versionModal");
+const versionModalPanel = document.getElementById("versionModalPanel");
+const existingWrap = document.getElementById("existingVersionWrap");
+const existingSelect = document.getElementById("existingDocument");
+
+function animateOpen(overlay, panel) {
+  overlay.classList.remove("hidden");
+  requestAnimationFrame(() => {
+    overlay.classList.add("is-open");
+    panel.classList.add("is-open");
+  });
+  document.body.classList.add("overflow-hidden");
+}
+
+function animateClose(overlay, panel, callback = null) {
+  overlay.classList.remove("is-open");
+  panel.classList.remove("is-open");
+  setTimeout(() => {
+    overlay.classList.add("hidden");
+    if (callback) callback();
+    if (modal.classList.contains("hidden") && versionModal.classList.contains("hidden")) document.body.classList.remove("overflow-hidden");
+  }, 180);
+}
+
+function openModal() {
+  animateOpen(modal, modalPanel);
+}
+
+function closeModal() {
+  if (modal.classList.contains("hidden")) return;
+  animateClose(modal, modalPanel, () => {
+    document.getElementById("documentForm").reset();
+    document.getElementById("documentType").innerHTML = `<option value="">Select document type</option>`;
+    document.getElementById("customNameWrap").classList.add("hidden");
+    document.getElementById("existingVersionWrap").classList.add("hidden");
+    document.getElementById("fileName").textContent = "Choose a document";
+  });
+}
+
+function openUpload(doc = null) {
+  document.getElementById("documentForm").reset();
+  document.getElementById("fileName").textContent = "Choose a document";
+  document.getElementById("customNameWrap").classList.add("hidden");
+  document.getElementById("documentCategory").value = doc ? doc.category : "";
+  populateDocumentTypes(doc ? doc.category : "", doc ? doc.name : "");
+  existingSelect.innerHTML = `<option value="">This is a new document</option>${documents.map(x => `<option value="${x.id}">${x.name} · current v${x.version}</option>`).join("")}`;
+  existingSelect.value = doc ? doc.id : "";
+  existingWrap.classList.toggle("hidden", !doc);
+  openModal();
+}
+
+function showVersions(doc) {
+  document.getElementById("versionModalTitle").textContent = doc.name;
+  renderVersions(doc);
+  animateOpen(versionModal, versionModalPanel);
+}
+
+function renderVersions(doc) {
+  document.getElementById("versionList").innerHTML = doc.versions.map(v => `
+    <div class="rounded-xl border border-slate-100 ${v.version === doc.version ? "bg-slate-50" : "bg-white"} p-4">
+      <div class="flex items-center gap-4">
+        <div class="w-10 h-10 rounded-lg bg-white border border-slate-100 flex items-center justify-center text-md font-semibold text-slate-500">v${v.version}</div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2">
+            <p class="text-md font-medium">${v.version === doc.version ? "Current version" : "Previous version"}</p>
+            ${v.version === doc.version ? `<span class="px-2 py-0.5 rounded-md bg-slate-200 text-[11px] text-slate-500">Current</span>` : ""}
+          </div>
+          <p class="text-md text-slate-400 mt-1">${v.date} · Uploaded by ${v.uploadedBy} · ${v.size}</p>
+        </div>
+        <div class="flex items-center gap-1">
+          <button type="button" data-version-download="${v.version}" class="h-9 px-3 rounded-lg text-md text-slate-500 hover:bg-slate-50">Download</button>
+          <button type="button" data-version-delete="${v.version}" class="w-9 h-9 rounded-lg text-slate-400 hover:text-red-600 hover:bg-red-50 flex items-center justify-center" title="Delete version">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" d="M6 7h12m-9 0V5h6v2m-7 3v7m4-7v7m4-7v7M5 7l1 13h12l1-13"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  `).join("");
+
+  document.querySelectorAll("[data-version-delete]").forEach(button => {
+    button.onclick = () => deleteVersion(doc, Number(button.dataset.versionDelete));
+  });
+
+  document.querySelectorAll("[data-version-download]").forEach(button => {
+    button.onclick = () => {
+      const version = doc.versions.find(v => v.version === Number(button.dataset.versionDownload));
+      if (version) alert(`Download: ${version.file}`);
+    };
+  });
+}
+
+function deleteVersion(doc, versionNumber) {
+  const version = doc.versions.find(v => v.version === versionNumber);
+  if (!version) return;
+
+  const isCurrent = versionNumber === doc.version;
+  const message = isCurrent
+    ? doc.versions.length > 1
+      ? `Delete v${versionNumber}? The previous version will become the current version.`
+      : `Delete v${versionNumber}? This will remove the document entirely.`
+    : `Delete previous version v${versionNumber}?`;
+
+  if (!confirm(message)) return;
+
+  doc.versions = doc.versions.filter(v => v.version !== versionNumber);
+
+  if (!doc.versions.length) {
+    const index = documents.findIndex(x => x.id === doc.id);
+    if (index !== -1) documents.splice(index, 1);
+    closeVersions();
+    renderDocuments();
+    return;
+  }
+
+  if (isCurrent) {
+    const nextCurrent = doc.versions.reduce((latest, item) => item.version > latest.version ? item : latest, doc.versions[0]);
+    doc.version = nextCurrent.version;
+    doc.date = nextCurrent.date;
+    doc.uploadedBy = nextCurrent.uploadedBy;
+    doc.size = nextCurrent.size;
+    doc.file = nextCurrent.file;
+  }
+
+  doc.versions.sort((a,b) => b.version - a.version);
+  renderVersions(doc);
+  renderDocuments();
+}
+
+function closeVersions() {
+  if (versionModal.classList.contains("hidden")) return;
+  animateClose(versionModal, versionModalPanel);
+}
+
+document.getElementById("uploadDocumentBtn").onclick = () => openUpload();
+document.getElementById("closeDocumentModal").onclick = closeModal;
+document.getElementById("cancelDocument").onclick = closeModal;
+
+
+document.getElementById("documentCategory").onchange = e => {
+  populateDocumentTypes(e.target.value);
+  existingWrap.classList.add("hidden");
+};
+
+document.getElementById("documentType").onchange = e => {
+  document.getElementById("customNameWrap").classList.toggle("hidden", e.target.value !== "Custom document name");
+};
+
+document.getElementById("existingDocument").onchange = e => {
+  const doc = documents.find(x => x.id === e.target.value);
+  if (doc) {
+    document.getElementById("documentCategory").value = doc.category;
+    populateDocumentTypes(doc.category, doc.name);
+  }
+};
+
+document.getElementById("documentDropzone").onclick = () => document.getElementById("documentFile").click();
+document.getElementById("documentFile").onchange = e => {
+  document.getElementById("fileName").textContent = e.target.files[0]?.name || "Choose a document";
+};
+
+document.getElementById("documentForm").onsubmit = e => {
+  e.preventDefault();
+
+  const form = new FormData(e.target);
+  const existingId = form.get("existing_document");
+  const category = form.get("category");
+  const type = form.get("document_type");
+  const customName = form.get("custom_name");
+  const name = type === "Custom document name" ? customName : type;
+  const file = document.getElementById("documentFile").files[0];
+
+  if (!name || !file) return;
+
+  const date = new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"numeric"});
+  const size = `${Math.max(1, Math.round(file.size / 1024))} KB`;
+
+  if (existingId) {
+    const doc = documents.find(x => x.id === existingId);
+    doc.version++;
+    doc.date = date;
+    doc.uploadedBy = "You";
+    doc.size = size;
+    doc.file = file.name;
+    doc.versions.unshift({version:doc.version,date,uploadedBy:doc.uploadedBy,size,file:file.name});
+  } else {
+    const id = `${Date.now()}`;
+    documents.unshift({id,name,category,version:1,tenantVisible:false,date,uploadedBy:"You",size,file:file.name,versions:[{version:1,date,uploadedBy:"You",size,file:file.name}]});
+  }
+
+  closeModal();
+  renderDocuments();
+};
+
+document.querySelectorAll("[data-action]");
+
+document.getElementById("documentSearch").oninput = renderDocuments;
+document.getElementById("categoryFilter").onchange = renderDocuments;
+
+document.onkeydown = e => {
+  if (e.key === "Escape") {
+    if (!modal.classList.contains("hidden")) closeModal();
+    else if (!versionModal.classList.contains("hidden")) closeVersions();
+  }
+};
+
+renderDocuments();
+</script>
+
+<script src="property.js"></script>
+
+</body>
+</html>

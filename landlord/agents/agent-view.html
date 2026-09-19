@@ -1,0 +1,146 @@
+<!-- /landlord/agents/agent-view.html -->
+ <!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YourLandlordship — Agent</title>
+  <script src="../tailwind.js"></script>
+</head>
+<body class="bg-white text-slate-900 antialiased">
+<div class="h-screen overflow-hidden flex">
+  <div id="sidebarMount"></div>
+  <div class="flex-1 min-w-0 flex flex-col">
+    <div id="headerMount"></div>
+    <main id="page" class="flex-1 overflow-auto opacity-0 scale-[0.96] transition-all duration-200 ease-out">
+      <div class="mx-auto px-5 lg:px-6 pt-6 pb-10">
+
+        <div class="flex items-center gap-3 mb-6">
+          <a href="agents.html" class="w-9 h-9 rounded-lg border border-slate-200 bg-white hover:bg-slate-50 flex items-center justify-center text-slate-500">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" d="m15 18-6-6 6-6"/></svg>
+          </a>
+          <div>
+            <h1 class="text-md font-semibold text-slate-900">Agent</h1>
+            <p class="text-sm text-slate-400 mt-1">View agent details, active work and maintenance history.</p>
+          </div>
+        </div>
+
+        <section class="rounded-2xl bg-slate-50 p-6 lg:p-7">
+
+          <div class="flex flex-col sm:flex-row sm:items-start justify-between gap-5 pb-6 border-b border-slate-200">
+            <div class="flex items-center gap-4">
+              <div id="detailAvatar" class="w-16 h-16 rounded-xl bg-white flex items-center justify-center shrink-0">
+                <span class="text-lg font-semibold text-slate-500">BW</span>
+              </div>
+              <div>
+                <h2 id="detailName" class="text-lg font-semibold">ByeWind</h2>
+                <p id="detailCompany" class="text-md text-slate-400 mt-0.5">Independent</p>
+                <div class="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-md text-slate-500">
+                  <span id="detailEmail">byewind@twitter.com</span>
+                  <span id="detailPhone">+41 0092 293 2903</span>
+                </div>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="detailAvailability" class="px-2.5 py-1 rounded-full bg-white text-md">Available</span>
+              <button type="button" class="h-9 px-3 rounded-lg border border-slate-200 bg-white text-md hover:bg-slate-100">Edit</button>
+            </div>
+          </div>
+
+          <div class="pt-6">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-md font-semibold">Currently working on</h3>
+              <span id="activeJobsCount" class="text-md text-slate-400">2 active</span>
+            </div>
+            <div id="activeJobs" class="space-y-2.5">
+              <div class="bg-white rounded-xl p-4">
+                <div class="flex items-start justify-between gap-4">
+                  <div><p class="text-md font-medium">24 Meadow Lane</p><p class="text-md text-slate-400 mt-0.5">Oakland</p></div>
+                  <span class="text-md text-slate-500">In progress</span>
+                </div>
+                <p class="text-md mt-3">Leaking kitchen sink</p>
+                <p class="text-md text-slate-400 mt-1">Started Sep 8, 2026</p>
+              </div>
+              <div class="bg-white rounded-xl p-4">
+                <div class="flex items-start justify-between gap-4">
+                  <div><p class="text-md font-medium">17 Bagwell Avenue</p><p class="text-md text-slate-400 mt-0.5">Ocala</p></div>
+                  <span class="text-md text-slate-500">Scheduled</span>
+                </div>
+                <p class="text-md mt-3">Boiler inspection</p>
+                <p class="text-md text-slate-400 mt-1">Started Sep 6, 2026</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-7">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-md font-semibold">Maintenance history</h3>
+              <span class="text-md text-slate-400">12 completed</span>
+            </div>
+            <div class="bg-white rounded-xl overflow-hidden">
+              <div class="hidden sm:grid grid-cols-[1.1fr_1.5fr_100px_70px] gap-4 px-4 py-3 bg-slate-100 text-md text-slate-400">
+                <span>Property</span><span>Work completed</span><span>Date</span><span>Cost</span>
+              </div>
+              <div class="divide-y divide-slate-100">
+                <div class="grid grid-cols-1 sm:grid-cols-[1.1fr_1.5fr_100px_70px] gap-1 sm:gap-4 px-4 py-4"><span class="text-md">12 Larry Street</span><span class="text-md">Replaced bathroom tap</span><span class="text-md text-slate-400">Aug 28</span><span class="text-md">£85</span></div>
+                <div class="grid grid-cols-1 sm:grid-cols-[1.1fr_1.5fr_100px_70px] gap-1 sm:gap-4 px-4 py-4"><span class="text-md">8 Morrison Road</span><span class="text-md">Fixed bedroom radiator</span><span class="text-md text-slate-400">Aug 19</span><span class="text-md">£120</span></div>
+                <div class="grid grid-cols-1 sm:grid-cols-[1.1fr_1.5fr_100px_70px] gap-1 sm:gap-4 px-4 py-4"><span class="text-md">31 Washburn Road</span><span class="text-md">Repaired front door lock</span><span class="text-md text-slate-400">Aug 11</span><span class="text-md">£65</span></div>
+                <div class="grid grid-cols-1 sm:grid-cols-[1.1fr_1.5fr_100px_70px] gap-1 sm:gap-4 px-4 py-4"><span class="text-md">5 Meadow Lane</span><span class="text-md">Replaced faulty light switches</span><span class="text-md text-slate-400">Jul 30</span><span class="text-md">£45</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-7">
+            <h3 class="text-md font-semibold mb-4">Agent details</h3>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div class="bg-white rounded-xl p-4"><p class="text-md text-slate-400">Availability</p><p id="detailsAvailability" class="text-md mt-1">Available</p></div>
+              <div class="bg-white rounded-xl p-4"><p class="text-md text-slate-400">Properties</p><p id="detailsProperties" class="text-md mt-1">8</p></div>
+              <div class="bg-white rounded-xl p-4"><p class="text-md text-slate-400">Completed jobs</p><p id="detailsJobs" class="text-md mt-1">12</p></div>
+              <div class="bg-white rounded-xl p-4"><p class="text-md text-slate-400">Total spend</p><p id="detailsSpend" class="text-md mt-1">£1,485</p></div>
+            </div>
+            <div class="mt-4 bg-white rounded-xl p-4">
+              <p class="text-md text-slate-400 mb-2">Specialization</p>
+              <div id="detailSpecialization" class="flex flex-wrap gap-2"></div>
+            </div>
+          </div>
+
+        </section>
+      </div>
+    </main>
+  </div>
+  <div id="notificationsMount"></div>
+</div>
+
+<script src="../app.js"></script>
+<script>
+const agents={
+  byewind:{name:"ByeWind",email:"byewind@twitter.com",phone:"+41 0092 293 2903",initials:"BW",company:"Independent",availability:"Available",specializations:["Residential","Property Management"],properties:8,completedJobs:12,totalSpend:"£1,485",activeJobs:2},
+  kate:{name:"Kate Morrison",email:"melody@altbox.com",phone:"+41 0092 293 2903",initials:"KM",company:"Morrison Property Services",availability:"Available",specializations:["Residential","Leasing"],properties:5,completedJobs:9,totalSpend:"£980",activeJobs:1},
+  drew:{name:"Drew Cano",email:"max@kt.com",phone:"+41 0092 293 2903",initials:"DC",company:"KT Property Group",availability:"Limited availability",specializations:["Commercial","Property Management"],properties:11,completedJobs:18,totalSpend:"£2,340",activeJobs:3},
+  orlando:{name:"Orlando Diggs",email:"sean@dellito.com",phone:"+41 0092 293 2903",initials:"OD",company:"Diggs Homes",availability:"Available",specializations:["Residential","Maintenance"],properties:6,completedJobs:14,totalSpend:"£1,125",activeJobs:0}
+};
+
+const id=new URLSearchParams(location.search).get("id")||"byewind";
+const agent=agents[id]||agents.byewind;
+
+document.getElementById("detailAvatar").querySelector("span").textContent=agent.initials;
+document.getElementById("detailName").textContent=agent.name;
+document.getElementById("detailCompany").textContent=agent.company;
+document.getElementById("detailEmail").textContent=agent.email;
+document.getElementById("detailPhone").textContent=agent.phone;
+document.getElementById("detailAvailability").textContent=agent.availability;
+document.getElementById("detailsAvailability").textContent=agent.availability;
+document.getElementById("detailsProperties").textContent=agent.properties;
+document.getElementById("detailsJobs").textContent=agent.completedJobs;
+document.getElementById("detailsSpend").textContent=agent.totalSpend;
+document.getElementById("activeJobsCount").textContent=`${agent.activeJobs} active`;
+document.getElementById("detailSpecialization").innerHTML=agent.specializations.map(x=>`<span class="px-2.5 py-1 rounded-lg bg-slate-50 text-md">${x}</span>`).join("");
+document.getElementById("activeJobs").classList.toggle("hidden",agent.activeJobs===0);
+
+document.addEventListener("DOMContentLoaded",()=>{
+  const page=document.getElementById("page");
+  if(page)requestAnimationFrame(()=>page.classList.remove("opacity-0","scale-[0.96]"));
+});
+</script>
+</body>
+</html>
