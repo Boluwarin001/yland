@@ -48,6 +48,9 @@ async function initLayout() {
   document.getElementById("notificationButton")?.addEventListener("click", () => {
     notifications?.classList.toggle("translate-x-full");
   });
+  document.getElementById("notificationClose")?.addEventListener("click", () => {
+    notifications?.classList.add("translate-x-full");
+  });
 
   document.querySelectorAll(".sidebarHref").forEach(href => {
     href.href = baseUrl + href.getAttribute("href");

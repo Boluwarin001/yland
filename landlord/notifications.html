@@ -1,7 +1,14 @@
 <!-- /landlord/notifications.html -->
 <aside id="notificationsPanel" class="fixed lg:static inset-y-0 right-0 z-40 w-70 bg-white border-l border-slate-200 flex flex-col translate-x-full lg:translate-x-0 transition-transform duration-200">
-  <div class="h-14 border-b border-slate-100 flex items-center px-4">
+
+  <div class="h-14 border-b border-slate-100 flex items-center justify-between px-4 shrink-0">
     <h2 class="text-sm font-medium text-slate-900">Notifications</h2>
+
+    <button id="notificationClose" class="lg:hidden w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:bg-slate-100 hover:text-slate-700 transition" aria-label="Close notifications">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="M6 6l12 12M18 6 6 18"/>
+      </svg>
+    </button>
   </div>
 
   <div class="flex-1 overflow-y-auto">
