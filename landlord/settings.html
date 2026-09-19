@@ -26,28 +26,47 @@
             <h1 class="text-xl font-semibold">Settings</h1>
           </div>
 
-          <!-- Tabs -->
-          <div class="border-b border-slate-200 overflow-x-auto">
-            <div class="flex min-w-max">
+          
+        <!-- Mobile tab selector -->
+        <div class="lg:hidden mb-6">
+        <label for="settingsTabSelect" class="block text-xs font-medium text-slate-500 mb-2">Settings section</label>
+        <div class="relative">
+            <select id="settingsTabSelect" class="w-full appearance-none rounded-xl border border-slate-200 bg-white px-4 py-3 pr-10 text-md text-slate-700 focus:outline-none focus:ring-2 focus:ring-[#1D3639]/10 focus:border-[#1D3639]">
+            <option value="profile">Profile</option>
+            <option value="banking">Banking & Payments</option>
+            <option value="notifications">Notifications</option>
+            <option value="security">Security</option>
+            </select>
+            <svg class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.7" d="m6 9 6 6 6-6"/>
+            </svg>
+        </div>
+        </div>
 
-              <button onclick="showTab('profile',this)" data-tab="profile" class="px-5 pb-3.5 text-md font-medium text-slate-900 border-b-2 border-slate-900 cursor-pointer">
-                Profile
-              </button>
+        <!-- Desktop tabs -->
+        <div class="hidden lg:block border-b border-slate-200 overflow-x-auto">
+        <div class="flex min-w-max">
+            <button onclick="showTab('profile',this)" data-tab="profile" class="px-5 pb-3.5 text-md font-medium text-slate-900 border-b-2 border-slate-900 cursor-pointer">
+            Profile
+            </button>
 
-              <button onclick="showTab('banking',this)" data-tab="banking" class="px-5 pb-3.5 text-md text-slate-400 border-b-2 border-transparent cursor-pointer hover:text-slate-700">
-                Banking & Payments
-              </button>
+            <button onclick="showTab('banking',this)" data-tab="banking" class="px-5 pb-3.5 text-md text-slate-400 border-b-2 border-transparent cursor-pointer hover:text-slate-700">
+            Banking & Payments
+            </button>
 
-              <button onclick="showTab('notifications',this)" data-tab="notifications" class="px-5 pb-3.5 text-md text-slate-400 border-b-2 border-transparent cursor-pointer hover:text-slate-700">
-                Notifications
-              </button>
+            <button onclick="showTab('notifications',this)" data-tab="notifications" class="px-5 pb-3.5 text-md text-slate-400 border-b-2 border-transparent cursor-pointer hover:text-slate-700">
+            Notifications
+            </button>
 
-              <button onclick="showTab('security',this)" data-tab="security" class="px-5 pb-3.5 text-md text-slate-400 border-b-2 border-transparent cursor-pointer hover:text-slate-700">
-                Security
-              </button>
+            <button onclick="showTab('security',this)" data-tab="security" class="px-5 pb-3.5 text-md text-slate-400 border-b-2 border-transparent cursor-pointer hover:text-slate-700">
+            Security
+            </button>
+        </div>
+        </div>
 
-            </div>
-          </div>
+        <script>
+        document.getElementById("settingsTabSelect")?.addEventListener("change",function(){showTab(this.value,document.querySelector('[data-tab="'+this.value+'"]'));});
+        </script>
 
 
           <!-- PROFILE -->
